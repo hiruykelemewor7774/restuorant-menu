@@ -9,7 +9,6 @@ export default function Home() {
           <span className="text-amber-300 text-9xl font-bold">Welcome</span>
         </h1>
         <h2 className="text-3xl mt-4">To Digital Food Menu</h2>
-       
         <p className="text-amber-400 mt-4">Choose a category from the menu above.</p>
         </section>
         <FoodMenu/>

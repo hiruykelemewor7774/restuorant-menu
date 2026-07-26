@@ -23,6 +23,33 @@ model Waiter {
   isActive  Boolean  @default(true)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  orders    Order[]
 
   @@map("waiters")
+}
+
+model Order {
+  id          String      @id @default(cuid())
+  tableNumber String
+  waiterId    String
+  waiter      Waiter      @relation(fields: [waiterId], references: [id])
+  status      String      @default("pending")
+  notes       String?     @db.Text
+  items       OrderItem[]
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  @@map("orders")
+}
+
+model OrderItem {
+  id       String @id @default(cuid())
+  orderId  String
+  order    Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  name     String
+  price    String
+  quantity Int    @default(1)
+  category String // "Food" | "Drink" | "Room"
+
+  @@map("order_items")
 }

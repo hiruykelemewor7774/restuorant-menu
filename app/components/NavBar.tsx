@@ -1,12 +1,12 @@
-
 import Link from 'next/link'
 import Image from 'next/image'
 import { RiAdminFill } from "react-icons/ri";
-const links = [
+import { FaConciergeBell } from "react-icons/fa";const links = [
   { label: 'All', href: '/' },
   { label: 'Food', href: '/Food' },
   { label: 'Drink', href: '/drink' },
   { label: 'Room', href: '/room' },
+ { label: <FaConciergeBell />, href: '/waiter' },
   { label: <RiAdminFill  />, href:'/admin'}
 ]
 
