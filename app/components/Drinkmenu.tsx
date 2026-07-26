@@ -12,25 +12,25 @@ type Category = (typeof categories)[number]
 
 const drinks: Record<Category, MenuItem[]> = {
   'Hot Drink': [
-    { name: 'Coffee',    price: '$3', image: '/image/coffee.jpg', href: '/drink/coffee' },
-    { name: 'Tea',       price: '$2', image: '/image/tea.jpg',    href: '/drink/tea' },
-    { name: 'Macchiato', price: '$3', image: '/image/makiyato.jpg', href: '/drink/macchiato' },
+    { name: 'Coffee',    price: '$3', image: '/image/coffee.Webp', href: '/drink/coffee' },
+    { name: 'Tea',       price: '$2', image: '/image/tea.Webp',    href: '/drink/tea' },
+    { name: 'Macchiato', price: '$3', image: '/image/makiyato.Webp', href: '/drink/macchiato' },
   ],
   'Cold Drink': [
-    { name: 'Fresh Juice', price: '$4', image: '/image/duice.jpg',     href: '/drink/juice' },
-    { name: 'Iced Coffee', price: '$4', image: '/image/iced image.Webp', href: '/drink/iced-coffee' },
-    { name: 'Milkshake',   price: '$5', image: '/image/milkshake.jpg',  href: '/drink/milkshake' },
+    { name: 'Fresh Juice', price: '$4', image: '/image/juice.Webp',     href: '/drink/juice' },
+    { name: 'Iced Coffee', price: '$4', image: '/image/iced-coffee.Webp', href: '/drink/iced-coffee' },
+    { name: 'Milkshake',   price: '$5', image: '/image/milkshake.Webp',  href: '/drink/milkshake' },
   ],
   'Soft Drink': [
     { name: 'Coca Cola', price: '$2', image: '/image/coca.Webp',  href: '/drink/cola' },
-    { name: 'Sprite',    price: '$2', image: '/image/sprite.jpg', href: '/drink/sprite' },
-    { name: 'Water',     price: '$1', image: '/image/water.jpg',  href: '/drink/water' },
+    { name: 'Sprite',    price: '$2', image: '/image/sprite.Webp', href: '/drink/sprite' },
+    { name: 'Water',     price: '$1', image: '/image/water.Webp',  href: '/drink/water' },
   ],
   'Alcohol':
   [
-    { name: 'draft', price: '$2', image: '/image/draft.jpg',  href: '/drink/draft' },
-    { name: 'giorgis',    price: '$2', image: '/image/sprite.jpg', href: '/drink/gioris' },
-    { name: 'castle',     price: '$1', image: '/image/water.jpg',  href: '/drink/castle' },
+    { name: 'draft', price: '$2', image: '/image/draft.Webp',  href: '/drink/draft' },
+    { name: 'giorgis',    price: '$2', image: '/image/sprite.Webp', href: '/drink/gioris' },
+    { name: 'castle',     price: '$1', image: '/image/water.Webp',  href: '/drink/castle' },
   ],
 }
 
@@ -41,7 +41,7 @@ export default function DrinkPage() {
 
   return (
     <main className="max-w-6xl mx-auto px-6 py-0">
-      <h1 className="text-4xl font-bold mb-8">Drinks</h1>
+      <h1 className="text-4xl font-bold mb-3 pt-25">Drinks</h1>
 
 
       <div className="flex gap-4 mb-8 ">

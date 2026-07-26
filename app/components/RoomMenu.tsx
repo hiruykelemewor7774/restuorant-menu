@@ -15,28 +15,28 @@ const rooms: Room[] = [
   {
     name: 'One Bed',
     price: '500 Birr / night',
-    image: '/image/onebed.jpg',
+    image: '/image/onebed.Webp',
     href: '/room/one-bed',
     features: ['1 Single Bed', 'Free Wi-Fi', 'Private Bathroom', 'TV'],
   },
   {
     name: 'Two Bed',
     price: '800 Birr / night',
-    image: '/image/twobed.jpg',
+    image: '/image/twobed.Webp',
     href: '/room/two-bed',
     features: ['2 Beds', 'Free Wi-Fi', 'Air Conditioning', 'Breakfast Included'],
   },
   {
     name: 'Three Bed',
     price: '1200 Birr / night',
-    image: '/image/threebed.jpeg',
+    image: '/threebed.Webp',
     href: '/room/three-bed',
     features: ['3 Beds', 'Free Wi-Fi', 'Balcony', 'Mini Fridge', 'Breakfast Included'],
   },
   {
     name: 'Family Suite',
     price: '2000 Birr / night',
-    image: '/image/family.jpg',
+    image: '/image/family.Webp',
     href: '/room/family-suite',
     features: ['4 Beds', 'Living Room', 'Kitchen', 'Air Conditioning', 'City View'],
   },
@@ -46,8 +46,8 @@ const rooms: Room[] = [
 export default function RoomMenu() {
   return (
     <main className="max-w-6xl mx-auto px-6 py-2">
-      <h1 className="text-4xl font-bold mb-2">Rooms</h1>
-      <p className="text-amber-400 mb-8">Choose the room that fits your stay.</p>
+      <h1 className="text-4xl font-bold mb-2 pt-25">Rooms</h1>
+      <p className="text-amber-400 mb-3">Choose the room that fits your stay.</p>
 
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">

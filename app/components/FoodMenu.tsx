@@ -11,26 +11,26 @@ type Category = (typeof categories)[number]
 
 const foods: Record<Category, MenuItem[]> = {
   'Traditional': [
-    { name: 'Doro',   price: '80 Birr', image: '/image/doro.jpg',   href: '/food/doro' },
-    { name: 'Firfir', price: '25 Birr', image: '/image/firfir.jpg', href: '/food/firfir' },
-    { name: 'Kitfo',  price: '72 Birr', image: '/image/kitfo.jpg',  href: '/food/kitfo' },
+    { name: 'Doro',   price: '80 Birr', image: '/image/doro.Webp',   href: '/food/doro' },
+    { name: 'Firfir', price: '25 Birr', image: '/image/firfir.Webp', href: '/food/firfir' },
+    { name: 'Kitfo',  price: '72 Birr', image: '/image/kitfFo.Webp',  href: '/food/kitfo' },
   ],
   'Fast Food': [
-    { name: 'Pizza',  price: '50 Birr', image: '/image/pizza.jpg',  href: '/food/pizza' },
-    { name: 'Pasta',  price: '25 Birr', image: '/image/pasta.jpg',  href: '/food/pasta' },
-    { name: 'Burger', price: '65 Birr', image: '/image/burger.jpg', href: '/food/burger' },
+    { name: 'Pizza',  price: '50 Birr', image: '/image/pizza.Webp',  href: '/food/pizza' },
+    { name: 'Pasta',  price: '25 Birr', image: '/image/pasta.Webp',  href: '/food/pasta' },
+    { name: 'Burger', price: '65 Birr', image: '/image/burger.Webp', href: '/food/burger' },
   ],
   'Grill': [
-    { name: 'Tibs',        price: '60 Birr',  image: '/image/tibs.Webp',   href: '/food/tibs' },
-    { name: 'Grilled Fish', price: '90 Birr', image: '/image/fish.jpg',    href: '/food/grilled-fish' },
+    { name: 'Tibs', price: '60 Birr',  image: '/image/tibs.Webp', href: '/food/tibs' },
+    { name: 'Grilled Fish', price: '90 Birr', image: '/image/fish.Webp', href: '/food/grilled-fish' },
   ],
   'Breakfast': [
-    { name: 'Ful',    price: '30 Birr', image: '/image/ful.jpg',    href: '/food/ful' },
-    { name: 'Chechebsa', price: '35 Birr', image: '/image/chechebsa.jpg', href: '/food/chechebsa' },
+    { name: 'Ful', price: '30 Birr', image: '/image/ful.Webp', href: '/food/ful' },
+    { name: 'Chechebsa', price: '35 Birr', image: '/image/chechebsa.Webp', href: '/food/chechebsa' },
   ],
   'Dessert': [
-    { name: 'Cake',      price: '40 Birr', image: '/image/cake.jpg',      href: '/food/cake' },
-    { name: 'Ice Cream', price: '30 Birr', image: '/image/icecream.jpg',  href: '/food/ice-cream' },
+    { name: 'Cake', price: '40 Birr', image: '/image/cake.Webp', href: '/food/cake' },
+    { name: 'Ice Cream', price: '30 Birr', image: '/image/icecream.Webp', href: '/food/ice-cream' },
   ],
 }
 
@@ -41,11 +41,20 @@ export default function FoodMenu() {
 
   return (
     <main className="max-w-6xl mx-auto px-6 py-2">
-      <h1 className="text-4xl font-bold mb-2">Food</h1>
-      <p className="mb-8">Whatever you want you can order</p>
+      <h1 className="text-4xl font-bold mb-2 pt-25">Food</h1>
+      <p className="mb-3">Whatever you want you can order</p>
 
 
-      <div className="flex flex-wrap gap-4 mb-8">
+      <div className="flex flex-wrap gap-4 mb-8 rounded-2xl
+    border
+    border-white/10
+    bg-white/5
+    backdrop-blur-xl
+    p-6
+    transition-all
+    duration-300
+    hover:scale-105
+    hover:bg-white/10">
         {categories.map((category) => (
           <button
             key={category}
