@@ -1,6 +1,7 @@
-import Link from 'next/link'
-import Image from 'next/image'
+"use client";
 
+import Image from 'next/image'
+import { useCart } from '../context/CartContext'
 
 export type MenuItem = {
   name: string
@@ -9,14 +10,29 @@ export type MenuItem = {
   href: string
 }
 
+export default function MenuCard({
+  item,
+  category = "Food",
+}: {
+  item: MenuItem
+  category?: string
+}) {
+  const { addToCart } = useCart()
 
-export default function MenuCard({ item }: { item: MenuItem }) {
+  function handleAdd(e: React.MouseEvent) {
+    e.preventDefault()
+    e.stopPropagation()
+    addToCart({
+      name: item.name,
+      price: item.price,
+      image: item.image,
+      category,
+    })
+  }
+
   return (
-    <Link
-      href={item.href}
-      className="block rounded-2xl border border-gray-200 overflow-hidden shadow-sm
-      hover:shadow-lg hover:-translate-y-1 transition-all"
-    >
+    <div className="block rounded-2xl border border-gray-200 overflow-hidden shadow-sm
+    hover:shadow-lg hover:-translate-y-1 transition-all relative">
       <div className="relative h-48 w-full rounded-2xl
     border
     border-white/10
@@ -32,7 +48,14 @@ export default function MenuCard({ item }: { item: MenuItem }) {
       <div className="p-4">
         <h3 className="text-lg font-semibold">{item.name}</h3>
         <p className="text-amber-500 font-bold mt-1">{item.price}</p>
+
+        <button
+          onClick={handleAdd}
+          className="mt-3 w-full bg-amber-500 text-black font-semibold py-2 rounded-full hover:bg-amber-600 transition"
+        >
+          🛒 Add to Cart
+        </button>
       </div>
-    </Link>
+    </div>
   )
 }

@@ -70,3 +70,34 @@ export async function GET(req: NextRequest) {
 
   return NextResponse.json({ success: true, orders });
 }
+
+
+
+
+
+
+
+
+
+// export async function GET(req: NextRequest) {
+//   const token = req.cookies.get(WAITER_COOKIE_NAME)?.value;
+//   const payload = token ? await verifyWaiterToken(token) : null;
+
+//   if (!payload) {
+//     return NextResponse.json({ success: false }, { status: 401 });
+//   }
+
+//   const statusFilter = req.nextUrl.searchParams.get("status");
+
+//   const orders = await prisma.order.findMany({
+//     where: {
+//       waiterId: payload.waiterId,
+//       ...(statusFilter ? { status: statusFilter } : {}),
+//     },
+//     include: { items: true },
+//     orderBy: { createdAt: "desc" },
+//     take: 20,
+//   });
+
+//   return NextResponse.json({ success: true, orders });
+// }

@@ -1,11 +1,26 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { foodMenu, drinkMenu, roomMenu, MenuItem } from "@/lib/menu-data";
+import { playNotificationSound } from "@/lib/notifySound";
 
-type CartItem = MenuItem & { quantity: number; category: string };
+type DbItem = {
+  id: string;
+  type: string;
+  category: string;
+  name: string;
+  price: string;
+  image: string;
+};
+
+type CartItem = {
+  name: string;
+  price: string;
+  image: string;
+  quantity: number;
+  category: string;
+};
 
 type OrderItemResult = {
   id: string;
@@ -28,23 +43,98 @@ type MainTab = (typeof mainTabs)[number];
 
 export default function WaiterOrderPage() {
   const router = useRouter();
+  const [allItems, setAllItems] = useState<DbItem[]>([]);
+  const [loadingMenu, setLoadingMenu] = useState(true);
+
   const [tableNumber, setTableNumber] = useState("");
   const [notes, setNotes] = useState("");
   const [mainTab, setMainTab] = useState<MainTab>("Food");
-  const [foodCategory, setFoodCategory] = useState(Object.keys(foodMenu)[0]);
-  const [drinkCategory, setDrinkCategory] = useState(Object.keys(drinkMenu)[0]);
+  const [subCategory, setSubCategory] = useState("");
   const [cart, setCart] = useState<CartItem[]>([]);
   const [submitting, setSubmitting] = useState(false);
   const [message, setMessage] = useState("");
   const [lastOrder, setLastOrder] = useState<OrderResult | null>(null);
+  const [readyOrders, setReadyOrders] = useState<OrderResult[]>([]);
+  const knownReadyIds = useRef<Set<string>>(new Set());
+  const firstReadyLoad = useRef(true);
 
-  function currentItems(): MenuItem[] {
-    if (mainTab === "Food") return foodMenu[foodCategory];
-    if (mainTab === "Drink") return drinkMenu[drinkCategory];
-    return roomMenu;
+  // Menu ጫን
+  useEffect(() => {
+    fetch("/api/menu", { cache: "no-store" })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          setAllItems(data.items);
+          const firstFoodCategory = data.items.find(
+            (i: DbItem) => i.type === "Food"
+          )?.category;
+          setSubCategory(firstFoodCategory || "");
+        }
+        setLoadingMenu(false);
+      });
+  }, []);
+
+  // Ready orders ጫን + ድምጽ
+  useEffect(() => {
+    async function loadReadyOrders() {
+      const res = await fetch("/api/waiter/orders?status=ready", { cache: "no-store" });
+      const data = await res.json();
+      if (!data.success) return;
+
+      const newOnes = data.orders.filter(
+        (o: OrderResult) => !knownReadyIds.current.has(o.id)
+      );
+      if (!firstReadyLoad.current && newOnes.length > 0) {
+        playNotificationSound();
+      }
+
+      data.orders.forEach((o: OrderResult) => knownReadyIds.current.add(o.id));
+      setReadyOrders(data.orders);
+      firstReadyLoad.current = false;
+    }
+
+    loadReadyOrders();
+    const interval = setInterval(loadReadyOrders, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
+  async function handleDeliver(orderId: string, tableNum: string) {
+    if (!confirm(`ጠረጴዛ ${tableNum} ላይ ትዕዛዙን በትክክል አድርሰሃል?`)) return;
+
+    const res = await fetch(`/api/waiter/orders/${orderId}/deliver`, {
+      method: "PUT",
+    });
+    const data = await res.json();
+
+    if (data.success) {
+      setReadyOrders((prev) => prev.filter((o) => o.id !== orderId));
+    } else {
+      alert(data.message || "ስህተት ተፈጥሯል");
+    }
   }
 
-  function addToCart(item: MenuItem) {
+  function itemsForTab(tab: MainTab): DbItem[] {
+    return allItems.filter((i) => i.type === tab);
+  }
+
+  function categoriesForTab(tab: MainTab): string[] {
+    return Array.from(new Set(itemsForTab(tab).map((i) => i.category)));
+  }
+
+  function currentItems(): DbItem[] {
+    if (mainTab === "Room") return itemsForTab("Room");
+    return itemsForTab(mainTab).filter((i) => i.category === subCategory);
+  }
+
+  function switchMainTab(tab: MainTab) {
+    setMainTab(tab);
+    if (tab !== "Room") {
+      const firstCat = categoriesForTab(tab)[0] || "";
+      setSubCategory(firstCat);
+    }
+  }
+
+  function addToCart(item: DbItem) {
     setCart((prev) => {
       const existing = prev.find(
         (c) => c.name === item.name && c.category === mainTab
@@ -56,7 +146,10 @@ export default function WaiterOrderPage() {
             : c
         );
       }
-      return [...prev, { ...item, quantity: 1, category: mainTab }];
+      return [
+        ...prev,
+        { name: item.name, price: item.price, image: item.image, quantity: 1, category: mainTab },
+      ];
     });
   }
 
@@ -132,10 +225,10 @@ export default function WaiterOrderPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-8000 relative z-10 pt-28 px-6 pb-10">
+    <div className="min-h-screen bg-gray-50 pt-28 px-6 pb-10">
       {/* Header */}
       <div className="flex justify-between items-center mb-6 max-w-6xl mx-auto print:hidden">
-        <h1 className="text-2xl font-bold text-gray-900 fot">የዌይተር ትዕዛዝ ገፅ</h1>
+        <h1 className="text-2xl font-bold">የዌይተር ትዕዛዝ ገፅ</h1>
         <button
           onClick={handleLogout}
           className="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700"
@@ -143,6 +236,38 @@ export default function WaiterOrderPage() {
           ውጣ (Logout)
         </button>
       </div>
+
+      {/* Ready Orders (ደረሱ ዝግጁ ናቸው) */}
+      {readyOrders.length > 0 && (
+        <div className="max-w-6xl mx-auto mb-6 print:hidden">
+          <h2 className="text-lg font-bold mb-3">🔔 ዝግጁ የሆኑ ትዕዛዞች</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {readyOrders.map((order) => (
+              <div
+                key={order.id}
+                className="bg-green-50 border border-green-300 rounded-xl p-4"
+              >
+                <p className="font-bold text-green-700 mb-2">
+                  ጠረጴዛ: {order.tableNumber}
+                </p>
+                <div className="text-sm space-y-1 mb-3">
+                  {order.items.map((item) => (
+                    <p key={item.id}>
+                      {item.name} x{item.quantity}
+                    </p>
+                  ))}
+                </div>
+                <button
+                  onClick={() => handleDeliver(order.id, order.tableNumber)}
+                  className="w-full bg-green-600 text-white font-semibold py-2 rounded-full hover:bg-green-700"
+                >
+                  🚚 ደረሰ (Delivered)
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Receipt */}
       {lastOrder && (
@@ -179,7 +304,7 @@ export default function WaiterOrderPage() {
           <div className="flex gap-2 print:hidden">
             <button
               onClick={() => window.print()}
-              className="flex-1 bg-black text-gray-900 py-2 rounded-full text-sm hover:bg-gray-800"
+              className="flex-1 bg-black text-white py-2 rounded-full text-sm hover:bg-gray-800"
             >
               🖨️ ደረሰኝ አትም
             </button>
@@ -193,172 +318,149 @@ export default function WaiterOrderPage() {
         </div>
       )}
 
-      <div className="text-gray-900 max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6 print:hidden">
-        {/* Left: Menu selection */}
-        <div className="lg:col-span-2">
-          {/* Table number */}
-          <div className="text-gray-900 bg-white rounded-xl shadow p-4 mb-4">
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              የጠረጴዛ ቁጥር
-            </label>
-            <input
-              type="text"
-              value={tableNumber}
-              onChange={(e) => setTableNumber(e.target.value)}
-              placeholder="ለምሳሌ: 5"
-              className="text-gray-900 w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500"
-            />
-          </div>
+      {loadingMenu ? (
+        <p className="text-center text-gray-400">Menu እየጫነ ነው...</p>
+      ) : (
+        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6 print:hidden">
+          {/* Left: Menu selection */}
+          <div className="lg:col-span-2">
+            <div className="bg-white rounded-xl shadow p-4 mb-4">
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                የጠረጴዛ ቁጥር
+              </label>
+              <input
+                type="text"
+                value={tableNumber}
+                onChange={(e) => setTableNumber(e.target.value)}
+                placeholder="ለምሳሌ: 5"
+                className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500"
+              />
+            </div>
 
-          {/* Notes */}
-          <div className="bg-white rounded-xl shadow p-4 mb-4">
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              ማስታወሻ (አማራጭ)
-            </label>
-            <textarea
-              value={notes}
-              onChange={(e) => setNotes(e.target.value)}
-              placeholder="ለምሳሌ: ስኳር አታድርግ፣ ቶሎ አምጣ..."
-              className="text-gray-900 w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500"
-              rows={2}
-            />
-          </div>
+            <div className="bg-white rounded-xl shadow p-4 mb-4">
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                ማስታወሻ (አማራጭ)
+              </label>
+              <textarea
+                value={notes}
+                onChange={(e) => setNotes(e.target.value)}
+                placeholder="ለምሳሌ: ስኳር አታድርግ፣ ቶሎ አምጣ..."
+                className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500"
+                rows={2}
+              />
+            </div>
 
-          {/* Main tabs: Food / Drink / Room */}
-          <div className="flex gap-3 mb-4 text-gray-900">
-            {mainTabs.map((tab) => (
-              <button
-                key={tab}
-                onClick={() => setMainTab(tab)}
-                className={`px-5 py-2 rounded-full font-semibold transition-colors ${
-                  mainTab === tab
-                    ? "bg-amber-500 text-black"
-                    : "bg-white border hover:bg-gray-100"
-                }`}
-              >
-                {tab}
-              </button>
-            ))}
-          </div>
-
-          {/* Sub-category tabs */}
-          {mainTab === "Food" && (
-            <div className="flex flex-wrap gap-2 mb-4 text-gray-900">
-              {Object.keys(foodMenu).map((cat) => (
+            <div className="flex gap-3 mb-4">
+              {mainTabs.map((tab) => (
                 <button
-                  key={cat}
-                  onClick={() => setFoodCategory(cat)}
-                  className={`px-4 py-1.5 rounded-full text-sm font-medium ${
-                    foodCategory === cat
-                      ? "bg-black text-white"
+                  key={tab}
+                  onClick={() => switchMainTab(tab)}
+                  className={`px-5 py-2 rounded-full font-semibold transition-colors ${
+                    mainTab === tab
+                      ? "bg-amber-500 text-black"
                       : "bg-white border hover:bg-gray-100"
                   }`}
                 >
-                  {cat}
+                  {tab}
                 </button>
               ))}
             </div>
-          )}
-          {mainTab === "Drink" && (
-            <div className="flex flex-wrap gap-2 mb-4">
-              {Object.keys(drinkMenu).map((cat) => (
-                <button
-                  key={cat}
-                  onClick={() => setDrinkCategory(cat)}
-                  className={`px-4 py-1.5 rounded-full text-sm font-medium ${
-                    drinkCategory === cat
-                      ? "bg-black text-white"
-                      : "bg-white border hover:bg-gray-100"
-                  }`}
-                >
-                  {cat}
-                </button>
-              ))}
-            </div>
-          )}
 
-          {/* Item grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-            {currentItems().map((item) => (
-              <button
-                key={item.name}
-                onClick={() => addToCart(item)}
-                className="bg-white rounded-xl shadow overflow-hidden text-left hover:shadow-lg hover:-translate-y-0.5 transition-all"
-              >
-                <div className="relative h-28 w-full bg-gray-100">
-                  <Image
-                    src={item.image}
-                    alt={item.name}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <div className="p-3">
-                  <p className="font-semibold text-sm">{item.name}</p>
-                  <p className="text-amber-600 font-bold text-sm">{item.price}</p>
-                </div>
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Right: Cart */}
-        <div className="bg-white rounded-xl shadow p-4 h-fit sticky top-28">
-          <h2 className="text-lg font-bold mb-3">🛒 ትዕዛዝ ዝርዝር</h2>
-
-          {cart.length === 0 ? (
-            <p className="text-gray-400 text-sm">ገና ምንም እቃ አልተመረጠም</p>
-          ) : (
-            <div className="space-y-3">
-              {cart.map((c) => (
-                <div
-                  key={`${c.category}-${c.name}`}
-                  className="flex justify-between items-center border-b pb-2"
-                >
-                  <div>
-                    <p className="font-medium text-sm">{c.name}</p>
-                    <p className="text-xs text-gray-500">{c.price}</p>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <button
-                      onClick={() => changeQuantity(c.name, c.category, -1)}
-                      className="w-6 h-6 rounded-full bg-gray-200 hover:bg-gray-300"
-                    >
-                      −
-                    </button>
-                    <span className="text-sm w-4 text-center">{c.quantity}</span>
-                    <button
-                      onClick={() => changeQuantity(c.name, c.category, 1)}
-                      className="w-6 h-6 rounded-full bg-gray-200 hover:bg-gray-300"
-                    >
-                      +
-                    </button>
-                  </div>
-                </div>
-              ))}
-
-              <div className="flex justify-between font-bold pt-2">
-                <span>ጠቅላላ</span>
-                <span>{total.toFixed(2)}</span>
+            {mainTab !== "Room" && (
+              <div className="flex flex-wrap gap-2 mb-4">
+                {categoriesForTab(mainTab).map((cat) => (
+                  <button
+                    key={cat}
+                    onClick={() => setSubCategory(cat)}
+                    className={`px-4 py-1.5 rounded-full text-sm font-medium ${
+                      subCategory === cat
+                        ? "bg-black text-white"
+                        : "bg-white border hover:bg-gray-100"
+                    }`}
+                  >
+                    {cat}
+                  </button>
+                ))}
               </div>
+            )}
+
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+              {currentItems().map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => addToCart(item)}
+                  className="bg-white rounded-xl shadow overflow-hidden text-left hover:shadow-lg hover:-translate-y-0.5 transition-all"
+                >
+                  <div className="relative h-28 w-full bg-gray-100">
+                    <Image src={item.image} alt={item.name} fill className="object-cover" />
+                  </div>
+                  <div className="p-3">
+                    <p className="font-semibold text-sm">{item.name}</p>
+                    <p className="text-amber-600 font-bold text-sm">{item.price}</p>
+                  </div>
+                </button>
+              ))}
             </div>
-          )}
+          </div>
 
-          {message && (
-            <p className="text-sm mt-3 text-center text-amber-600 font-medium">
-              {message}
-            </p>
-          )}
+          {/* Right: Cart */}
+          <div className="bg-white rounded-xl shadow p-4 h-fit sticky top-28">
+            <h2 className="text-lg font-bold mb-3">🛒 ትዕዛዝ ዝርዝር</h2>
 
-          <button
-            onClick={handleSubmitOrder}
-            disabled={submitting}
-            className="w-full mt-4 bg-amber-500 text-black font-semibold py-2 rounded-full hover:bg-amber-600 disabled:opacity-50"
-          >
-            {submitting ? "እየተላከ ነው..." : "ትዕዛዝ ላክ"}
-          </button>
+            {cart.length === 0 ? (
+              <p className="text-gray-400 text-sm">ገና ምንም እቃ አልተመረጠም</p>
+            ) : (
+              <div className="space-y-3">
+                {cart.map((c) => (
+                  <div
+                    key={`${c.category}-${c.name}`}
+                    className="flex justify-between items-center border-b pb-2"
+                  >
+                    <div>
+                      <p className="font-medium text-sm">{c.name}</p>
+                      <p className="text-xs text-gray-500">{c.price}</p>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={() => changeQuantity(c.name, c.category, -1)}
+                        className="w-6 h-6 rounded-full bg-gray-200 hover:bg-gray-300"
+                      >
+                        −
+                      </button>
+                      <span className="text-sm w-4 text-center">{c.quantity}</span>
+                      <button
+                        onClick={() => changeQuantity(c.name, c.category, 1)}
+                        className="w-6 h-6 rounded-full bg-gray-200 hover:bg-gray-300"
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
+                ))}
+
+                <div className="flex justify-between font-bold pt-2">
+                  <span>ጠቅላላ</span>
+                  <span>{total.toFixed(2)}</span>
+                </div>
+              </div>
+            )}
+
+            {message && (
+              <p className="text-sm mt-3 text-center text-amber-600 font-medium">
+                {message}
+              </p>
+            )}
+
+            <button
+              onClick={handleSubmitOrder}
+              disabled={submitting}
+              className="w-full mt-4 bg-amber-500 text-black font-semibold py-2 rounded-full hover:bg-amber-600 disabled:opacity-50"
+            >
+              {submitting ? "እየተላከ ነው..." : "ትዕዛዝ ላክ"}
+            </button>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

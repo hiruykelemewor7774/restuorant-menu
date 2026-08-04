@@ -39,10 +39,10 @@ export default function WaiterLoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4 text-gray-900">
+    <div className="flex items-center justify-center px-4 text-white mr-10">
       <form
         onSubmit={handleSubmit}
-        className="bg-white rounded-xl shadow-md p-8 w-full max-w-sm"
+        className="rounded-xl shadow-md p-8 mt-0 w-full max-w-sm text-white border border-gray-200"
       >
         <h1 className="text-2xl font-bold mb-6 text-center">
           የዌይተር መግቢያ
@@ -55,32 +55,32 @@ export default function WaiterLoginPage() {
         )}
 
         <label className="block mb-3">
-          <span className="text-sm font-medium text-gray-700">Username</span>
+          <span className="text-sm font-medium text-white">Username</span>
           <input
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
             autoFocus
-            className="mt-1 w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="mt-1 w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gray-200"
           />
         </label>
 
         <label className="block mb-5">
-          <span className="text-sm font-medium text-gray-700">Password</span>
+          <span className="text-sm font-medium text-white">Password</span>
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            className="mt-1 w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gray-200"
           />
         </label>
 
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-blue-600 text-white rounded-md py-2 font-medium hover:bg-blue-700 disabled:opacity-50"
+          className="w-full bg-amber-500 text-white rounded-md py-2 font-medium hover:bg-amber-400 disabled:opacity-50"
         >
           {loading ? "እየገባ ነው..." : "ግባ"}
         </button>

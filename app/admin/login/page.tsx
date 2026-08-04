@@ -17,7 +17,7 @@ export default function AdminLogin() {
     setError('')
 
 
-    const res = await fetch('/api/login', {
+    const res = await fetch('/api/admin/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username, password }),
@@ -34,11 +34,10 @@ export default function AdminLogin() {
 
 
   return (
-    <main className="flex min-h-screen items-center justify-center ">
+    <main className="flex items-center justify-center">
       <form
         onSubmit={handleSubmit}
-        className="w-80 space-y-4 rounded-2xl border border-gray-200 p-6 shadow-sm px-6 mb-50"
-      >
+        className="w-80 space-y-4 rounded-2xl border border-gray-200 p-6 shadow-sm px-6 mr-20">
         <h1 className="text-2xl font-bold">Admin Login</h1>
 
 
@@ -65,11 +64,9 @@ export default function AdminLogin() {
 
         <button
           type="submit"
-          className="w-full rounded-lg bg-amber-500 py-2 font-semibold text-black hover:bg-amber-400"
-        >
+          className="w-full rounded-lg bg-amber-500 py-2 font-semibold text-black hover:bg-amber-400" >
           Login
         </button>
-
 
         <button
           type="button"
