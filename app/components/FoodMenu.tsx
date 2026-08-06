@@ -42,7 +42,7 @@ export default function FoodMenu() {
     }))
 
   return (
-    <main className="max-w-6xl mx-auto px-6 py-2">
+    <main className="max-w-6xl mx-auto px-6 py-2 mt-35">
       <h1 className="text-4xl font-bold mb-2 pt-25">Food</h1>
       <p className="mb-3">Whatever you want you can order</p>
 

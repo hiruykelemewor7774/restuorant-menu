@@ -8,7 +8,13 @@ export async function GET(req: NextRequest) {
   if (!payload) return NextResponse.json({ success: false }, { status: 401 });
 
   const orders = await prisma.order.findMany({
-    where: { status: { in: ["pending", "sent_to_kitchen", "ready"] } },
+    where: {
+      status: { in: ["pending", "sent_to_kitchen", "ready"] },
+      OR: [
+        { source: "waiter" },
+        { paymentStatus: "paid" },
+      ],
+    },
     include: { items: true, waiter: { select: { username: true, fullName: true } } },
     orderBy: { createdAt: "desc" },
     take: 50,

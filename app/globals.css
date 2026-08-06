@@ -94,3 +94,26 @@ body {
 .animation-delay-9000 {
   animation-delay: 9s;
 }
+
+
+/* Light theme override - ዋና shell ላይ ብቻ (sidebar, navbar, main area) */
+html.light-theme body {
+  background-color: #f3f4f6;
+  color: #111827;
+}
+
+html.light-theme aside {
+  background-color: #ffffff !important;
+  color: #111827 !important;
+  border-color: #e5e7eb !important;
+}
+
+html.light-theme aside a,
+html.light-theme aside button {
+  color: #374151 !important;
+}
+
+html.light-theme aside a:hover,
+html.light-theme aside button:hover {
+  background-color: #f3f4f6 !important;
+}

@@ -17,7 +17,7 @@ export default function CartDrawer({
   const [message, setMessage] = useState("");
   const [success, setSuccess] = useState(false);
 
-  async function handleCheckout() {
+async function handleCheckout() {
     setMessage("");
 
     if (!tableNumber.trim()) {
@@ -44,12 +44,11 @@ export default function CartDrawer({
         return;
       }
 
-      setSuccess(true);
+      // Chapa checkout ገፅ ላይ ማዞር
       clearCart();
-      setTableNumber("");
+      window.location.href = data.checkoutUrl;
     } catch {
       setMessage("የኔትወርክ ችግር ተፈጥሯል");
-    } finally {
       setSubmitting(false);
     }
   }

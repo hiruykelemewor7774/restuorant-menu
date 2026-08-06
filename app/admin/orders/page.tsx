@@ -88,12 +88,11 @@ export default function LiveOrdersPage() {
     <div className="text-white">
       <h1 className="text-3xl font-bold mb-6 text-yellow-500">Live Orders</h1>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="w-200 ml-0  grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {orders.map((order) => (
           <div
             key={order.id}
-            className="bg-gray-900 border border-gray-800 rounded-xl p-4"
-          >
+            className="bg-gray-900 border border-gray-800 rounded-xl p-4">
             <div className="flex justify-between items-center mb-2">
               <span className="font-bold text-yellow-400">
                 ጠረጴዛ: {order.tableNumber}
@@ -131,8 +130,7 @@ export default function LiveOrdersPage() {
                   onChange={(e) =>
                     setSelectedWaiter({ ...selectedWaiter, [order.id]: e.target.value })
                   }
-                  className="flex-1 bg-gray-800 border border-gray-700 rounded-lg px-2 py-1.5 text-sm"
-                >
+                  className="flex-1 bg-gray-800 border border-gray-700 rounded-lg px-2 py-1.5 text-sm">
                   <option value="">ዌይተር ምረጥ</option>
                   {waiters.map((w) => (
                     <option key={w.id} value={w.id}>
@@ -142,8 +140,7 @@ export default function LiveOrdersPage() {
                 </select>
                 <button
                   onClick={() => sendToKitchen(order.id)}
-                  className="bg-yellow-500 text-black text-sm font-semibold px-3 py-1.5 rounded-lg hover:bg-yellow-400"
-                >
+                  className="bg-yellow-500 text-black text-sm font-semibold px-3 py-1.5 rounded-lg hover:bg-yellow-400">
                   ወደ ኩሽና ላክ
                 </button>
               </div>

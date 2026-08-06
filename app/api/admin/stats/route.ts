@@ -32,6 +32,12 @@ export async function GET(req: NextRequest) {
       where: { status: "delivered", createdAt: { gte: startOfToday } },
     }),
     prisma.menuItem.findMany({ select: { type: true, category: true } }),
+    prisma.order.groupBy({
+      by: ["waiterId"],
+      where: { paymentStatus: "paid", waiterId: { not: null } },
+      _sum: { totalAmount: true },
+      _count: { id: true },
+    }),
   ]);
 
   // በ type እና category የተከፋፈለ ብዛት ማስላት
@@ -42,6 +48,29 @@ export async function GET(req: NextRequest) {
     if (!breakdown[type]) breakdown[type] = {};
     breakdown[type][category] = (breakdown[type][category] || 0) + 1;
   }
+
+  const waiterSalesRaw = await prisma.order.groupBy({
+    by: ["waiterId"],
+    where: { paymentStatus: "paid", waiterId: { not: null } },
+    _sum: { totalAmount: true },
+    _count: { id: true },
+  });
+
+  const waiterIds = waiterSalesRaw.map((w) => w.waiterId).filter(Boolean) as string[];
+  const waiterDetails = await prisma.waiter.findMany({
+    where: { id: { in: waiterIds } },
+    select: { id: true, username: true, fullName: true },
+  });
+
+  const waiterSales = waiterSalesRaw.map((w) => {
+    const detail = waiterDetails.find((d) => d.id === w.waiterId);
+    return {
+      waiterId: w.waiterId,
+      name: detail?.fullName || detail?.username || "Unknown",
+      totalSales: w._sum.totalAmount || 0,
+      orderCount: w._count.id,
+    };
+  });
 
   return NextResponse.json({
     success: true,
@@ -56,5 +85,6 @@ export async function GET(req: NextRequest) {
       todayDelivered,
     },
     menuBreakdown: breakdown,
+    waiterSales,
   });
 }
