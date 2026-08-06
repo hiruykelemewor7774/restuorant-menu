@@ -118,6 +118,46 @@ html.light-theme aside button:hover {
   background-color: #f3f4f6 !important;
 }
 
+/* Light Mode - Body/NavBar/Overlay ራሳቸው ወደ ብርሃን መቀየሪያ */
+html.light-theme body {
+  background-color: #f3f4f6 !important;
+}
+
+html.light-theme .app-main-shell {
+  background-image: none !important;
+  background-color: #f3f4f6 !important;
+}
+
+html.light-theme .app-overlay {
+  display: none !important;
+}
+
+html.light-theme header {
+  background-color: #ffffff !important;
+  border-color: #e5e7eb !important;
+}
+
+html.light-theme header span,
+html.light-theme header button {
+  color: #111827 !important;
+}
+
+html.light-theme header .text-amber-400 {
+  color: #d97706 !important;
+}
+
+html.light-theme main {
+  color: #111827 !important;
+}
+
+html.light-theme main h1,
+html.light-theme main h2,
+html.light-theme main h3,
+html.light-theme main p,
+html.light-theme main span {
+  color: inherit;
+}
+
 /* ============================================
    DARK MODE - ግልጽ (light) የነበሩ ቦታዎችን ወደ ጥቁር መቀየሪያ
    (Waiter dashboard/login በዋናነት)

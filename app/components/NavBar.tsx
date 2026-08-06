@@ -23,7 +23,7 @@ export default function Navbar() {
 
   return (
     <>
-      <header className="w-full ml-0 flex items-center justify-between px-6 py-4 bg-transparent backdrop-blur-md border-b border-gray-800/40 sticky top-0 left-0 right-0 z-50">
+      <header className="bg-transparent h-20 w-screen fixed dark:bg-green-950 dark:text-white flex items-center justify-between px-6 py-4 backdrop-blur-md border-b border-gray-800/40 top-0 left-0 right-0 z-50">
         
         {/* Left section (Logo with Image and Company Name) */}
         <Link href="/campany" className="flex items-center space-x-2 cursor-pointer">

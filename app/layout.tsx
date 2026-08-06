@@ -17,32 +17,30 @@ export default function RootLayout({
         <ThemeProvider>
           <LanguageProvider>
             <CartProvider>
-              <div className="flex h-screen w-screen overflow-hidden">
+              
+                {/* Fixed Navbar (ከላይ ቋሚ ሆኖ የሚቀመጥ) */}
+                  <div className="w-full z-50 shrink-0">
+                  <Navbar />
+                  </div>
+                <div className="flex h-screen w-screen overflow-hidden">
 
                 {/* ሳይድባር */}
-                <aside className="h-screen sticky top-0 overflow-y-auto w-64 shrink-0 z-20">
+                <aside className="mt-20 sticky top-0 overflow-y-auto w-64">
                   <Sidebar />
                 </aside>
 
                 {/* የቀኝ በኩል አጠቃላይ ክፍል (ማሸብለል የሌለበት) */}
-                <div className="flex-1 flex flex-col h-full relative bg-[url('/image/restaurant.Webp')] backdrop-blur-xl bg-cover bg-center">
+                <div className="app-main-shell flex-1 flex flex-col h-full relative bg-[url('/image/restaurant.Webp')] backdrop-blur-xl bg-cover bg-center">
 
-                  {/* የጀርባ ምስል ከለላ (Overlay) */}
-                  <div className="absolute inset-0 bg-gray-950/70 backdrop-blur-[2px] pointer-events-none"></div>
-
-                  {/* Fixed Navbar (ከላይ ቋሚ ሆኖ የሚቀመጥ) */}
-                  <div className="w-full z-50 shrink-0">
-                   <Navbar />
-                  </div>
+                {/* የጀርባ ምስል ከለላ (Overlay) */}
+                <div className="app-overlay absolute inset-0 bg-gray-950/70 backdrop-blur-[2px] pointer-events-none"></div>
 
                   {/* ማሸብለል የሚችለው ዋናው የገጽ ኮንቴንት ብቻ */}
                   <main className="flex-1 px-6 py-8 overflow-y-auto relative z-10">
-                    {children}
+                    {children}                  
                   </main>
-
                 </div>
-
-              </div>
+              </div>             
             </CartProvider>
           </LanguageProvider>
         </ThemeProvider>

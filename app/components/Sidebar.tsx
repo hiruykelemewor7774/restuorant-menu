@@ -50,10 +50,10 @@ export default function Sidebar({ isAdmin = false }: SidebarProps) {
     languageOptions.find((l) => l.code === language)?.label || "English";
 
   return (
-    <aside className="mt-28 w-64 bg-gray-950 text-white flex flex-col justify-between p-4 border-r border-gray-800 select-none relative z-30 overflow-y-auto [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-thumb]:bg-gray-800 [&::-webkit-scrollbar-thumb]:rounded-full">
+    <aside className="w-64 text-white flex flex-col justify-between p-4 border-r border-gray-800 select-none relative z-30 overflow-y-auto [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-thumb]:bg-gray-800 [&::-webkit-scrollbar-thumb]:rounded-full">
       
       {/* Top section containing navigation links and system settings */}
-      <div>
+      <div className="mt-28">
         <div className="text-amber-400 text-2xl font-black mb-8 px-2 tracking-wide">
           Kerami RMS
         </div>
