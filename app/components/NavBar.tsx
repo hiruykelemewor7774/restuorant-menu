@@ -9,11 +9,14 @@ import { useRouter } from "next/navigation";
 import { useCart } from "../context/CartContext";
 import { useLanguage } from "../context/LanguageContext";
 import CartDrawer from "./CartDrawer";
+import { Menu } from "lucide-react";
+import { useUI } from "../context/UIContext";
 
 export default function Navbar() {
   const [showDropdown, setShowDropdown] = useState(false);
   const router = useRouter();
   const { totalItems } = useCart();
+  const { toggleSidebar } = useUI();
   const { t } = useLanguage();
   const [cartOpen, setCartOpen] = useState(false);
 
@@ -24,7 +27,13 @@ export default function Navbar() {
   return (
     <>
       <header className="bg-transparent h-20 w-screen fixed dark:bg-green-950 dark:text-white flex items-center justify-between px-6 py-4 backdrop-blur-md border-b border-gray-800/40 top-0 left-0 right-0 z-50">
-        
+        {/* Hamburger Menu - Mobile ላይ ብቻ ይታያል */}
+<button
+  onClick={toggleSidebar}
+  className="md:hidden p-2 rounded-lg bg-gray-800/80 hover:bg-gray-800 border border-gray-700 text-white mr-2"
+>
+  <Menu size={20} />
+</button>
         {/* Left section (Logo with Image and Company Name) */}
         <Link href="/campany" className="flex items-center space-x-2 cursor-pointer">
           <Image src="/pizza.Webp" width={35} height={35} className="rounded-full object-cover" alt="Company logo"/>

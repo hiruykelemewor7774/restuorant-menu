@@ -11,8 +11,7 @@ export default function CartDrawer({
   isOpen: boolean;
   onClose: () => void;
 }) {
-  const { cart, changeQuantity, clearCart, totalPrice } = useCart();
-  const [tableNumber, setTableNumber] = useState("");
+  const { cart, changeQuantity, clearCart, totalPrice, tableNumber, setTableNumber } = useCart();
   const [submitting, setSubmitting] = useState(false);
   const [message, setMessage] = useState("");
   const [success, setSuccess] = useState(false);

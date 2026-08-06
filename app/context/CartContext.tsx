@@ -7,7 +7,7 @@ export type CartItem = {
   price: string;
   image: string;
   quantity: number;
-  category: string; // "Food" | "Drink" | "Room"
+  category: string;
 };
 
 type CartContextType = {
@@ -17,12 +17,15 @@ type CartContextType = {
   clearCart: () => void;
   totalItems: number;
   totalPrice: number;
+  tableNumber: string;
+  setTableNumber: (table: string) => void;
 };
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export function CartProvider({ children }: { children: ReactNode }) {
   const [cart, setCart] = useState<CartItem[]>([]);
+  const [tableNumber, setTableNumber] = useState("");
 
   function addToCart(item: Omit<CartItem, "quantity">) {
     setCart((prev) => {
@@ -64,7 +67,16 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   return (
     <CartContext.Provider
-      value={{ cart, addToCart, changeQuantity, clearCart, totalItems, totalPrice }}
+      value={{
+        cart,
+        addToCart,
+        changeQuantity,
+        clearCart,
+        totalItems,
+        totalPrice,
+        tableNumber,
+        setTableNumber,
+      }}
     >
       {children}
     </CartContext.Provider>
