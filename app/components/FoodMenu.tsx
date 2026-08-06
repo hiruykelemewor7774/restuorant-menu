@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import MenuCard, { MenuItem } from './MenuCard'
+import { useLanguage } from '../context/LanguageContext'
 
 type DbItem = {
   id: string
@@ -16,6 +17,7 @@ export default function FoodMenu() {
   const [allItems, setAllItems] = useState<DbItem[]>([])
   const [loading, setLoading] = useState(true)
   const [active, setActive] = useState<string>('')
+  const { t } = useLanguage()
 
   useEffect(() => {
     fetch('/api/menu', { cache: 'no-store' })
@@ -43,8 +45,8 @@ export default function FoodMenu() {
 
   return (
     <main className="max-w-6xl mx-auto px-6 py-2 mt-35">
-      <h1 className="text-4xl font-bold mb-2 pt-25">Food</h1>
-      <p className="mb-3">Whatever you want you can order</p>
+      <h1 className="text-4xl font-bold mb-2 pt-25">{t("food")}</h1>
+      <p className="mb-3">{t("foodSubtitle")}</p>
 
       {loading ? (
         <p className="text-gray-400">Loading...</p>

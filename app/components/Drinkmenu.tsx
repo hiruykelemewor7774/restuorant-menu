@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import MenuCard, { MenuItem } from '../components/MenuCard'
-
+import { useLanguage } from '../context/LanguageContext'
 type DbItem = {
   id: string
   type: string
@@ -16,7 +16,7 @@ export default function DrinkPage() {
   const [allItems, setAllItems] = useState<DbItem[]>([])
   const [loading, setLoading] = useState(true)
   const [active, setActive] = useState<string>('')
-
+  const { t } = useLanguage()
   useEffect(() => {
     fetch('/api/menu', { cache: 'no-store' })
       .then((res) => res.json())
@@ -43,7 +43,7 @@ export default function DrinkPage() {
 
   return (
     <main className="max-w-6xl mx-auto px-6 py-0">
-      <h1 className="text-4xl font-bold mb-3 pt-25">Drinks</h1>
+      <h1 className="text-4xl font-bold mb-3 pt-25">{t("drinksTitle")}</h1>
 
       {loading ? (
         <p className="text-gray-400">Loading...</p>

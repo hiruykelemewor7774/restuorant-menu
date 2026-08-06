@@ -11,23 +11,27 @@ type ThemeContextType = {
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
+function applyTheme(theme: Theme) {
+  document.documentElement.classList.toggle("dark-content", theme === "dark");
+  document.documentElement.classList.toggle("light-theme", theme === "light");
+}
+
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<Theme>("dark");
 
-useEffect(() => {
-  const saved = localStorage.getItem("kerami-theme") as Theme | null;
-  if (saved) {
+  useEffect(() => {
+    const saved = localStorage.getItem("kerami-theme") as Theme | null;
+    const initial = saved || "dark";
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    setTheme(saved);
-    document.documentElement.classList.toggle("light-theme", saved === "light");
-  }
-}, []);
+    setTheme(initial);
+    applyTheme(initial);
+  }, []);
 
   function toggleTheme() {
     setTheme((prev) => {
       const next = prev === "dark" ? "light" : "dark";
       localStorage.setItem("kerami-theme", next);
-      document.documentElement.classList.toggle("light-theme", next === "light");
+      applyTheme(next);
       return next;
     });
   }

@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { useCart } from '../context/CartContext'
+import { useLanguage } from '../context/LanguageContext'
 
 type DbMenuItem = {
   id: string
@@ -18,6 +19,7 @@ export default function RoomMenu() {
   const [rooms, setRooms] = useState<DbMenuItem[]>([])
   const [loading, setLoading] = useState(true)
   const { addToCart } = useCart()
+  const { t } = useLanguage()
 
   useEffect(() => {
     fetch('/api/menu', { cache: 'no-store' })
@@ -44,8 +46,8 @@ export default function RoomMenu() {
 
   return (
     <main className="max-w-6xl mx-auto px-6 py-2">
-      <h1 className="text-4xl font-bold mb-2 pt-25">Rooms</h1>
-      <p className="text-amber-400 mb-3">Choose the room that fits your stay.</p>
+      <h1 className="text-4xl font-bold mb-2 pt-25">{t("roomsTitle")}</h1>
+      <p className="text-amber-400 mb-3">{t("roomsSubtitle")}</p>
 
       {loading ? (
         <p className="text-gray-400">Loading...</p>

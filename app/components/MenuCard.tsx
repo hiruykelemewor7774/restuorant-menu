@@ -2,6 +2,7 @@
 
 import Image from 'next/image'
 import { useCart } from '../context/CartContext'
+import { useLanguage } from '../context/LanguageContext';
 
 export type MenuItem = {
   name: string
@@ -18,6 +19,7 @@ export default function MenuCard({
   category?: string
 }) {
   const { addToCart } = useCart()
+  const { t } = useLanguage()
 
   function handleAdd(e: React.MouseEvent) {
     e.preventDefault()
@@ -53,7 +55,7 @@ export default function MenuCard({
           onClick={handleAdd}
           className="mt-3 w-full bg-amber-500 text-black font-semibold py-2 rounded-full hover:bg-amber-600 transition"
         >
-          🛒 Add to Cart
+          🛒 {t("addToCart")}
         </button>
       </div>
     </div>

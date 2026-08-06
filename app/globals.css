@@ -117,3 +117,71 @@ html.light-theme aside a:hover,
 html.light-theme aside button:hover {
   background-color: #f3f4f6 !important;
 }
+
+/* ============================================
+   DARK MODE - ግልጽ (light) የነበሩ ቦታዎችን ወደ ጥቁር መቀየሪያ
+   (Waiter dashboard/login በዋናነት)
+   ============================================ */
+html.dark-content .bg-gray-50 {
+  background-color: #030712 !important;
+}
+
+html.dark-content .bg-white {
+  background-color: #111827 !important;
+  color: #f3f4f6 !important;
+}
+
+html.dark-content .bg-gray-100 {
+  background-color: #1f2937 !important;
+}
+
+html.dark-content .text-gray-700,
+html.dark-content .text-gray-800,
+html.dark-content .text-gray-900 {
+  color: #e5e7eb !important;
+}
+
+html.dark-content .text-gray-400,
+html.dark-content .text-gray-500,
+html.dark-content .text-gray-600 {
+  color: #9ca3af !important;
+}
+
+html.dark-content .border,
+html.dark-content .border-gray-200,
+html.dark-content .border-gray-300 {
+  border-color: #374151 !important;
+}
+
+html.dark-content input,
+html.dark-content textarea,
+html.dark-content select {
+  background-color: #1f2937 !important;
+  color: #f3f4f6 !important;
+  border-color: #374151 !important;
+}
+
+html.dark-content .bg-green-50 {
+  background-color: rgba(21, 128, 61, 0.15) !important;
+}
+
+html.dark-content .text-green-700 {
+  color: #4ade80 !important;
+}
+
+html.dark-content .bg-red-100 {
+  background-color: rgba(153, 27, 27, 0.3) !important;
+}
+
+html.dark-content .text-red-700,
+html.dark-content .text-red-500 {
+  color: #fca5a5 !important;
+}
+
+html.dark-content .bg-gray-200 {
+  background-color: #374151 !important;
+}
+
+html.dark-content .hover\:bg-gray-100:hover {
+  background-color: #374151 !important;
+}
