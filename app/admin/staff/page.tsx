@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-type Waiter = {
+type StaffMember = {
   id: string;
   username: string;
   fullName: string | null;
@@ -10,8 +10,11 @@ type Waiter = {
   createdAt: string;
 };
 
+type StaffType = "waiter" | "kitchen";
+
 export default function ManageStaffPage() {
-  const [waiters, setWaiters] = useState<Waiter[]>([]);
+  const [staffType, setStaffType] = useState<StaffType>("waiter");
+  const [staffList, setStaffList] = useState<StaffMember[]>([]);
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState("");
 
@@ -22,24 +25,37 @@ export default function ManageStaffPage() {
   const [resetTarget, setResetTarget] = useState<string | null>(null);
   const [resetPassword, setResetPassword] = useState("");
 
-   async function loadWaiters() {
+  const apiBase = staffType === "waiter" ? "/api/admin/staff" : "/api/admin/kitchen-staff";
+  const listKey = staffType === "waiter" ? "waiters" : "kitchenStaff";
+
+  async function loadStaff() {
     setLoading(true);
-    const res = await fetch("/api/admin/staff", { cache: "no-store" });
+    const res = await fetch(apiBase, { cache: "no-store" });
     const data = await res.json();
-    if (data.success) setWaiters(data.waiters);
+    if (data.success) setStaffList(data[listKey]);
     setLoading(false);
   }
 
- useEffect(() => {
-  // eslint-disable-next-line react-hooks/set-state-in-effect
-  void loadWaiters();
-}, []);
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    void loadStaff();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [staffType]);
+
+  function switchTab(type: StaffType) {
+    setStaffType(type);
+    setMessage("");
+    setUsername("");
+    setPassword("");
+    setFullName("");
+    setResetTarget(null);
+  }
 
   async function handleCreate(e: React.FormEvent) {
     e.preventDefault();
     setMessage("");
 
-    const res = await fetch("/api/admin/staff", {
+    const res = await fetch(apiBase, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username, password, fullName }),
@@ -51,33 +67,33 @@ export default function ManageStaffPage() {
       return;
     }
 
-    setMessage("✅ አዲስ waiter ተፈጥሯል");
+    setMessage(`✅ አዲስ ${staffType === "waiter" ? "waiter" : "kitchen staff"} ተፈጥሯል`);
     setUsername("");
     setPassword("");
     setFullName("");
-    loadWaiters();
+    loadStaff();
   }
 
-  async function toggleActive(w: Waiter) {
-    await fetch(`/api/admin/staff/${w.id}`, {
+  async function toggleActive(member: StaffMember) {
+    await fetch(`${apiBase}/${member.id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ isActive: !w.isActive }),
+      body: JSON.stringify({ isActive: !member.isActive }),
     });
-    loadWaiters();
+    loadStaff();
   }
 
   async function handleDelete(id: string) {
-    if (!confirm("እርግጠኛ ነህ ይህን waiter ማጥፋት ትፈልጋለህ?")) return;
-    const res = await fetch(`/api/admin/staff/${id}`, { method: "DELETE" });
+    if (!confirm("እርግጠኛ ነህ ማጥፋት ትፈልጋለህ?")) return;
+    const res = await fetch(`${apiBase}/${id}`, { method: "DELETE" });
     const data = await res.json();
-    if (data.success) loadWaiters();
+    if (data.success) loadStaff();
     else alert(data.message);
   }
 
   async function handleResetPassword(id: string) {
     if (!resetPassword.trim()) return;
-    await fetch(`/api/admin/staff/${id}`, {
+    await fetch(`${apiBase}/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ newPassword: resetPassword }),
@@ -88,15 +104,41 @@ export default function ManageStaffPage() {
   }
 
   return (
-    <div className="text-white">
+    <div className="text-white pt-7">
       <h1 className="text-3xl font-bold mb-6 text-yellow-500">Manage Staff Auth</h1>
+
+      {/* Tabs */}
+      <div className="flex gap-2 mb-6">
+        <button
+          onClick={() => switchTab("waiter")}
+          className={`px-5 py-2 rounded-full font-semibold transition ${
+            staffType === "waiter"
+              ? "bg-yellow-500 text-black"
+              : "bg-gray-900 border border-gray-700 hover:bg-gray-800"
+          }`}
+        >
+          🍽️ Waiters
+        </button>
+        <button
+          onClick={() => switchTab("kitchen")}
+          className={`px-5 py-2 rounded-full font-semibold transition ${
+            staffType === "kitchen"
+              ? "bg-yellow-500 text-black"
+              : "bg-gray-900 border border-gray-700 hover:bg-gray-800"
+          }`}
+        >
+          🍳 Kitchen Staff
+        </button>
+      </div>
 
       {/* Create Form */}
       <form
         onSubmit={handleCreate}
         className="bg-gray-900 border border-gray-800 rounded-2xl p-6 mb-8 max-w-xl"
       >
-        <h2 className="text-lg font-bold mb-4 text-yellow-400">አዲስ Waiter ጨምር</h2>
+        <h2 className="text-lg font-bold mb-4 text-yellow-400">
+          አዲስ {staffType === "waiter" ? "Waiter" : "Kitchen Staff"} ጨምር
+        </h2>
 
         <div className="grid grid-cols-2 gap-4 mb-4">
           <div>
@@ -146,28 +188,28 @@ export default function ManageStaffPage() {
         <p className="text-gray-400">እየጫነ ነው...</p>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {waiters.map((w) => (
+          {staffList.map((member) => (
             <div
-              key={w.id}
+              key={member.id}
               className="bg-gray-900 border border-gray-800 rounded-xl p-4"
             >
               <div className="flex justify-between items-start mb-2">
                 <div>
-                  <p className="font-semibold">{w.fullName || w.username}</p>
-                  <p className="text-xs text-gray-400">@{w.username}</p>
+                  <p className="font-semibold">{member.fullName || member.username}</p>
+                  <p className="text-xs text-gray-400">@{member.username}</p>
                 </div>
                 <span
                   className={`text-xs px-2 py-1 rounded-full ${
-                    w.isActive
+                    member.isActive
                       ? "bg-green-900/50 text-green-400"
                       : "bg-red-900/50 text-red-400"
                   }`}
                 >
-                  {w.isActive ? "Active" : "Disabled"}
+                  {member.isActive ? "Active" : "Disabled"}
                 </span>
               </div>
 
-              {resetTarget === w.id ? (
+              {resetTarget === member.id ? (
                 <div className="flex gap-2 mt-3">
                   <input
                     type="text"
@@ -177,7 +219,7 @@ export default function ManageStaffPage() {
                     className="flex-1 text-sm px-2 py-1.5 bg-gray-800 border border-gray-700 rounded-lg"
                   />
                   <button
-                    onClick={() => handleResetPassword(w.id)}
+                    onClick={() => handleResetPassword(member.id)}
                     className="text-sm bg-yellow-500 text-black px-3 py-1.5 rounded-lg font-semibold"
                   >
                     አስቀምጥ
@@ -186,19 +228,19 @@ export default function ManageStaffPage() {
               ) : (
                 <div className="flex gap-2 mt-3">
                   <button
-                    onClick={() => toggleActive(w)}
+                    onClick={() => toggleActive(member)}
                     className="flex-1 text-sm bg-gray-800 hover:bg-gray-700 py-1.5 rounded-lg transition"
                   >
-                    {w.isActive ? "አሰናክል" : "አንቃ"}
+                    {member.isActive ? "አሰናክል" : "አንቃ"}
                   </button>
                   <button
-                    onClick={() => setResetTarget(w.id)}
+                    onClick={() => setResetTarget(member.id)}
                     className="flex-1 text-sm bg-gray-800 hover:bg-gray-700 py-1.5 rounded-lg transition"
                   >
                     Password ቀይር
                   </button>
                   <button
-                    onClick={() => handleDelete(w.id)}
+                    onClick={() => handleDelete(member.id)}
                     className="flex-1 text-sm bg-red-900/50 hover:bg-red-900 text-red-300 py-1.5 rounded-lg transition"
                   >
                     Delete
@@ -208,9 +250,9 @@ export default function ManageStaffPage() {
             </div>
           ))}
 
-          {waiters.length === 0 && (
+          {staffList.length === 0 && (
             <p className="text-gray-400 col-span-full text-center py-10">
-              ምንም waiter የለም
+              ምንም {staffType === "waiter" ? "waiter" : "kitchen staff"} የለም
             </p>
           )}
         </div>
