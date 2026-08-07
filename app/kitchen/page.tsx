@@ -12,7 +12,7 @@ export default function KitchenDashboard() {
   };
 
   return (
-    <div className="min-h-screen text-white p-10">
+    <div className="min-h-screen text-white p-10 pt-15">
       <h1 className="text-3xl font-bold mb-6 text-yellow-500">🍳 Kitchen Order Preparation Screen</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

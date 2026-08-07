@@ -32,8 +32,8 @@ export default function TableManagementPage() {
   };
 
   return (
-    <div className="ml-20 flex text-white mr-200">
-      <main className="mr-100 ml-0flex-1 p-10 mx-auto w-200">
+    <div className="ml-100 flex text-white mr-200">
+      <main className="flex-1 p-10 mx-auto w-200">
         <h1 className="text-3xl font-bold mb-6 ml-0 text-yellow-500">Table & QR Code Management</h1>
 
         <form onSubmit={handleAddTable} className="flex flex-col gap-2 mb-8 max-w-xl w-full">
@@ -61,7 +61,7 @@ export default function TableManagementPage() {
               <h3 className="text-xl font-bold text-yellow-400 mb-2">{t.tableNumber}</h3>
               
               <div className="bg-white p-4 rounded-xl shadow-inner flex items-center justify-center my-2">
-               <QRCodeCanvas value={`http://10.77.24.194:3000/?table=${t.tableNumber}`} size={100} />             
+               <QRCodeCanvas value={`http://10.232.104.194:3000/?table=${t.tableNumber}`} size={100} />             
               </div>
               <span className="text-xs text-gray-400 text-center mt-3">Scan to order from {t.tableNumber}</span>
             </div>
