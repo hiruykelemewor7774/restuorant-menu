@@ -44,7 +44,7 @@ export default function FoodMenu() {
     }))
 
   return (
-    <main className="max-w-6xl mx-auto px-6 py-2 mt-35">
+    <main className="max-w-6xl mx-auto px-6 py-2">
       <h1 className="text-4xl font-bold mb-2 pt-25">{t("food")}</h1>
       <p className="mb-3">{t("foodSubtitle")}</p>
 

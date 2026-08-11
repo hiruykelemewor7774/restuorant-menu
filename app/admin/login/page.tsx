@@ -34,7 +34,7 @@ export default function AdminLogin() {
 
 
   return (
-    <main className="flex items-center justify-center">
+    <main className="mt-10 flex items-center justify-center">
       <form
         onSubmit={handleSubmit}
         className="w-80 space-y-4 rounded-2xl border border-gray-200 p-6 shadow-sm px-6 mr-20">

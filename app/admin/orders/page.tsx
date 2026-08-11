@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { playNotificationSound } from "@/lib/notifySound";
+import { playNotifySound } from "@/lib/notifySound";
 
 type OrderItem = {
   id: string;
@@ -43,7 +43,7 @@ export default function LiveOrdersPage() {
     );
 
     if (!firstLoad.current && newPending.length > 0) {
-      playNotificationSound();
+      playNotifySound();
     }
 
     data.orders.forEach((o: Order) => knownIds.current.add(o.id));

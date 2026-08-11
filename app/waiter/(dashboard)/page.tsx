@@ -3,7 +3,7 @@
 import { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { playNotificationSound } from "@/lib/notifySound";
+import { playNotifySound } from "@/lib/notifySound";
 
 type DbItem = {
   id: string;
@@ -36,6 +36,8 @@ type OrderResult = {
   notes: string | null;
   createdAt: string;
   items: OrderItemResult[];
+  paymentStatus?: string;
+  source?: string;
 };
 
 const mainTabs = ["Food", "Drink", "Room"] as const;
@@ -57,6 +59,9 @@ export default function WaiterOrderPage() {
   const [readyOrders, setReadyOrders] = useState<OrderResult[]>([]);
   const knownReadyIds = useRef<Set<string>>(new Set());
   const firstReadyLoad = useRef(true);
+  const [incomingOrders, setIncomingOrders] = useState<OrderResult[]>([]);
+  const knownIncomingIds = useRef<Set<string>>(new Set());
+  const firstIncomingLoad = useRef(true);
 
   // Menu ጫን
   useEffect(() => {
@@ -85,7 +90,7 @@ export default function WaiterOrderPage() {
         (o: OrderResult) => !knownReadyIds.current.has(o.id)
       );
       if (!firstReadyLoad.current && newOnes.length > 0) {
-        playNotificationSound();
+        playNotifySound();
       }
 
       data.orders.forEach((o: OrderResult) => knownReadyIds.current.add(o.id));
@@ -97,6 +102,32 @@ export default function WaiterOrderPage() {
     const interval = setInterval(loadReadyOrders, 5000);
     return () => clearInterval(interval);
   }, []);
+
+  // Incoming pending orders (customer/manual) ጫን + ድምጽ
+useEffect(() => {
+  async function loadIncomingOrders() {
+    const res = await fetch("/api/waiter/orders?status=pending", { cache: "no-store" });
+    const data = await res.json();
+    if (!data.success) return;
+
+    const customerOrders = data.orders.filter((o: OrderResult) => o.source === "customer");
+
+    const newOnes = customerOrders.filter(
+      (o: OrderResult) => !knownIncomingIds.current.has(o.id)
+    );
+    if (!firstIncomingLoad.current && newOnes.length > 0) {
+      playNotifySound();
+    }
+
+    customerOrders.forEach((o: OrderResult) => knownIncomingIds.current.add(o.id));
+    setIncomingOrders(customerOrders);
+    firstIncomingLoad.current = false;
+  }
+
+  loadIncomingOrders();
+  const interval = setInterval(loadIncomingOrders, 5000);
+  return () => clearInterval(interval);
+}, []);
 
   async function handleDeliver(orderId: string, tableNum: string) {
     if (!confirm(`ጠረጴዛ ${tableNum} ላይ ትዕዛዙን በትክክል አድርሰሃል?`)) return;
@@ -112,6 +143,32 @@ export default function WaiterOrderPage() {
       alert(data.message || "ስህተት ተፈጥሯል");
     }
   }
+
+   async function handleConfirmPayment(orderId: string) {
+  const res = await fetch(`/api/waiter/orders/${orderId}/confirm-payment`, {
+    method: "PUT",
+  });
+  const data = await res.json();
+  if (data.success) {
+    setIncomingOrders((prev) =>
+      prev.map((o) => (o.id === orderId ? { ...o, paymentStatus: "paid" } : o))
+    );
+  } else {
+    alert(data.message || "ስህተት ተፈጥሯል");
+  }
+}
+
+async function handleForwardToKitchen(orderId: string) {
+  const res = await fetch(`/api/waiter/orders/${orderId}/forward`, {
+    method: "PUT",
+  });
+  const data = await res.json();
+  if (data.success) {
+    setIncomingOrders((prev) => prev.filter((o) => o.id !== orderId));
+  } else {
+    alert(data.message || "ስህተት ተፈጥሯል");
+  }
+}
 
   function itemsForTab(tab: MainTab): DbItem[] {
     return allItems.filter((i) => i.type === tab);
@@ -236,6 +293,56 @@ export default function WaiterOrderPage() {
           ውጣ (Logout)
         </button>
       </div>
+
+           {/* Incoming Orders (ከ customer የመጡ አዲስ ትዕዛዞች) */}
+    {incomingOrders.length > 0 && (
+      <div className="max-w-6xl mx-auto mb-6 print:hidden">
+        <h2 className="text-lg font-bold mb-3">🆕 አዳዲስ ትዕዛዞች</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {incomingOrders.map((order) => (
+            <div
+              key={order.id}
+              className="bg-amber-50 border border-amber-300 rounded-xl p-4"
+            >
+              <div className="flex justify-between items-center mb-2">
+                <p className="font-bold text-amber-700">ጠረጴዛ: {order.tableNumber}</p>
+                <span
+                  className={`text-xs px-2 py-0.5 rounded-full font-semibold ${
+                    order.paymentStatus === "paid"
+                      ? "bg-green-100 text-green-700"
+                      : "bg-red-100 text-red-700"
+                  }`}
+                >
+                  {order.paymentStatus === "paid" ? "ተከፍሏል" : "አልተከፈለም"}
+                </span>
+              </div>
+              <div className="text-sm space-y-1 mb-3">
+                {order.items.map((item) => (
+                  <p key={item.id}>
+                    {item.name} x{item.quantity}
+                  </p>
+                ))}
+              </div>
+              {order.paymentStatus !== "paid" ? (
+                <button
+                  onClick={() => handleConfirmPayment(order.id)}
+                  className="w-full bg-emerald-600 text-white font-semibold py-2 rounded-full hover:bg-emerald-700"
+                >
+                  💵 ክፍያ አረጋግጥ
+                </button>
+              ) : (
+                <button
+                  onClick={() => handleForwardToKitchen(order.id)}
+                  className="w-full bg-blue-600 text-white font-semibold py-2 rounded-full hover:bg-blue-700"
+                >
+                  🚀 ወደ ኪችን ላክ
+                </button>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    )}
 
       {/* Ready Orders (ደረሱ ዝግጁ ናቸው) */}
       {readyOrders.length > 0 && (

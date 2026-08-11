@@ -14,7 +14,7 @@ export default function WaiterDashboard() {
   };
 
   return (
-    <div className="min-h-screen text-white p-10">
+    <div className="mt-10 min-h-screen text-white p-10">
       <h1 className="text-2xl font-bold mb-6 text-yellow-500">🍽️ Waiter Station & Order Dispatcher</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

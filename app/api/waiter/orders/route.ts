@@ -10,7 +10,7 @@ export async function POST(req: NextRequest) {
     if (!payload) {
       return NextResponse.json(
         { success: false, message: "Session አልተገኘም፣ እንደገና ግባ" },
-        { status: 401 }
+        { status: 401 },
       );
     }
 
@@ -19,7 +19,7 @@ export async function POST(req: NextRequest) {
     if (!tableNumber || !items || items.length === 0) {
       return NextResponse.json(
         { success: false, message: "የጠረጴዛ ቁጥር እና ቢያንስ አንድ እቃ ያስፈልጋል" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -31,12 +31,17 @@ export async function POST(req: NextRequest) {
         notes: notes || null,
         items: {
           create: items.map(
-            (item: { name: string; price: string; quantity: number; category: string }) => ({
+            (item: {
+              name: string;
+              price: string;
+              quantity: number;
+              category: string;
+            }) => ({
               name: item.name,
               price: item.price,
               quantity: item.quantity,
               category: item.category,
-            })
+            }),
           ),
         },
       },
@@ -48,7 +53,7 @@ export async function POST(req: NextRequest) {
     console.error("Order creation error:", error);
     return NextResponse.json(
       { success: false, message: "ትዕዛዝ መፍጠር አልተቻለም" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -61,43 +66,15 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ success: false }, { status: 401 });
   }
 
+  const statusParam = req.nextUrl.searchParams.get("status");
+
   const orders = await prisma.order.findMany({
-    where: { waiterId: payload.waiterId },
+    where: statusParam
+      ? { status: statusParam }
+      : { status: { in: ["pending", "sent_to_kitchen"] } },
     include: { items: true },
-    orderBy: { createdAt: "desc" },
-    take: 20,
+    orderBy: { createdAt: "asc" },
   });
 
   return NextResponse.json({ success: true, orders });
 }
-
-
-
-
-
-
-
-
-
-// export async function GET(req: NextRequest) {
-//   const token = req.cookies.get(WAITER_COOKIE_NAME)?.value;
-//   const payload = token ? await verifyWaiterToken(token) : null;
-
-//   if (!payload) {
-//     return NextResponse.json({ success: false }, { status: 401 });
-//   }
-
-//   const statusFilter = req.nextUrl.searchParams.get("status");
-
-//   const orders = await prisma.order.findMany({
-//     where: {
-//       waiterId: payload.waiterId,
-//       ...(statusFilter ? { status: statusFilter } : {}),
-//     },
-//     include: { items: true },
-//     orderBy: { createdAt: "desc" },
-//     take: 20,
-//   });
-
-//   return NextResponse.json({ success: true, orders });
-// }
