@@ -1,4 +1,7 @@
 const CHAPA_BASE_URL = "https://api.chapa.co/v1";
+import dns from "node:dns";
+dns.setDefaultResultOrder("ipv4first");
+
 
 export async function initializeChapaPayment({
   amount,

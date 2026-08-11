@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import Image from "next/image";
 import { User, LogOut, ChevronDown, Lock, Utensils, ChefHat } from "lucide-react";
 import { FaShoppingCart } from "react-icons/fa";
@@ -26,19 +25,35 @@ export default function Navbar() {
 
   return (
     <>
-      <header className="bg-transparent h-20 w-screen fixed dark:bg-green-950 dark:text-white flex items-center justify-between px-6 py-4 backdrop-blur-md border-b border-gray-800/40 top-0 left-0 right-0 z-50">
+      <header className="bg h-20 w-screen fixed text-white flex items-center justify-between px-6 py-4 backdrop-blur-md border-b border-gray-800/40 top-0 left-0 right-0 z-50">
         {/* Hamburger Menu - Mobile ላይ ብቻ ይታያል */}
 <button
   onClick={toggleSidebar}
-  className="md:hidden p-2 rounded-lg bg-gray-800/80 hover:bg-gray-800 border border-gray-700 text-white mr-2"
->
+  className="md:hidden p-2 rounded-lg bg-gray-800/80 hover:bg-gray-800 border border-gray-700 text-white mr-2">
   <Menu size={20} />
 </button>
-        {/* Left section (Logo with Image and Company Name) */}
-        <Link href="/campany" className="flex items-center space-x-2 cursor-pointer">
-          <Image src="/pizza.Webp" width={35} height={35} className="rounded-full object-cover" alt="Company logo"/>
-          <span className="text-amber-400 font-bold text-xl tracking-wider">Kerami</span>
-        </Link>
+     
+<div className='block dark-content:hidden p-1 shrink-0 items-center space-x-2 cursor-pointer logo-light'>
+                  <Image
+                        alt="Company logo"
+                        width={100}
+                        height={75}
+                        style={{ width: "auto", height: "auto" }}
+                        className=" object-cover"
+                        priority
+                        src="/image/kereamilm.png"/>
+            </div>
+
+             <div className='p-1 shrink-0 hidden items-center space-x-2 cursor-pointer logo-dark'>
+                  <Image
+                        alt="Company logo"
+                        width={100}
+                        height={75}
+                        style={{ width: "auto", height: "auto" }}
+                        className=" object-cover"
+                        priority
+                        src="/image/kereamidm.png"/>
+            </div>
 
         {/* Center links (All, Food, Drink, Room navigation links have been completely removed from the navbar as requested) */}
 

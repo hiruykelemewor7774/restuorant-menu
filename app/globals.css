@@ -225,3 +225,16 @@ html.dark-content .bg-gray-200 {
 html.dark-content .hover\:bg-gray-100:hover {
   background-color: #374151 !important;
 }
+
+/* Logo switching based on app's own theme toggle */
+.logo-dark {
+  display: none;
+}
+
+html.dark-content .logo-light {
+  display: none;
+}
+
+html.dark-content .logo-dark {
+  display: block;
+}

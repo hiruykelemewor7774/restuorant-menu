@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { initializeChapaPayment } from "@/lib/chapa";
 
-
 interface OrderItemInput {
   name: string;
   price: string | number;
@@ -11,12 +10,13 @@ interface OrderItemInput {
 }
 export async function POST(req: NextRequest) {
   try {
-    const { tableNumber, items, customerEmail, customerPhone } = await req.json();
+    const { tableNumber, items, customerEmail, customerPhone, paymentMethod } =
+      await req.json();
 
     if (!tableNumber || !items || items.length === 0) {
       return NextResponse.json(
         { success: false, message: "የጠረጴዛ ቁጥር እና ቢያንስ አንድ እቃ ያስፈልጋል" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -36,18 +36,25 @@ export async function POST(req: NextRequest) {
         paymentRef: txRef,
         totalAmount,
         items: {
-          create: items.map(
-            (item: OrderItemInput) => ({
-              name: item.name,
-              price: String(item.price),
-              quantity: item.quantity,
-              category: item.category,
-            })
-          ),
+          create: items.map((item: OrderItemInput) => ({
+            name: item.name,
+            price: String(item.price),
+            quantity: item.quantity,
+            category: item.category,
+          })),
         },
       },
       include: { items: true },
     });
+
+    // Manual payment ከሆነ Chapa gateway ላይ ላይላክ
+    if (paymentMethod === "manual") {
+      return NextResponse.json({
+        success: true,
+        order,
+        checkoutUrl: null,
+      });
+    }
 
     const chapaRes = await initializeChapaPayment({
       amount: totalAmount,
@@ -59,13 +66,16 @@ export async function POST(req: NextRequest) {
       returnUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/order-status?tx_ref=${txRef}`,
     });
 
-     if (chapaRes.status !== "success") {
-      console.error("Chapa initialization failed:", JSON.stringify(chapaRes, null, 2));
-         return NextResponse.json(
-          { success: false, message: chapaRes.message || "የክፍያ ማስጀመር አልተቻለም" },
-          { status: 500 }
-     );
-}
+    if (chapaRes.status !== "success") {
+      console.error(
+        "Chapa initialization failed:",
+        JSON.stringify(chapaRes, null, 2),
+      );
+      return NextResponse.json(
+        { success: false, message: chapaRes.message || "የክፍያ ማስጀመር አልተቻለም" },
+        { status: 500 },
+      );
+    }
 
     return NextResponse.json({
       success: true,
@@ -76,7 +86,7 @@ export async function POST(req: NextRequest) {
     console.error("Customer order creation error:", error);
     return NextResponse.json(
       { success: false, message: "ትዕዛዝ መፍጠር አልተቻለም" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

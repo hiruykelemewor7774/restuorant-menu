@@ -61,7 +61,7 @@ export default function TableManagementPage() {
               <h3 className="text-xl font-bold text-yellow-400 mb-2">{t.tableNumber}</h3>
               
               <div className="bg-white p-4 rounded-xl shadow-inner flex items-center justify-center my-2">
-               <QRCodeCanvas value={`http://10.232.104.194:3000/?table=${t.tableNumber}`} size={100} />             
+               <QRCodeCanvas value={`http://192.168.137.1:3000/?table=${t.tableNumber}`} size={100} />             
               </div>
               <span className="text-xs text-gray-400 text-center mt-3">Scan to order from {t.tableNumber}</span>
             </div>
