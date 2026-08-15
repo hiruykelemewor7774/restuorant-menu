@@ -10,6 +10,7 @@ import { useLanguage } from "../context/LanguageContext";
 import CartDrawer from "./CartDrawer";
 import { Menu } from "lucide-react";
 import { useUI } from "../context/UIContext";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
   const [showDropdown, setShowDropdown] = useState(false);
@@ -19,13 +20,24 @@ export default function Navbar() {
   const { t } = useLanguage();
   const [cartOpen, setCartOpen] = useState(false);
 
-  const handleLogout = () => {
-    router.push("/admin/login");
-  };
+  const pathname = usePathname();
+
+async function handleLogout() {
+  let role: "admin" | "waiter" | "kitchen" = "admin";
+
+  if (pathname.startsWith("/waiter")) role = "waiter";
+  else if (pathname.startsWith("/kitchen")) role = "kitchen";
+  else if (pathname.startsWith("/admin")) role = "admin";
+
+  await fetch(`/api/${role}/logout`, { method: "POST" });
+  setShowDropdown(false);
+  router.push(`/${role}/login`);
+  router.refresh();
+}
 
   return (
     <>
-      <header className="bg h-20 w-screen fixed text-white flex items-center justify-between px-6 py-4 backdrop-blur-md border-b border-gray-800/40 top-0 left-0 right-0 z-50">
+      <header className="bg h-20 w-screen fixed text-white flex items-center justify-between px-6 py-4 backdrop-blur-md  top-0 left-0 right-0 z-50">
         {/* Hamburger Menu - Mobile ላይ ብቻ ይታያል */}
 <button
   onClick={toggleSidebar}
@@ -33,22 +45,22 @@ export default function Navbar() {
   <Menu size={20} />
 </button>
      
-<div className='block dark-content:hidden p-1 shrink-0 items-center space-x-2 cursor-pointer logo-light'>
+<div className='mt-3 block dark-content:hidden p-1 shrink-0 items-center space-x-2 cursor-pointer logo-light'>
                   <Image
                         alt="Company logo"
-                        width={100}
-                        height={75}
+                        width={90}
+                        height={50}
                         style={{ width: "auto", height: "auto" }}
                         className=" object-cover"
                         priority
                         src="/image/kereamilm.png"/>
             </div>
 
-             <div className='p-1 shrink-0 hidden items-center space-x-2 cursor-pointer logo-dark'>
+             <div className='mt-3 shrink-0 hidden items-center space-x-2 cursor-pointer logo-dark'>
                   <Image
                         alt="Company logo"
-                        width={100}
-                        height={75}
+                        width={90}
+                        height={50}
                         style={{ width: "auto", height: "auto" }}
                         className=" object-cover"
                         priority
@@ -90,8 +102,7 @@ export default function Navbar() {
               
               <button 
                 onClick={() => { setShowDropdown(false); router.push("/admin/login"); }}
-                className="w-full flex items-center gap-3 px-4 py-2.5 text-sm hover:bg-gray-800 transition text-gray-200 cursor-pointer"
-              >
+                className="w-full flex items-center gap-3 px-4 py-2.5 text-sm hover:bg-gray-800 transition text-gray-200 cursor-pointer">
                 <Lock size={16} className="text-amber-400" />
                 <span>{t("adminLogin")}</span>
               </button>
@@ -108,6 +119,13 @@ export default function Navbar() {
                 className="w-full flex items-center gap-3 px-4 py-2.5 text-sm hover:bg-gray-800 transition text-gray-200 cursor-pointer">
                 <ChefHat size={16} className="text-amber-400" />
                 <span>{t("kitchenLogin")}</span>
+              </button>
+
+              <button 
+                onClick={() => { setShowDropdown(false); router.push("/store/login"); }}
+                className="w-full flex items-center gap-3 px-4 py-2.5 text-sm hover:bg-gray-800 transition text-gray-200 cursor-pointer">
+                <Utensils size={16} className="text-amber-400" />
+                <span>{t("storeLogin") || "Store Login"}</span>
               </button>
 
               <div className="border-t border-gray-800 my-1"></div>

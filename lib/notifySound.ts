@@ -1,8 +1,10 @@
 export function playNotifySound() {
   try {
-    const audioCtx = new (
-      window.AudioContext || (window as any).webkitAudioContext
-    )();
+    const AudioContextClass =
+      window.AudioContext ||
+      (window as unknown as { webkitAudioContext: typeof AudioContext })
+        .webkitAudioContext;
+    const audioCtx = new AudioContextClass();
     const osc = audioCtx.createOscillator();
     const gain = audioCtx.createGain();
     osc.connect(gain);
@@ -33,3 +35,5 @@ export function playNotifySound() {
     console.error("Sound play error:", e);
   }
 }
+
+export const playNotificationSound = playNotifySound;

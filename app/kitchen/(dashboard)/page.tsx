@@ -16,6 +16,7 @@ type Order = {
   id: string;
   tableNumber: string;
   notes: string | null;
+  status: string;
   createdAt: string;
   items: OrderItem[];
 };
@@ -23,8 +24,10 @@ type Order = {
 export default function KitchenDashboardPage() {
   const router = useRouter();
   const [orders, setOrders] = useState<Order[]>([]);
+  const [finishedOrders, setFinishedOrders] = useState<Order[]>([]);
   const knownIds = useRef<Set<string>>(new Set());
   const firstLoad = useRef(true);
+  const [processing, setProcessing] = useState<string | null>(null);
 
   async function loadOrders() {
     const res = await fetch("/api/kitchen/orders", { cache: "no-store" });
@@ -41,15 +44,34 @@ export default function KitchenDashboardPage() {
     firstLoad.current = false;
   }
 
+  async function loadHistory() {
+    const res = await fetch("/api/kitchen/orders/history", { cache: "no-store" });
+    const data = await res.json();
+    if (data.success) setFinishedOrders(data.orders);
+  }
+
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     loadOrders();
-    const interval = setInterval(loadOrders, 5000);
+    loadHistory();
+    const interval = setInterval(() => {
+      loadOrders();
+      loadHistory();
+    }, 5000);
     return () => clearInterval(interval);
   }, []);
 
   async function markReady(id: string) {
-    await fetch(`/api/kitchen/orders/${id}`, { method: "PUT" });
-    loadOrders();
+    setProcessing(id);
+    const res = await fetch(`/api/kitchen/orders/${id}`, { method: "PUT" });
+    const data = await res.json();
+    if (data.success) {
+      setOrders((prev) => prev.filter((o) => o.id !== id));
+      loadHistory();
+    } else {
+      alert(data.message || "ስህተት ተፈጥሯል");
+    }
+    setProcessing(null);
   }
 
   async function handleLogout() {
@@ -58,14 +80,18 @@ export default function KitchenDashboardPage() {
     router.refresh();
   }
 
+  const statusBadge: Record<string, { label: string; color: string }> = {
+    ready: { label: "ለ Waiter ተልኳል", color: "bg-blue-900/50 text-blue-400" },
+    delivered: { label: "ተጠናቅቋል", color: "bg-green-900/50 text-green-400" },
+  };
+
   return (
-    <div className="min-h-screen bg-gray-950 text-white p-6">
+    <div className="mt-10 min-h-screen text-white p-4">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold text-yellow-400">🍳 የኩሽና ትዕዛዞች</h1>
         <button
           onClick={handleLogout}
-          className="bg-red-600 px-4 py-2 rounded-md hover:bg-red-700"
-        >
+          className="bg-red-600 px-4 py-2 rounded-md hover:bg-red-700">
           ውጣ
         </button>
       </div>
@@ -74,8 +100,7 @@ export default function KitchenDashboardPage() {
         {orders.map((order) => (
           <div
             key={order.id}
-            className="bg-gray-900 border border-gray-800 rounded-xl p-4"
-          >
+            className="bg-gray-900 border border-gray-800 rounded-xl p-4">
             <p className="font-bold text-yellow-400 mb-2">
               ጠረጴዛ: {order.tableNumber}
             </p>
@@ -97,9 +122,10 @@ export default function KitchenDashboardPage() {
 
             <button
               onClick={() => markReady(order.id)}
-              className="w-full bg-green-600 hover:bg-green-500 text-white font-semibold py-2 rounded-lg"
+              disabled={processing === order.id}
+              className="w-full bg-green-600 hover:bg-green-500 text-white font-semibold py-2 rounded-lg disabled:opacity-50"
             >
-              ✅ ዝግጁ ነው (Ready)
+              {processing === order.id ? "..." : "✅ ዝግጁ ነው (Ready)"}
             </button>
           </div>
         ))}
@@ -110,6 +136,35 @@ export default function KitchenDashboardPage() {
           </p>
         )}
       </div>
+
+      {finishedOrders.length > 0 && (
+        <div>
+          <h2 className="text-lg font-bold mb-3 text-green-400">📋 ያለፉ ትዕዛዞች</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {finishedOrders.map((order) => {
+              const badge = statusBadge[order.status] || { label: order.status, color: "bg-gray-800 text-gray-400" };
+              return (
+                <div
+                  key={order.id}
+                  className="bg-gray-900/50 border border-gray-800 rounded-xl p-4 opacity-70"
+                >
+                  <div className="flex justify-between items-center mb-2">
+                    <span className="font-bold text-gray-300">ጠረጴዛ: {order.tableNumber}</span>
+                    <span className={`px-2 py-0.5 text-xs rounded-full ${badge.color}`}>
+                      {badge.label}
+                    </span>
+                  </div>
+                  <ul className="text-xs text-gray-500 list-disc list-inside">
+                    {order.items.map((item) => (
+                      <li key={item.id}>{item.name} (x{item.quantity})</li>
+                    ))}
+                  </ul>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -5,5 +5,6 @@ export default function WaiterDashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <SessionGuard>{children}</SessionGuard>;
+  return 
+  <SessionGuard>{children}</SessionGuard>;
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Kitchen } from '../../generated/prisma/browser';
 
 type Summary = {
   totalOrders: number;
@@ -14,6 +15,11 @@ type WaiterPerf = {
   name: string;
   orders: number;
   revenue: number;
+};
+
+type KitchenPerf = {
+  name: string; 
+  readyCount: number 
 };
 
 type TopItem = {
@@ -36,6 +42,7 @@ export default function ReportsPage() {
   const [period, setPeriod] = useState<Period>("day");
   const [summary, setSummary] = useState<Summary | null>(null);
   const [waiterPerformance, setWaiterPerformance] = useState<WaiterPerf[]>([]);
+  const [kitchenPerformance, setKitchenPerformance] = useState<KitchenPerf[]>([]);
   const [topItems, setTopItems] = useState<TopItem[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -47,6 +54,7 @@ export default function ReportsPage() {
       if (data.success) {
         setSummary(data.summary);
         setWaiterPerformance(data.waiterPerformance);
+        setKitchenPerformance(data.kitchenPerformance || []);
         setTopItems(data.topItems);
       }
       setLoading(false);
@@ -133,6 +141,32 @@ export default function ReportsPage() {
               </table>
             )}
           </div>
+
+          {/* Kitchen Performance  */}
+           <h2 className="text-xl font-bold mb-4 mt-10 text-yellow-500">🍳 Kitchen Performance</h2>
+          <div className="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden mb-10">
+            {kitchenPerformance.length === 0 ? (
+              <p className="text-gray-400 text-sm p-4">ለዚህ ጊዜ ክፍል ዳታ የለም</p>
+            ) : (
+              <table className="w-full text-sm">
+                <thead className="bg-gray-800 text-gray-300">
+                  <tr>
+                    <th className="text-left p-3">Kitchen Staff</th>
+                    <th className="text-right p-3">ያዘጋጁት ትዕዛዞች</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {kitchenPerformance.map((k, idx) => (
+                    <tr key={idx} className="border-t border-gray-800">
+                      <td className="p-3">{k.name}</td>
+                      <td className="p-3 text-right text-amber-400 font-bold">{k.readyCount}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
+          </div>
+          
 
           {/* Top Selling Items */}
           <h2 className="text-xl font-bold mb-4 text-yellow-500">🔥 Top-Selling Items</h2>

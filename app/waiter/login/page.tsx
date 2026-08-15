@@ -39,7 +39,7 @@ export default function WaiterLoginPage() {
   }
 
   return (
-    <div className="flex items-center justify-center px-4 text-white mr-10">
+    <div className="mt-18 flex items-center justify-center px-4 text-white mr-10">
       <form
         onSubmit={handleSubmit}
         className="rounded-xl shadow-md p-8 mt-0 w-full max-w-sm text-white border border-gray-200"

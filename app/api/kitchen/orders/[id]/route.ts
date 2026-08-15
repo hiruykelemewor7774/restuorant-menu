@@ -4,7 +4,7 @@ import { verifyKitchenToken, KITCHEN_COOKIE_NAME } from "@/lib/kitchen-auth";
 
 export async function PUT(
   req: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
   const token = req.cookies.get(KITCHEN_COOKIE_NAME)?.value;
   const payload = token ? await verifyKitchenToken(token) : null;
@@ -15,14 +15,17 @@ export async function PUT(
   try {
     const order = await prisma.order.update({
       where: { id },
-      data: { status: "ready" },
+      data: {
+        status: "ready",
+        kitchenId: payload.kitchenId,
+      },
     });
     return NextResponse.json({ success: true, order });
   } catch (error) {
     console.error("Kitchen ready error:", error);
     return NextResponse.json(
       { success: false, message: "ማዘመን አልተቻለም" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

@@ -8,9 +8,10 @@ interface OrderItemInput {
   quantity: number;
   category: string;
 }
+
 export async function POST(req: NextRequest) {
   try {
-    const { tableNumber, items, customerEmail, customerPhone, paymentMethod } =
+    const { tableNumber, items, customerEmail, paymentMethod } =
       await req.json();
 
     if (!tableNumber || !items || items.length === 0) {
@@ -27,12 +28,40 @@ export async function POST(req: NextRequest) {
 
     const txRef = `kerami-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
 
+    // ---- "በእጅ ክፍያ" (manual) ከሆነ: Chapa ጨርሶ አንጠቀምም ----
+    if (paymentMethod === "manual") {
+      const order = await prisma.order.create({
+        data: {
+          tableNumber,
+          status: "pending",
+          source: "customer",
+          paymentStatus: "unpaid",
+          paymentMethod: "manual",
+          paymentRef: txRef,
+          totalAmount,
+          items: {
+            create: items.map((item: OrderItemInput) => ({
+              name: item.name,
+              price: String(item.price),
+              quantity: item.quantity,
+              category: item.category,
+            })),
+          },
+        },
+        include: { items: true },
+      });
+
+      return NextResponse.json({ success: true, order });
+    }
+
+    // ---- Telebirr/Bank (chapa) ----
     const order = await prisma.order.create({
       data: {
         tableNumber,
         status: "pending",
         source: "customer",
         paymentStatus: "unpaid",
+        paymentMethod: "chapa",
         paymentRef: txRef,
         totalAmount,
         items: {
@@ -46,15 +75,6 @@ export async function POST(req: NextRequest) {
       },
       include: { items: true },
     });
-
-    // Manual payment ከሆነ Chapa gateway ላይ ላይላክ
-    if (paymentMethod === "manual") {
-      return NextResponse.json({
-        success: true,
-        order,
-        checkoutUrl: null,
-      });
-    }
 
     const chapaRes = await initializeChapaPayment({
       amount: totalAmount,

@@ -48,8 +48,7 @@ function OrderStatusContent() {
         )}
         <Link
           href="/"
-          className="inline-block bg-amber-500 text-black font-semibold px-6 py-2 rounded-full hover:bg-amber-600"
-        >
+          className="inline-block bg-amber-500 text-black font-semibold px-6 py-2 rounded-full hover:bg-amber-600">
           ወደ Menu ተመለስ
         </Link>
       </div>

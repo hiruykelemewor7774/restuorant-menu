@@ -50,12 +50,9 @@ export default function Sidebar({ isAdmin = false }: SidebarProps) {
     languageOptions.find((l) => l.code === language)?.label || "English";
 
   return (
-    <aside className="w-64 bg-gray-950 text-white flex flex-col justify-between p-4 border-r border-gray-800 select-none relative z-30 overflow-y-auto [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-thumb]:bg-gray-800 [&::-webkit-scrollbar-thumb]:rounded-full">
-      
+    <aside className="w-64 text-white flex flex-col justify-between p-4 select-none relative z-30 overflow-y-auto [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-thumb]:bg-gray-800 [&::-webkit-scrollbar-thumb]:rounded-full"> 
       {/* Top section containing navigation links and system settings */}
-      <div className="pt-23">
-        
-
+      <div className="pt-5">       
         <nav className="space-y-2 pb-6">
           {/* Admin Management Navigation Links - Displayed ONLY when isAdmin is true */}
           {isAdmin && (
@@ -82,7 +79,7 @@ export default function Sidebar({ isAdmin = false }: SidebarProps) {
           )}
 
           {/* User / Public Navigation Section (Always visible for customers/regular users) */}
-          <div className="pt-2 pb-2">
+          <div className="">
             <div className="px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">
               Public Navigation
             </div>
@@ -107,8 +104,7 @@ export default function Sidebar({ isAdmin = false }: SidebarProps) {
                 setShowSettingsDropdown(!showSettingsDropdown);
                 setShowLangSubMenu(false);
               }}
-              className="w-full flex items-center justify-between px-3 py-2.5 rounded-lg bg-gray-900 hover:bg-gray-800 text-gray-200 transition border border-gray-800 cursor-pointer"
-            >
+              className="w-full flex items-center justify-between px-3 py-2.5 rounded-lg hover:bg-gray-800 text-gray-200 transition border border-gray-800 cursor-pointer" >
               <div className="flex items-center gap-3">
                 <Settings size={20} className="text-amber-400" />
                 <span className="font-medium text-sm">{t("settings")}</span>
@@ -118,13 +114,12 @@ export default function Sidebar({ isAdmin = false }: SidebarProps) {
 
             {/* Dropdown Menu Content Panel */}
             {showSettingsDropdown && (
-              <div className="mt-2 w-full bg-gray-900 border border-gray-700 rounded-xl shadow-xl overflow-hidden py-1 text-white space-y-1">
+              <div className="mt-2 w-full border border-gray-700 rounded-xl shadow-xl overflow-hidden py-1 text-white space-y-1">
                 
                 {/* 1. Dark Mode Toggle Control Button - ትክክለኛ functional */}
                 <button 
                   onClick={toggleTheme}
-                  className="w-full flex items-center justify-between px-4 py-2.5 text-sm hover:bg-gray-800 transition text-gray-200 cursor-pointer"
-                >
+                  className="w-full flex items-center justify-between px-4 py-2.5 text-sm hover:bg-gray-800 transition text-gray-200 cursor-pointer">
                   <div className="flex items-center gap-2.5">
                     {theme === "dark" ? <Moon size={16} className="text-amber-400" /> : <Sun size={16} className="text-amber-400" />}
                     <span>Dark Mode</span>
@@ -151,7 +146,7 @@ export default function Sidebar({ isAdmin = false }: SidebarProps) {
 
                   {/* Sub-menu panel listing available languages */}
                   {showLangSubMenu && (
-                    <div className="bg-gray-950 border-t border-b border-gray-800 py-1 space-y-0.5">
+                    <div className="border-t border-b border-gray-800 py-1 space-y-0.5">
                       {languageOptions.map((opt) => (
                         <button
                           key={opt.code}

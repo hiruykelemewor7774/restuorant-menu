@@ -6,6 +6,7 @@ import { LanguageProvider } from "./context/LanguageContext";
 import { UIProvider } from "./context/UIContext";
 import QrTableReader from "./components/QrTableReader";
 import MobileSidebarWrapper from "./components/MobileSidebarWrapper";
+import GlobalLogoutButton from "./components/GlobalLogoutButton";
 import "./globals.css";
 
 export const viewport = {
@@ -25,6 +26,7 @@ export default function RootLayout({
             <CartProvider>
               <UIProvider>
                 <QrTableReader />
+                <GlobalLogoutButton />
 
                 {/* Fixed Navbar (ከላይ ቋሚ ሆኖ የሚቀመጥ) */}
                 <div className="w-full z-50 shrink-0">

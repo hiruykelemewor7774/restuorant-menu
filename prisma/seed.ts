@@ -46,14 +46,26 @@ async function main() {
     },
   });
   console.log("✔ Kitchen created -> username: kitchen1 | password: kitchen123");
-}
 
+  // STORE
+    const storePassword = await bcrypt.hash("store123", 10);
+    await prisma.storeAuth.upsert({
+      where: { username: "store1" },
+      update: {},
+      create: {
+        username: "store1",
+        password: storePassword,
+        fullName: "Store Keeper One",
+      },
+    });
+    console.log("✔ Store created -> username: store1 | password: store123");
+}
 main()
-  .then(async () => {
-    await prisma.$disconnect();
-  })
-  .catch(async (e) => {
-    console.error(e);
-    await prisma.$disconnect();
-    process.exit(1);
-  });
+   .then(async () => {
+     await prisma.$disconnect();
+   })
+   .catch(async (e) => {
+     console.error(e);
+     await prisma.$disconnect();
+     process.exit(1);
+   });

@@ -19,7 +19,6 @@ export default function Home() {
           <p className="text-amber-400 mt-4">{t("chooseCategory")}</p>
         </div>
       </section>
-
       <FoodMenu />
       <Drinkmenu />
       <RoomMenu />

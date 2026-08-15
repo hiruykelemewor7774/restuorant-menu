@@ -1,0 +1,19 @@
+import { redirect } from "next/navigation";
+import { cookies } from "next/headers";
+import { verifyStoreToken, STORE_COOKIE_NAME } from "@/lib/store-auth";
+
+export default async function StoreDashboardLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const cookieStore = await cookies();
+  const token = cookieStore.get(STORE_COOKIE_NAME)?.value;
+  const payload = token ? await verifyStoreToken(token) : null;
+
+  if (!payload) {
+    redirect("/store/login");
+  }
+
+  return <>{children}</>;
+}

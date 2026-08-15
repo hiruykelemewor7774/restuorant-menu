@@ -62,6 +62,10 @@ export default function WaiterOrderPage() {
   const [incomingOrders, setIncomingOrders] = useState<OrderResult[]>([]);
   const knownIncomingIds = useRef<Set<string>>(new Set());
   const firstIncomingLoad = useRef(true);
+  const [unclaimedOrders, setUnclaimedOrders] = useState<OrderResult[]>([]);
+  const knownUnclaimedIds = useRef<Set<string>>(new Set());
+  const firstUnclaimedLoad = useRef(true);
+  const [claiming, setClaiming] = useState<string | null>(null);
 
   // Menu ጫን
   useEffect(() => {
@@ -129,6 +133,42 @@ useEffect(() => {
   return () => clearInterval(interval);
 }, []);
 
+     useEffect(() => {
+  async function loadUnclaimedOrders() {
+    const res = await fetch("/api/waiter/orders/unclaimed", { cache: "no-store" });
+    const data = await res.json();
+    if (!data.success) return;
+
+    const newOnes = data.orders.filter(
+      (o: OrderResult) => !knownUnclaimedIds.current.has(o.id)
+    );
+    if (!firstUnclaimedLoad.current && newOnes.length > 0) {
+      playNotifySound();
+    }
+
+    data.orders.forEach((o: OrderResult) => knownUnclaimedIds.current.add(o.id));
+    setUnclaimedOrders(data.orders);
+    firstUnclaimedLoad.current = false;
+  }
+
+  loadUnclaimedOrders();
+  const interval = setInterval(loadUnclaimedOrders, 5000);
+  return () => clearInterval(interval);
+}, []);
+
+async function handleClaim(orderId: string) {
+  setClaiming(orderId);
+  const res = await fetch(`/api/waiter/orders/${orderId}/claim`, { method: "PUT" });
+  const data = await res.json();
+
+  if (data.success) {
+    setUnclaimedOrders((prev) => prev.filter((o) => o.id !== orderId));
+  } else {
+    alert(data.message || "ስህተት ተፈጥሯል");
+  }
+  setClaiming(null);
+}
+
   async function handleDeliver(orderId: string, tableNum: string) {
     if (!confirm(`ጠረጴዛ ${tableNum} ላይ ትዕዛዙን በትክክል አድርሰሃል?`)) return;
 
@@ -157,6 +197,8 @@ useEffect(() => {
     alert(data.message || "ስህተት ተፈጥሯል");
   }
 }
+
+
 
 async function handleForwardToKitchen(orderId: string) {
   const res = await fetch(`/api/waiter/orders/${orderId}/forward`, {
@@ -343,6 +385,45 @@ async function handleForwardToKitchen(orderId: string) {
         </div>
       </div>
     )}
+
+      {/* Unclaimed Customer Orders (ገና ማንም waiter ያልያዘው) */}
+{unclaimedOrders.length > 0 && (
+  <div className="max-w-6xl mx-auto mb-6 print:hidden">
+    <h2 className="text-lg font-bold mb-3">🆕 አዳዲስ የደንበኛ ትዕዛዞች (ገና አልተያዙም)</h2>
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      {unclaimedOrders.map((order) => (
+        <div
+          key={order.id}
+          className="bg-blue-50 border border-blue-300 rounded-xl p-4"
+        >
+          <p className="font-bold text-blue-700 mb-2">
+            ጠረጴዛ: {order.tableNumber}
+          </p>
+          <div className="text-sm space-y-1 mb-3">
+            {order.items.map((item) => (
+              <p key={item.id}>
+                {item.name} x{item.quantity}
+              </p>
+            ))}
+          </div>
+          {order.notes && (
+            <p className="text-xs italic text-gray-600 mb-2">
+              ማስታወሻ: {order.notes}
+            </p>
+          )}
+          <button
+            onClick={() => handleClaim(order.id)}
+            disabled={claiming === order.id}
+            className="w-full bg-blue-600 text-white font-semibold py-2 rounded-full hover:bg-blue-700 disabled:opacity-50"
+          >
+            {claiming === order.id ? "እየተያዘ ነው..." : "🙋 ውሰድ እና ወደ ኩሽና ላክ"}
+          </button>
+        </div>
+      ))}
+    </div>
+  </div>
+)}
+
 
       {/* Ready Orders (ደረሱ ዝግጁ ናቸው) */}
       {readyOrders.length > 0 && (

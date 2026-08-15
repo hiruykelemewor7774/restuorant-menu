@@ -2,8 +2,6 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Kitchen } from '../../generated/prisma/browser';
-import AdminLogin from '../../admin/login/page';
 
 export default function KitchenLoginPage() {
   const router = useRouter();

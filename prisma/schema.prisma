@@ -38,6 +38,7 @@ model Kitchen {
   isActive  Boolean  @default(true)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  orders Order[]
 
   @@map("kitchen")
 }
@@ -60,10 +61,13 @@ model Order {
   table         Table?      @relation(fields: [tableId], references: [id])
   waiterId      String?
   waiter        Waiter?     @relation(fields: [waiterId], references: [id])
+  kitchenId     String?
+  kitchen       Kitchen?    @relation(fields: [kitchenId], references: [id])
   status        String      @default("pending")
   source        String      @default("waiter")
   notes         String?     @db.Text
-  paymentStatus String      @default("unpaid") // unpaid | paid | failed
+  paymentStatus String      @default("unpaid")
+  paymentMethod String?
   paymentRef    String?     @unique
   totalAmount   Float       @default(0)
   items         OrderItem[]
@@ -97,4 +101,29 @@ model MenuItem {
   updatedAt DateTime @updatedAt
 
   @@map("menu_items")
+}
+
+model StoreAuth {
+  id        String   @id @default(cuid())
+  username  String   @unique
+  password  String
+  fullName  String?
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("store_auth")
+}
+
+model StoreItem {
+  id           String   @id @default(cuid())
+  name         String
+  unit         String   // ኪሎ, ሊትር, ፓኬት, ቁራጭ ወዘተ
+  quantity     Float    @default(0)
+  minThreshold Float    @default(0)
+  notes        String?  @db.Text
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@map("store_items")
 }

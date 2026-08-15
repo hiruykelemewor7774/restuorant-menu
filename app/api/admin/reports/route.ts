@@ -41,7 +41,10 @@ export async function GET(req: NextRequest) {
   // ---- ትዕዛዝ ማጠቃለያ ----
   const orders = await prisma.order.findMany({
     where: { createdAt: { gte: start, lte: end } },
-    include: { items: true, waiter: { select: { id: true, username: true, fullName: true } } },
+    include: {
+      items: true,
+      waiter: { select: { id: true, username: true, fullName: true } },
+    },
   });
 
   const totalOrders = orders.length;
@@ -52,7 +55,10 @@ export async function GET(req: NextRequest) {
   const cancelledCount = orders.filter((o) => o.status === "cancelled").length;
 
   // ---- Waiter Performance ----
-  const waiterMap: Record<string, { name: string; orders: number; revenue: number }> = {};
+  const waiterMap: Record<
+    string,
+    { name: string; orders: number; revenue: number }
+  > = {};
   for (const order of orders) {
     if (!order.waiterId || !order.waiter) continue;
     if (!waiterMap[order.waiterId]) {
@@ -67,15 +73,47 @@ export async function GET(req: NextRequest) {
       waiterMap[order.waiterId].revenue += order.totalAmount;
     }
   }
-  const waiterPerformance = Object.values(waiterMap).sort((a, b) => b.revenue - a.revenue);
+  const waiterPerformance = Object.values(waiterMap).sort(
+    (a, b) => b.revenue - a.revenue,
+  );
+
+  // ---- Kitchen Performance ----
+  const kitchenMap: Record<string, { name: string; readyCount: number }> = {};
+  const readyOrders = await prisma.order.findMany({
+    where: { createdAt: { gte: start, lte: end }, kitchenId: { not: null } },
+    include: {
+      kitchen: { select: { id: true, username: true, fullName: true } },
+    },
+  });
+  for (const order of readyOrders) {
+    if (!order.kitchenId || !order.kitchen) continue;
+    if (!kitchenMap[order.kitchenId]) {
+      kitchenMap[order.kitchenId] = {
+        name: order.kitchen.fullName || order.kitchen.username,
+        readyCount: 0,
+      };
+    }
+    kitchenMap[order.kitchenId].readyCount += 1;
+  }
+  const kitchenPerformance = Object.values(kitchenMap).sort(
+    (a, b) => b.readyCount - a.readyCount,
+  );
 
   // ---- Top-Selling Items ----
-  const itemMap: Record<string, { name: string; category: string; quantity: number; revenue: number }> = {};
+  const itemMap: Record<
+    string,
+    { name: string; category: string; quantity: number; revenue: number }
+  > = {};
   for (const order of orders) {
     for (const item of order.items) {
       const key = `${item.name}-${item.category}`;
       if (!itemMap[key]) {
-        itemMap[key] = { name: item.name, category: item.category, quantity: 0, revenue: 0 };
+        itemMap[key] = {
+          name: item.name,
+          category: item.category,
+          quantity: 0,
+          revenue: 0,
+        };
       }
       itemMap[key].quantity += item.quantity;
       const price = parseFloat(item.price.replace(/[^0-9.]/g, "")) || 0;
@@ -98,6 +136,7 @@ export async function GET(req: NextRequest) {
       cancelledCount,
     },
     waiterPerformance,
+    kitchenPerformance,
     topItems,
   });
 }

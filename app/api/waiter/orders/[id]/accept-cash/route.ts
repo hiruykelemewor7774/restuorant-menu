@@ -13,6 +13,7 @@ export async function PUT(
   const { id } = await params;
 
   const order = await prisma.order.findUnique({ where: { id } });
+
   if (!order) {
     return NextResponse.json(
       { success: false, message: "ትዕዛዝ አልተገኘም" },
@@ -20,31 +21,28 @@ export async function PUT(
     );
   }
 
-  if (order.paymentStatus !== "paid") {
+  if (order.waiterId) {
     return NextResponse.json(
-      { success: false, message: "ክፍያ ገና አልተከፈለም" },
+      { success: false, message: "ይህ ትዕዛዝ ቀድሞውኑ በሌላ waiter ተይዟል" },
+      { status: 409 },
+    );
+  }
+
+  if (order.paymentMethod !== "manual") {
+    return NextResponse.json(
+      { success: false, message: "ይህ ትዕዛዝ manual ክፍያ አይደለም" },
       { status: 400 },
     );
   }
 
   const updated = await prisma.order.update({
     where: { id },
-    data: { status: "sent_to_kitchen", waiterId: payload.waiterId },
-    include: { items: true },
+    data: {
+      waiterId: payload.waiterId,
+      paymentStatus: "paid",
+      status: "sent_to_kitchen",
+    },
   });
-
-  // Debug logging (minimal, safe): helps trace forwarded orders in server logs
-  try {
-    // eslint-disable-next-line no-console
-    console.log("Waiter forwarded order to kitchen:", {
-      id: updated.id,
-      status: updated.status,
-      waiterId: updated.waiterId,
-      itemCount: updated.items?.length ?? 0,
-    });
-  } catch (e) {
-    // ignore logging errors
-  }
 
   return NextResponse.json({ success: true, order: updated });
 }
