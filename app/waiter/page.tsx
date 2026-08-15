@@ -33,8 +33,6 @@ export default function WaiterDashboard() {
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
 
-  // ---- Loaders (ሁሉም function ትርጓሜዎች useEffect ከመድረሱ በፊት) ----
-
   async function loadOrders() {
     const unclaimedRes = await fetch("/api/waiter/orders/unclaimed", { cache: "no-store" });
     const unclaimedData = await unclaimedRes.json();
@@ -53,17 +51,26 @@ export default function WaiterDashboard() {
     combined.forEach((o) => uniqueMap.set(o.id, o));
     const uniqueOrders = Array.from(uniqueMap.values());
 
+    // 🔍 DEBUG LOG
+    console.log("🔍 firstLoad:", firstLoad.current, "| orders:", uniqueOrders.map(o => `${o.tableNumber}:${o.status}`));
+
     if (!firstLoad.current) {
       for (const order of uniqueOrders) {
         const prevStatus = knownStatuses.current.get(order.id);
         const isNew = prevStatus === undefined;
         const becameReady = prevStatus && prevStatus !== "ready" && order.status === "ready";
+
+        // 🔍 DEBUG LOG
+        console.log(`🔍 order ${order.tableNumber}: prevStatus=${prevStatus}, isNew=${isNew}, becameReady=${becameReady}`);
+
         if (isNew) {
+          console.log("🔔 TRIGGERING: new order alert");
           setAlertMessage(`🆕 አዲስ ትዕዛዝ! ጠረጴዛ ${order.tableNumber}`);
           setAlertOpen(true);
           break;
         }
         if (becameReady) {
+          console.log("🔔 TRIGGERING: ready alert");
           setAlertMessage(`✅ ጠረጴዛ ${order.tableNumber} ትዕዛዝ ዝግጁ ሆኗል! ወደ ደንበኛ ውሰድ።`);
           setAlertOpen(true);
           break;
@@ -100,8 +107,6 @@ export default function WaiterDashboard() {
     if (data.success) setFinishedOrders(data.orders.slice(0, 10));
   }
 
-  // ---- useEffects (loaders ከተገለጹ በኋላ) ----
-
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     loadOrders();
@@ -118,8 +123,6 @@ export default function WaiterDashboard() {
     const interval = setInterval(loadManualOrders, 5000);
     return () => clearInterval(interval);
   }, []);
-
-  // ---- Actions ----
 
   async function forwardToKitchen(orderId: string) {
     setProcessing(orderId);

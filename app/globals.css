@@ -254,3 +254,9 @@ html.dark-content .logo-dark {
 .animate-pulse-slow {
   animation: pulse-slow 1s ease-in-out infinite;
 }
+
+/* Navbar Dropdown Hover fix for Dark Mode */
+html.dark-content header .relative div[class*="absolute"] button:hover {
+  background-color: #334155 !important;
+  /* bg-slate-700 */
+}

@@ -99,8 +99,7 @@ export default function TrackOrderPage() {
                 <div
                   className={`w-10 h-10 rounded-full flex items-center justify-center text-lg ${
                     isDone ? "bg-amber-500" : "bg-gray-800"
-                  } ${isCurrent ? "animate-pulse" : ""}`}
-                >
+                  } ${isCurrent ? "animate-pulse" : ""}`}>
                   {step.icon}
                 </div>
                 <p className={isDone ? "text-white font-semibold" : "text-gray-500"}>

@@ -7,7 +7,7 @@ const SECRET_KEY = new TextEncoder().encode(
 export const WAITER_COOKIE_NAME = "waiter_session";
 
 // ገፁን ላይ ምንም እንቅስቃሴ ካልተደረገ በስንት ደቂቃ auto-logout እንደሚደረግ
-export const INACTIVITY_LIMIT_MINUTES = 15;
+export const INACTIVITY_LIMIT_MINUTES = 240; // 4 ሰዓት
 
 export interface WaiterSessionPayload {
   waiterId: string;

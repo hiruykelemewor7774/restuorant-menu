@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { playNotifySound } from "@/lib/notifySound";
+import { playNotificationSound } from "@/lib/notifySound";
 
 type OrderItem = {
   id: string;
@@ -43,7 +43,7 @@ export default function LiveOrdersPage() {
     );
 
     if (!firstLoad.current && newPending.length > 0) {
-      playNotifySound();
+      playNotificationSound();
     }
 
     data.orders.forEach((o: Order) => knownIds.current.add(o.id));
@@ -57,7 +57,8 @@ export default function LiveOrdersPage() {
       .then((data) => {
         if (data.success) setWaiters(data.waiters);
       });
-
+    
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     loadOrders();
     const interval = setInterval(loadOrders, 5000);
     return () => clearInterval(interval);

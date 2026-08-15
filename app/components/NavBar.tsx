@@ -37,7 +37,7 @@ async function handleLogout() {
 
   return (
     <>
-      <header className="bg h-20 w-screen fixed text-white flex items-center justify-between px-6 py-4 backdrop-blur-md  top-0 left-0 right-0 z-50">
+      <header className="fixed bg h-20 w-screen border-b-gray-300 border-b-1 text-white flex items-center justify-between px-6 py-4 backdrop-blur-md  top-0 left-0 right-0 z-50">
         {/* Hamburger Menu - Mobile ላይ ብቻ ይታያል */}
 <button
   onClick={toggleSidebar}
@@ -98,7 +98,7 @@ async function handleLogout() {
 
           {/* Dropdown Menu (Opened when Staff Portal is clicked) */}
           {showDropdown && (
-            <div className="absolute right-0 top-14 w-40 border border-gray-300 rounded-xl shadow-2xl overflow-hidden py-1 z-50 text-white">
+            <div className="absolute right-0 top-14 w-40 border border-gray-700 rounded-xl shadow-2xl overflow-hidden py-1 z-50 text-white">
               
               <button 
                 onClick={() => { setShowDropdown(false); router.push("/admin/login"); }}

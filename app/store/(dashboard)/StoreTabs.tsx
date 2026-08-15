@@ -26,15 +26,14 @@ export default function StoreTabs() {
   }
 
   return (
-    <div className="bg-white border-b border-gray-200 px-6 py-4">
+    <div className="bg-white border-b border-gray-200 px-6 py-4 mt-15">
       <div className="flex justify-between items-center mb-4">
         <h1 className="text-2xl font-bold text-amber-600">
           🏪 Store Management
         </h1>
         <button
           onClick={handleLogout}
-          className="bg-pink-600 hover:bg-pink-700 text-white px-5 py-2 rounded-lg text-sm font-semibold"
-        >
+          className="bg-pink-600 hover:bg-pink-700 text-white px-5 py-2 rounded-lg text-sm font-semibold">
           Logout
         </button>
       </div>
