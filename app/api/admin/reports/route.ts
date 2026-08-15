@@ -78,14 +78,15 @@ export async function GET(req: NextRequest) {
   );
 
   // ---- Kitchen Performance ----
-  const kitchenMap: Record<string, { name: string; readyCount: number }> = {};
-  const readyOrders = await prisma.order.findMany({
+  const kitchenOrdersInRange = await prisma.order.findMany({
     where: { createdAt: { gte: start, lte: end }, kitchenId: { not: null } },
     include: {
       kitchen: { select: { id: true, username: true, fullName: true } },
     },
   });
-  for (const order of readyOrders) {
+
+  const kitchenMap: Record<string, { name: string; readyCount: number }> = {};
+  for (const order of kitchenOrdersInRange) {
     if (!order.kitchenId || !order.kitchen) continue;
     if (!kitchenMap[order.kitchenId]) {
       kitchenMap[order.kitchenId] = {

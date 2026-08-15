@@ -257,6 +257,11 @@ html.dark-content .logo-dark {
 
 /* Navbar Dropdown Hover fix for Dark Mode */
 html.dark-content header .relative div[class*="absolute"] button:hover {
-  background-color: #334155 !important;
+  background-color: #223651 !important;
+  /* bg-slate-700 */
+}
+
+html.dark-content header .relative>button:hover {
+  background-color: #223651 !important;
   /* bg-slate-700 */
 }

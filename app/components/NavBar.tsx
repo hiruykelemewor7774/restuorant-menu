@@ -36,14 +36,14 @@ async function handleLogout() {
 }
 
   return (
-    <>
-      <header className="fixed bg h-20 w-screen border-b-gray-300 border-b-1 text-white flex items-center justify-between px-6 py-4 backdrop-blur-md  top-0 left-0 right-0 z-50">
-        {/* Hamburger Menu - Mobile ላይ ብቻ ይታያል */}
-<button
-  onClick={toggleSidebar}
-  className="md:hidden p-2 rounded-lg bg-gray-800/80 hover:bg-gray-800 border border-gray-700 text-white mr-2">
-  <Menu size={20} />
-</button>
+  <>
+    <header className="fixed bg h-20 w-screen border-b-gray-300 border-b-1.5    text-white flex items-center justify-between px-6 py-4 backdrop-blur-md  top-0 left-0 right-0 z-50">
+    {/* Hamburger Menu - Mobile ላይ ብቻ ይታያል */}
+   <button
+     onClick={toggleSidebar}
+     className="md:hidden p-2 rounded-lg bg-gray-800/80 hover:bg-gray-800 border border-gray-700 text-white mr-2">
+     <Menu size={20} />
+  </button>
      
     <div className='mt-3 block dark-content:hidden p-1 shrink-0 items-center space-x-2 cursor-pointer logo-light'>
           <Image

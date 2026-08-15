@@ -142,8 +142,8 @@ export default function ReportsPage() {
             )}
           </div>
 
-          {/* Kitchen Performance  */}
-           <h2 className="text-xl font-bold mb-4 mt-10 text-yellow-500">🍳 Kitchen Performance</h2>
+          {/* kitchen Performance */}
+          <h2 className="text-xl font-bold mb-4 mt-10 text-yellow-500">🍳 Kitchen Performance</h2>
           <div className="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden mb-10">
             {kitchenPerformance.length === 0 ? (
               <p className="text-gray-400 text-sm p-4">ለዚህ ጊዜ ክፍል ዳታ የለም</p>
@@ -165,8 +165,7 @@ export default function ReportsPage() {
                 </tbody>
               </table>
             )}
-          </div>
-          
+          </div>  
 
           {/* Top Selling Items */}
           <h2 className="text-xl font-bold mb-4 text-yellow-500">🔥 Top-Selling Items</h2>
