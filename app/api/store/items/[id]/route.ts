@@ -18,10 +18,17 @@ export async function PUT(
       where: { id },
       data: {
         ...(body.name !== undefined && { name: body.name }),
+        ...(body.category !== undefined && { category: body.category }),
         ...(body.unit !== undefined && { unit: body.unit }),
         ...(body.quantity !== undefined && { quantity: body.quantity }),
         ...(body.minThreshold !== undefined && {
           minThreshold: body.minThreshold,
+        }),
+        ...(body.costPerUnit !== undefined && {
+          costPerUnit: body.costPerUnit,
+        }),
+        ...(body.expiryDate !== undefined && {
+          expiryDate: body.expiryDate ? new Date(body.expiryDate) : null,
         }),
         ...(body.notes !== undefined && { notes: body.notes }),
       },

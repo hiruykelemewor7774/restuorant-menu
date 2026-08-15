@@ -118,12 +118,104 @@ model StoreAuth {
 model StoreItem {
   id           String   @id @default(cuid())
   name         String
-  unit         String   // ኪሎ, ሊትር, ፓኬት, ቁራጭ ወዘተ
+  category     String   @default("General")
+  unit         String
   quantity     Float    @default(0)
   minThreshold Float    @default(0)
+  costPerUnit  Float    @default(0)
+  expiryDate   DateTime?
   notes        String?  @db.Text
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
+  purchases    Purchase[]
+  wasteLogs    WasteLog[]
+  requestItems KitchenRequestItem[]
+  recipeItems  RecipeItem[]
+
   @@map("store_items")
+}
+
+model Supplier {
+  id        String   @id @default(cuid())
+  name      String
+  phone     String?
+  address   String?
+  notes     String?  @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  purchases Purchase[]
+
+  @@map("suppliers")
+}
+
+model Purchase {
+  id          String   @id @default(cuid())
+  itemId      String
+  item        StoreItem @relation(fields: [itemId], references: [id])
+  supplierId  String?
+  supplier    Supplier? @relation(fields: [supplierId], references: [id])
+  quantity    Float
+  totalCost   Float
+  purchasedAt DateTime @default(now())
+  notes       String?  @db.Text
+
+  @@map("purchases")
+}
+
+model KitchenRequest {
+  id        String   @id @default(cuid())
+  status    String   @default("pending") // pending | approved | rejected
+  requestedBy String?
+  notes     String?  @db.Text
+  items     KitchenRequestItem[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("kitchen_requests")
+}
+
+model KitchenRequestItem {
+  id         String  @id @default(cuid())
+  requestId  String
+  request    KitchenRequest @relation(fields: [requestId], references: [id], onDelete: Cascade)
+  itemId     String
+  item       StoreItem @relation(fields: [itemId], references: [id])
+  quantity   Float
+
+  @@map("kitchen_request_items")
+}
+
+model WasteLog {
+  id        String   @id @default(cuid())
+  itemId    String
+  item      StoreItem @relation(fields: [itemId], references: [id])
+  quantity  Float
+  reason    String?
+  createdAt DateTime @default(now())
+
+  @@map("waste_logs")
+}
+
+model Recipe {
+  id        String   @id @default(cuid())
+  name      String
+  notes     String?  @db.Text
+  items     RecipeItem[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("recipes")
+}
+
+model RecipeItem {
+  id       String @id @default(cuid())
+  recipeId String
+  recipe   Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+  itemId   String
+  item     StoreItem @relation(fields: [itemId], references: [id])
+  quantity Float
+
+  @@map("recipe_items")
 }

@@ -45,27 +45,27 @@ async function handleLogout() {
   <Menu size={20} />
 </button>
      
-<div className='mt-3 block dark-content:hidden p-1 shrink-0 items-center space-x-2 cursor-pointer logo-light'>
-                  <Image
-                        alt="Company logo"
-                        width={90}
-                        height={50}
-                        style={{ width: "auto", height: "auto" }}
-                        className=" object-cover"
-                        priority
-                        src="/image/kereamilm.png"/>
-            </div>
+    <div className='mt-3 block dark-content:hidden p-1 shrink-0 items-center space-x-2 cursor-pointer logo-light'>
+          <Image
+                alt="Company logo"
+                width={90}
+                height={50}
+                style={{ width: "auto", height: "auto" }}
+                className=" object-cover"
+                priority
+                src="/image/kereamilm.png"/>
+    </div>
 
-             <div className='mt-3 shrink-0 hidden items-center space-x-2 cursor-pointer logo-dark'>
-                  <Image
-                        alt="Company logo"
-                        width={90}
-                        height={50}
-                        style={{ width: "auto", height: "auto" }}
-                        className=" object-cover"
-                        priority
-                        src="/image/kereamidm.png"/>
-            </div>
+    <div className='mt-3 shrink-0 hidden items-center space-x-2 cursor-pointer logo-dark'>
+          <Image
+                alt="Company logo"
+                width={90}
+                height={50}
+                style={{ width: "auto", height: "auto" }}
+                className=" object-cover"
+                priority
+                src="/image/kereamidm.png"/>
+    </div>
 
         {/* Center links (All, Food, Drink, Room navigation links have been completely removed from the navbar as requested) */}
 
@@ -75,7 +75,7 @@ async function handleLogout() {
           {/* Cart Button */}
           <button
             onClick={() => setCartOpen(true)}
-            className="relative p-2.5 rounded-full bg-gray-800/80 hover:bg-gray-800 border border-gray-700 text-white transition cursor-pointer">
+            className="relative p-2.5 rounded-full hover:bg-gray-200 dark:bg-gray-800/80 dark:hover:bg-gray-800 border border-gray-300 text-white transition cursor-pointer">
             <FaShoppingCart size={18} />
             {totalItems > 0 && (
               <span className="absolute -top-1 -right-1 bg-red-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
@@ -86,7 +86,7 @@ async function handleLogout() {
 
           <button 
             onClick={() => setShowDropdown(!showDropdown)}
-            className="flex items-center gap-2 bg-gray-800/80 hover:bg-gray-800 px-4 py-2 rounded-full border border-gray-700 text-sm transition text-white cursor-pointer">
+            className="flex items-center gap-2 hover:bg-gray-200 dark:bg-gray-800/80 dark:hover:bg-gray-800 px-4 py-2 rounded-full border border-gray-300 text-sm transition text-white cursor-pointer">
             <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
             <span>{t("staffPortal")}</span>
             <ChevronDown size={16} className="text-gray-400" />
@@ -98,32 +98,32 @@ async function handleLogout() {
 
           {/* Dropdown Menu (Opened when Staff Portal is clicked) */}
           {showDropdown && (
-            <div className="absolute right-0 top-14 w-52 bg-gray-900 border border-gray-700 rounded-xl shadow-2xl overflow-hidden py-1 z-50 text-white">
+            <div className="absolute right-0 top-14 w-40 border border-gray-300 rounded-xl shadow-2xl overflow-hidden py-1 z-50 text-white">
               
               <button 
                 onClick={() => { setShowDropdown(false); router.push("/admin/login"); }}
-                className="w-full flex items-center gap-3 px-4 py-2.5 text-sm hover:bg-gray-800 transition text-gray-200 cursor-pointer">
+                className="w-full flex items-center gap-3 px-4 py-2.5 text-sm dark:bg-gray-900 hover:bg-gray-200 transition text-gray-200 cursor-pointer">
                 <Lock size={16} className="text-amber-400" />
                 <span>{t("adminLogin")}</span>
               </button>
 
               <button 
                 onClick={() => { setShowDropdown(false); router.push("/waiter"); }}
-                className="w-full flex items-center gap-3 px-4 py-2.5 text-sm hover:bg-gray-800 transition text-gray-200 cursor-pointer">
+                className="w-full flex items-center gap-3 px-4 py-2.5 text-sm hover:bg-gray-200 dark:hover:bg-gray-800 transition text-gray-200 cursor-pointer">
                 <Utensils size={16} className="text-amber-400" />
                 <span>{t("waiterLogin")}</span>
               </button>
 
               <button 
                 onClick={() => { setShowDropdown(false); router.push("/kitchen"); }}
-                className="w-full flex items-center gap-3 px-4 py-2.5 text-sm hover:bg-gray-800 transition text-gray-200 cursor-pointer">
+                className="w-full flex items-center gap-3 px-4 py-2.5 text-sm hover:bg-gray-200 dark:hover:bg-gray-800 transition text-gray-200 cursor-pointer">
                 <ChefHat size={16} className="text-amber-400" />
                 <span>{t("kitchenLogin")}</span>
               </button>
 
               <button 
                 onClick={() => { setShowDropdown(false); router.push("/store/login"); }}
-                className="w-full flex items-center gap-3 px-4 py-2.5 text-sm hover:bg-gray-800 transition text-gray-200 cursor-pointer">
+                className="w-full flex items-center gap-3 px-4 py-2.5 text-sm hover:bg-gray-200 dark:hover:bg-gray-800 transition text-gray-200 cursor-pointer">
                 <Utensils size={16} className="text-amber-400" />
                 <span>{t("storeLogin") || "Store Login"}</span>
               </button>
@@ -132,8 +132,7 @@ async function handleLogout() {
 
               <button 
                 onClick={handleLogout}
-                className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-red-400 hover:bg-red-500/10 transition cursor-pointer"
-              >
+                className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-red-400 hover:bg-red-500 transition cursor-pointer">
                 <LogOut size={16} />
                 <span>{t("logout")}</span>
               </button>

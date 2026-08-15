@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { useCart } from "../context/CartContext";
 
 interface CheckoutOptionsProps {
@@ -11,7 +12,8 @@ interface CheckoutOptionsProps {
 type PaymentMethod = "telebirr" | "bank" | "manual";
 
 export default function CheckoutOptions({ subtotal, onClose }: CheckoutOptionsProps) {
-  const { cart, tableNumber } = useCart();
+  const router = useRouter();
+  const { cart, tableNumber, clearCart } = useCart();
   const [selectedMethod, setSelectedMethod] = useState<PaymentMethod>("telebirr");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
@@ -44,9 +46,10 @@ export default function CheckoutOptions({ subtotal, onClose }: CheckoutOptionsPr
       }
 
       if (selectedMethod === "manual") {
-        alert(`የእጅ ክፍያ ትዕዛዝዎ ተመዝግቧል! አጠቃላይ ክፍያ: ${totalAmount} ብር`);
-        setIsSubmitting(false);
+        clearCart();
         if (onClose) onClose();
+        // ደንበኛውን ወደ Track Order ገፅ ውሰድ (ringing notifications ጋር)
+        router.push(`/track/${data.order.id}`);
         return;
       }
 

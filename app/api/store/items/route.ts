@@ -20,7 +20,16 @@ export async function POST(req: NextRequest) {
   if (!payload) return NextResponse.json({ success: false }, { status: 401 });
 
   try {
-    const { name, unit, quantity, minThreshold, notes } = await req.json();
+    const {
+      name,
+      category,
+      unit,
+      quantity,
+      minThreshold,
+      costPerUnit,
+      expiryDate,
+      notes,
+    } = await req.json();
 
     if (!name || !unit) {
       return NextResponse.json(
@@ -32,9 +41,12 @@ export async function POST(req: NextRequest) {
     const item = await prisma.storeItem.create({
       data: {
         name,
+        category: category || "General",
         unit,
         quantity: quantity ?? 0,
         minThreshold: minThreshold ?? 0,
+        costPerUnit: costPerUnit ?? 0,
+        expiryDate: expiryDate ? new Date(expiryDate) : null,
         notes: notes || null,
       },
     });

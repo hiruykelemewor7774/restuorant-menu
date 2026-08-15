@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 import { verifyStoreToken, STORE_COOKIE_NAME } from "@/lib/store-auth";
+import StoreTabs from "./StoreTabs";
 
 export default async function StoreDashboardLayout({
   children,
@@ -15,5 +16,10 @@ export default async function StoreDashboardLayout({
     redirect("/store/login");
   }
 
-  return <>{children}</>;
+  return (
+    <div className="min-h-screen bg-slate-50">
+      <StoreTabs />
+      <div className="p-6">{children}</div>
+    </div>
+  );
 }

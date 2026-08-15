@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { playNotificationSound } from "@/lib/notifySound";
+import RingingAlertModal from "../components/RingingAlertModal";
 
 type OrderItem = {
   id: string;
@@ -29,6 +30,8 @@ export default function WaiterDashboard() {
   const [manualOrders, setManualOrders] = useState<ManualOrder[]>([]);
   const knownManualIds = useRef<Set<string>>(new Set());
   const firstManualLoad = useRef(true);
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
 
   // ---- Loaders (ሁሉም function ትርጓሜዎች useEffect ከመድረሱ በፊት) ----
 
@@ -56,12 +59,13 @@ export default function WaiterDashboard() {
         const isNew = prevStatus === undefined;
         const becameReady = prevStatus && prevStatus !== "ready" && order.status === "ready";
         if (isNew) {
-          playNotificationSound();
+          setAlertMessage(`🆕 አዲስ ትዕዛዝ! ጠረጴዛ ${order.tableNumber}`);
+          setAlertOpen(true);
           break;
         }
         if (becameReady) {
-          playNotificationSound();
-          alert(`🔔 ጠረጴዛ ${order.tableNumber} ትዕዛዝ ዝግጁ ሆኗል! ወደ ደንበኛ ውሰድ።`);
+          setAlertMessage(`✅ ጠረጴዛ ${order.tableNumber} ትዕዛዝ ዝግጁ ሆኗል! ወደ ደንበኛ ውሰድ።`);
+          setAlertOpen(true);
           break;
         }
       }
@@ -81,8 +85,8 @@ export default function WaiterDashboard() {
       (o: ManualOrder) => !knownManualIds.current.has(o.id)
     );
     if (!firstManualLoad.current && newOnes.length > 0) {
-      playNotificationSound();
-      alert(`💵 አዲስ የበእጅ ክፍያ ትዕዛዝ! ጠረጴዛ: ${newOnes[0].tableNumber}`);
+      setAlertMessage(`💵 አዲስ የበእጅ ክፍያ ትዕዛዝ! ጠረጴዛ: ${newOnes[0].tableNumber}`);
+      setAlertOpen(true);
     }
 
     data.orders.forEach((o: ManualOrder) => knownManualIds.current.add(o.id));
@@ -99,7 +103,7 @@ export default function WaiterDashboard() {
   // ---- useEffects (loaders ከተገለጹ በኋላ) ----
 
   useEffect(() => {
-        // eslint-disable-next-line react-hooks/set-state-in-effect
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     loadOrders();
     loadFinished();
     const interval = setInterval(() => {
@@ -110,7 +114,6 @@ export default function WaiterDashboard() {
   }, []);
 
   useEffect(() => {
-        // eslint-disable-next-line react-hooks/set-state-in-effect
     loadManualOrders();
     const interval = setInterval(loadManualOrders, 5000);
     return () => clearInterval(interval);
@@ -165,6 +168,11 @@ export default function WaiterDashboard() {
 
   return (
     <div className="mt-10 min-h-screen text-white p-10">
+     <RingingAlertModal
+        isOpen={alertOpen}
+        title="ማሳወቂያ"
+        message={alertMessage}
+        onAcknowledge={() => setAlertOpen(false)}/>
       <h1 className="text-2xl font-bold mb-6 text-yellow-500">🍽️ Waiter Station & Order Dispatcher</h1>
 
       {manualOrders.length > 0 && (
