@@ -68,13 +68,17 @@ export async function GET(req: NextRequest) {
 
   const statusParam = req.nextUrl.searchParams.get("status");
 
-  const orders = await prisma.order.findMany({
-    where: statusParam
+const orders = await prisma.order.findMany({
+  where: {
+    waiterId: payload.waiterId,
+    ...(statusParam
       ? { status: statusParam }
-      : { status: { in: ["pending", "sent_to_kitchen"] } },
-    include: { items: true },
-    orderBy: { createdAt: "asc" },
-  });
+      : { status: { not: "delivered" } }), // status filter ከሌለ delivered ትዕዛዞችን አታምጣ
+  },
+  include: { items: true },
+  orderBy: { createdAt: "desc" },
+  take: 50,
+});
 
   return NextResponse.json({ success: true, orders });
 }
