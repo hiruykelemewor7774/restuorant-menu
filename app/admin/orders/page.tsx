@@ -86,19 +86,19 @@ export default function LiveOrdersPage() {
   };
 
   return (
-    <div className="text-white pt-8">
+    <div className="text-gray-800 pt-8">
       <h1 className="text-3xl font-bold mb-6 text-yellow-500">Live Orders</h1>
 
-      <div className="w-200 ml-0  grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="w-full ml-0  grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {orders.map((order) => (
           <div
             key={order.id}
-            className="bg-gray-900 border border-gray-800 rounded-xl p-4">
+            className="bg-white border border-gray-500 rounded-xl p-4">
             <div className="flex justify-between items-center mb-2">
               <span className="font-bold text-yellow-400">
                 ጠረጴዛ: {order.tableNumber}
               </span>
-              <span className="text-xs bg-gray-800 px-2 py-1 rounded-full">
+              <span className="text-xs bg-gray-200 px-2 py-1 rounded-md">
                 {statusLabel[order.status] || order.status}
               </span>
             </div>

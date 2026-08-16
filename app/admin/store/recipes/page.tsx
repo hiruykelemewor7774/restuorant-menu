@@ -78,15 +78,14 @@ export default function AdminRecipesPage() {
   }
 
   return (
-    <div className="text-white p-6 md:p-8 w-full">
+    <div className="text-gray-800 pt-8 md:p-8 w-full">
       <h1 className="text-2xl font-bold text-yellow-500 mb-6">
         📖 Recipes (Admin Control)
       </h1>
 
       <button
         onClick={() => setShowForm(!showForm)}
-        className="bg-amber-500 hover:bg-amber-600 text-black px-4 py-2 rounded-lg text-sm font-semibold mb-4"
-      >
+        className="bg-amber-500 hover:bg-amber-600 text-black px-4 py-2 rounded-lg text-sm font-semibold mb-4">
         {showForm ? "Cancel" : "+ New Recipe"}
       </button>
 
@@ -99,14 +98,14 @@ export default function AdminRecipesPage() {
             placeholder="Recipe Name"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-sm"
+            className="w-full px-3 py-2 bg-gray-200 border border-gray-500 rounded-lg text-sm"
           />
           {lines.map((line, idx) => (
             <div key={idx} className="flex gap-2">
               <select
                 value={line.itemId}
                 onChange={(e) => updateLine(idx, "itemId", e.target.value)}
-                className="flex-1 px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-sm"
+                className="flex-1 px-3 py-2 bg-gray-200 border border-gray-500 rounded-lg text-sm"
               >
                 <option value="">Select Ingredient</option>
                 {items.map((i) => (
@@ -120,14 +119,14 @@ export default function AdminRecipesPage() {
                 placeholder="Qty"
                 value={line.quantity}
                 onChange={(e) => updateLine(idx, "quantity", e.target.value)}
-                className="w-28 px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-sm"
+                className="w-28 px-3 py-2 bg-gray-200 border border-gray-500 rounded-lg text-sm"
               />
             </div>
           ))}
           <button
             type="button"
             onClick={addLine}
-            className="text-amber-400 text-sm font-medium"
+            className="text-amber-400 hover:text-amber-500 text-sm font-medium"
           >
             + Add ingredient
           </button>

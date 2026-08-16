@@ -116,7 +116,7 @@ export default function AdminStoreInventoryPage() {
   }
 
   return (
-    <div className="text-white p-6 md:p-8 w-full">
+    <div className="text-gray-800 pt-8 md:p-8 w-full">
       <h1 className="text-2xl font-bold text-yellow-500 mb-6">
         🏪 Store Inventory (Admin Control)
       </h1>
@@ -126,60 +126,55 @@ export default function AdminStoreInventoryPage() {
           resetForm();
           setShowForm(!showForm);
         }}
-        className="bg-amber-500 hover:bg-amber-600 text-black px-4 py-2 rounded-lg text-sm font-semibold mb-4"
-      >
+        className="bg-amber-500 hover:bg-amber-600 text-black px-4 py-2 rounded-lg text-sm font-semibold mb-4">
         {showForm ? "Cancel" : "+ Add Item"}
       </button>
 
       {showForm && (
         <form
           onSubmit={handleSubmit}
-          className="bg-gray-900 border border-gray-800 rounded-xl p-4 mb-6 grid grid-cols-2 md:grid-cols-4 gap-3"
-        >
+          className="bg-gray-900 border border-gray-800 rounded-xl p-4 mb-6 grid grid-cols-2 md:grid-cols-4 gap-3">
           <input
             placeholder="Name"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-sm"
-          />
+            className="px-3 py-2 bg-gray-200 border border-gray-500 rounded-lg text-sm"/>
           <input
             placeholder="Category"
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-            className="px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-sm"
-          />
+            className="px-3 py-2 bg-gray-200 border border-gray-500 rounded-lg text-sm"/>
           <input
             placeholder="Unit (kg, L, pcs...)"
             value={unit}
             onChange={(e) => setUnit(e.target.value)}
-            className="px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-sm"
-          />
+            className="px-3 py-2 bg-gray-200 border border-gray-500 rounded-lg text-sm"/>
           <input
             type="number"
             placeholder="Quantity"
             value={quantity}
             onChange={(e) => setQuantity(e.target.value)}
-            className="px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-sm"
+            className="px-3 py-2 bg-gray-200 border border-gray-500 rounded-lg text-sm"
           />
           <input
             type="number"
             placeholder="Min Threshold"
             value={minThreshold}
             onChange={(e) => setMinThreshold(e.target.value)}
-            className="px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-sm"
+            className="px-3 py-2 bg-gray-200 border border-gray-500 rounded-lg text-sm"
           />
           <input
             type="number"
             placeholder="Cost per Unit"
             value={costPerUnit}
             onChange={(e) => setCostPerUnit(e.target.value)}
-            className="px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-sm"
+            className="px-3 py-2 bg-gray-200 border border-gray-500 rounded-lg text-sm"
           />
           <input
             type="date"
             value={expiryDate}
             onChange={(e) => setExpiryDate(e.target.value)}
-            className="px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-sm"
+            className="px-3 py-2 bg-gray-200 border border-gray-500 rounded-lg text-sm"
           />
           <button
             type="submit"
@@ -199,7 +194,7 @@ export default function AdminStoreInventoryPage() {
         <div className="bg-gray-900 border border-gray-800 rounded-xl overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="text-left text-gray-400 border-b border-gray-800">
+              <tr className="text-left text-gray-800 bg-gray-200 border-b border-gray-800">
                 <th className="py-3 px-4">Name</th>
                 <th className="py-3 px-4">Category</th>
                 <th className="py-3 px-4">Quantity</th>

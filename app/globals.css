@@ -266,6 +266,7 @@ html.dark-content header .relative>button:hover {
   /* bg-slate-700 */
 }
 
+/* for navbar and sidebar bg color */
 .nav-header {
   background: linear-gradient(135deg, #171e2e 0%, #00040f 60%, #0f172a 100%);
 }
@@ -280,4 +281,23 @@ html.light-theme .nav-header {
 
 html.light-theme .sidebar-nav {
   background: #ffffff !important;
+}
+
+/* Light mode - Admin dashboard cards */
+html.light-theme main .bg-gray-900 {
+  background-color: #ffffff !important;
+  border-color: #e5e7eb !important;
+}
+
+html.light-theme main .text-gray-200,
+html.light-theme main .text-gray-300 {
+  color: #1f2937 !important;
+}
+
+html.light-theme main .bg-amber-500\/10 {
+  background-color: rgba(217, 119, 6, 0.1) !important;
+}
+
+html.light-theme main .bg-amber-500\/20 {
+  background-color: rgba(217, 119, 6, 0.15) !important;
 }

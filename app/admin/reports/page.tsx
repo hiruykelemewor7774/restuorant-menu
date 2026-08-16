@@ -63,7 +63,7 @@ export default function ReportsPage() {
   }, [period]);
 
   return (
-    <div className="text-white pt-9">
+    <div className="text-gray-800 pt-9">
       <h1 className="text-3xl font-bold mb-6 text-yellow-500">📊 ሪፖርት</h1>
 
       {/* Period Selector */}

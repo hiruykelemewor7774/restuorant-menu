@@ -49,6 +49,7 @@ export default function AdminDashboardPage() {
   const [breakdown, setBreakdown] = useState<MenuBreakdown>({});
   const [waiterSales, setWaiterSales] = useState<WaiterSale[]>([]);
   const [loading, setLoading] = useState(true);
+  const [showReport, setShowReport] = useState(false);
 
   useEffect(() => {
     async function loadStats() {
@@ -77,7 +78,7 @@ export default function AdminDashboardPage() {
     : [];
 
   return (
-    <div className="text-white p-6 md:p-8 ml-0 w-full">
+    <div className="text-yellow-500 md:pt-8 ml-0 w-full">
       <h1 className="text-3xl font-bold mb-2 text-yellow-500">Admin Page</h1>
       <p className="text-gray-400 mb-8">Welcome, admin. Overview of your restaurant.</p>
 
@@ -89,8 +90,7 @@ export default function AdminDashboardPage() {
           {/* 1. Dashboard Action Button */}
           <Link 
             href="/admin" 
-            className="flex items-center justify-between p-4 bg-gray-900 hover:bg-gray-800 border border-gray-800 rounded-xl transition group shadow-md"
-          >
+            className="flex items-center justify-between p-4 bg-gray-900 hover:bg-gray-800 border border-gray-800 rounded-xl transition group shadow-md">
             <div className="flex items-center gap-3">
               <div className="p-2.5 rounded-lg bg-amber-500/10 text-amber-400 group-hover:bg-amber-500/20 transition">
                 <LayoutDashboard size={22} />
@@ -117,8 +117,7 @@ export default function AdminDashboardPage() {
           {/* 3. Live Orders Action Button */}
           <Link 
             href="/admin/orders" 
-            className="flex items-center justify-between p-4 bg-gray-900 hover:bg-gray-800 border border-gray-800 rounded-xl transition group shadow-md"
-          >
+            className="flex items-center justify-between p-4 bg-gray-900 hover:bg-gray-800 border border-gray-800 rounded-xl transition group shadow-md">
             <div className="flex items-center gap-3">
               <div className="p-2.5 rounded-lg bg-amber-500/10 text-amber-400 group-hover:bg-amber-500/20 transition">
                 <ClipboardList size={22} />
@@ -131,8 +130,7 @@ export default function AdminDashboardPage() {
           {/* 4. Table & QR Generator Action Button */}
           <Link 
             href="/admin/tables" 
-            className="flex items-center justify-between p-4 bg-gray-900 hover:bg-gray-800 border border-gray-800 rounded-xl transition group shadow-md"
-          >
+            className="flex items-center justify-between p-4 bg-gray-900 hover:bg-gray-800 border border-gray-800 rounded-xl transition group shadow-md">
             <div className="flex items-center gap-3">
               <div className="p-2.5 rounded-lg bg-amber-500/10 text-amber-400 group-hover:bg-amber-500/20 transition">
                 <QrCode size={22} />
@@ -155,24 +153,49 @@ export default function AdminDashboardPage() {
             <span className="text-xs text-amber-400 font-semibold uppercase tracking-wider bg-amber-500/10 px-2.5 py-1 rounded-md">Control</span>
           </Link>
        
-          {/* for Admin Store Management */}
-          <Link href="/admin/store" className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-800 text-gray-300 hover:text-white transition">
-            <QrCode size={20} /> Store Management
+          {/* 6. Store Management Action Button */}
+          <Link 
+            href="/admin/store" 
+            className="flex items-center justify-between p-4 bg-gray-900 hover:bg-gray-800 border border-gray-800 rounded-xl transition group shadow-md"
+          >
+            <div className="flex items-center gap-3">
+              <div className="p-2.5 rounded-lg bg-amber-500/10 text-amber-400 group-hover:bg-amber-500/20 transition">
+                <QrCode size={22} />
+              </div>
+              <span className="font-medium text-gray-200 group-hover:text-white">Store Management</span>
+            </div>
+            <span className="text-xs text-amber-400 font-semibold uppercase tracking-wider bg-amber-500/10 px-2.5 py-1 rounded-md">Manage</span>
           </Link>
-           
-           {/* For Admin Recipes in Store Management */}
-          <Link href="/admin/store/recipes" className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-800 text-gray-300 hover:text-white transition">
-             <UtensilsCrossed size={20} /> Recipes
+
+          {/* 7. Recipes Action Button */}
+          <Link 
+            href="/admin/store/recipes" 
+            className="flex items-center justify-between p-4 bg-gray-900 hover:bg-gray-800 border border-gray-800 rounded-xl transition group shadow-md">
+            <div className="flex items-center gap-3">
+              <div className="p-2.5 rounded-lg bg-amber-500/10 text-amber-400 group-hover:bg-amber-500/20 transition">
+                <UtensilsCrossed size={22} />
+              </div>
+              <span className="font-medium text-gray-200 group-hover:text-white">Recipes</span>
+            </div>
+            <span className="text-xs text-amber-400 font-semibold uppercase tracking-wider bg-amber-500/10 px-2.5 py-1 rounded-md">Manage</span>
           </Link>
 
         </div>
       </div>
 
       {loading ? (
-        <p className="text-gray-400">እየጫነ ነው...</p>
+        <p className="text-gray-400">loading...</p>
       ) : (
         <>
+          {/* Report Toggle Button */}
+          <button
+            onClick={() => setShowReport(!showReport)}
+            className="mb-6 bg-amber-500 hover:bg-amber-600 text-black font-semibold px-6 py-2.5 rounded-full transition">
+            {showReport ? "📊 Hide Report" : "📊 Show Report"}
+          </button>
+
           {/* Order/Waiter Stats */}
+          {showReport && (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
             {cards.map((card) => (
               <Link
@@ -183,8 +206,9 @@ export default function AdminDashboardPage() {
                 <p className="text-sm text-gray-400 mb-1">{card.label}</p>
                 <p className={`text-3xl font-bold ${card.color}`}>{card.value}</p>
               </Link>
-            ))}
+           ))}
           </div>
+          )}
 
           {/* Menu Breakdown by Type & Category */}
           <h2 className="text-xl font-bold mb-4 text-yellow-500">
@@ -199,14 +223,13 @@ export default function AdminDashboardPage() {
               return (
                 <div
                   key={type}
-                  className={`bg-gray-900 border rounded-xl p-5 ${typeColors[type]}`}
-                >
+                  className={`bg-gray-900 border rounded-xl p-5 ${typeColors[type]}`}>
                   <div className="flex justify-between items-center mb-4">
                     <h3 className="text-lg font-bold flex items-center gap-2">
                       <span>{typeIcons[type]}</span>
                       <span>{type}</span>
                     </h3>
-                    <span className="text-sm bg-gray-800 px-3 py-1 rounded-full">
+                    <span className="text-sm bg-red-50 px-3 py-1 rounded-md">
                       ጠቅላላ: {total}
                     </span>
                   </div>
@@ -218,8 +241,7 @@ export default function AdminDashboardPage() {
                       {Object.entries(categories).map(([category, count]) => (
                         <div
                           key={category}
-                          className="flex justify-between items-center bg-gray-800 rounded-lg px-3 py-2"
-                        >
+                          className="flex justify-between items-center bg-gray-200 rounded-lg px-3 py-2">
                           <span className="text-sm text-gray-300">{category}</span>
                           <span className="text-sm font-bold text-gray-200">{count}</span>
                         </div>
@@ -229,9 +251,8 @@ export default function AdminDashboardPage() {
 
                   <Link
                     href="/admin/menu"
-                    className="mt-4 inline-block text-xs text-gray-400 hover:text-yellow-400 transition"
-                  >
-                    → ማስተዳደር
+                    className="mt-4 inline-block text-xs text-gray-500 hover:text-yellow-400 transition">
+                    → manage
                   </Link>
                 </div>
               );
@@ -247,7 +268,7 @@ export default function AdminDashboardPage() {
                 <p className="text-gray-400 text-sm p-4">ገና ምንም የተከፈለ ትዕዛዝ የለም</p>
               ) : (
                 <table className="w-full text-sm">
-                  <thead className="bg-gray-800 text-gray-300">
+                  <thead className="bg-gray-200 text-gray-300">
                     <tr>
                       <th className="text-left p-3">Waiter</th>
                       <th className="text-right p-3">ትዕዛዞች</th>

@@ -47,6 +47,7 @@ export default function MenuManagementPage() {
   }
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setLoading(true);
     void loadItems();
   }, []);
@@ -165,26 +166,24 @@ function startEdit(item: MenuItem) {
   const availableCategories = categoriesByType[form.type] || [];
 
   return (
-    <div className="text-white">
+    <div className="text-gray-800 mt-8">
       <h1 className="text-3xl font-bold mb-6 text-yellow-500">Menu Management</h1>
 
       {/* Form */}
       <form
         onSubmit={handleSubmit}
-        className="bg-gray-900 border border-gray-800 rounded-2xl p-6 mb-8 max-w-2xl"
-      >
+        className="bg-gray-900 border border-gray-800 rounded-2xl p-6 mb-8 max-w-2xl">
         <h2 className="text-lg font-bold mb-4 text-yellow-400">
           {editingId ? "እቃ አስተካክል" : "አዲስ እቃ ጨምር"}
         </h2>
 
-        <div className="grid grid-cols-2 gap-4 mb-4">
+        <div className="grid grid-cols-2 gap-4 mb-4 text-gray-900">
           <div>
-            <label className="block text-sm text-gray-400 mb-1">Type</label>
+            <label className="block text-sm text-gray-800 mb-1">Type</label>
             <select
               value={form.type}
               onChange={(e) => handleTypeChange(e.target.value)}
-              className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg"
-            >
+              className="w-full px-3 py-2 bg-gray-100 border border-gray-500 rounded-lg">
               <option value="Food">Food</option>
               <option value="Drink">Drink</option>
               <option value="Room">Room</option>
@@ -192,12 +191,11 @@ function startEdit(item: MenuItem) {
           </div>
 
           <div>
-            <label className="block text-sm text-gray-400 mb-1">Category</label>
+            <label className="block text-sm text-gray-900 mb-1">Category</label>
             <select
               value={form.category}
               onChange={(e) => setForm({ ...form, category: e.target.value })}
-              className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg"
-            >
+              className="w-full px-3 py-2 bg-gray-100 border border-gray-500 rounded-lg">
               {availableCategories.map((cat) => (
                 <option key={cat} value={cat}>
                   {cat}
@@ -209,31 +207,30 @@ function startEdit(item: MenuItem) {
 
         <div className="grid grid-cols-2 gap-4 mb-4">
           <div>
-            <label className="block text-sm text-gray-400 mb-1">Name</label>
+            <label className="block text-sm text-gray-800 mb-1">Name</label>
             <input
               type="text"
               value={form.name}
               onChange={(e) => setForm({ ...form, name: e.target.value })}
               required
-              className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg"
-            />
+              className="w-full px-3 py-2 bg-gray-100 border border-gray-500 rounded-lg"/>
           </div>
           <div>
-            <label className="block text-sm text-gray-400 mb-1">Price</label>
+            <label className="block text-sm text-gray-800 mb-1">Price</label>
             <input
               type="text"
               value={form.price}
               onChange={(e) => setForm({ ...form, price: e.target.value })}
               placeholder="ለምሳሌ: 80 Birr ወይም $3"
               required
-              className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg"
+              className="w-full px-3 py-2 bg-gray-100 border border-gray-700 rounded-lg"
             />
           </div>
         </div>
 
         {/* Image Upload */}
         <div className="mb-4">
-          <label className="block text-sm text-gray-400 mb-1">Image</label>
+          <label className="block text-sm text-gray-800 mb-1">Image</label>
           <input
             ref={fileInputRef}
             type="file"
@@ -293,8 +290,7 @@ function startEdit(item: MenuItem) {
             <button
               type="button"
               onClick={resetForm}
-              className="border border-gray-700 px-6 py-2 rounded-xl hover:bg-gray-800 transition"
-            >
+              className="border border-gray-700 px-6 py-2 rounded-xl hover:bg-gray-800 transition">
               ሰርዝ
             </button>
           )}
@@ -320,7 +316,7 @@ function startEdit(item: MenuItem) {
 
       {/* List */}
       {loading ? (
-        <p className="text-gray-400">እየጫነ ነው...</p>
+        <p className="text-gray-400">loading...</p>
       ) : (
         <div className="grid grid-cols-5 sm:grid-cols-2 md:grid-cols-3 gap-4 items-stretch">
           {filteredItems.map((item) => (
@@ -344,14 +340,12 @@ function startEdit(item: MenuItem) {
                 <div className="flex gap-2 mt-auto pt-3">
                   <button
                     onClick={() => startEdit(item)}
-                    className="flex-1 text-sm bg-gray-800 hover:bg-gray-700 py-1.5 rounded-lg transition"
-                  >
+                    className="flex-1 text-sm bg-gray-200 hover:bg-gray-300 py-1.5 rounded-lg transition">
                     Edit
                   </button>
                   <button
                     onClick={() => handleDelete(item.id)}
-                    className="flex-1 text-sm bg-red-900/50 hover:bg-red-900 text-red-300 py-1.5 rounded-lg transition"
-                  >
+                    className="flex-1 text-sm bg-red-500 hover:bg-red-600 text-gray-100 py-1.5 rounded-lg transition">
                     Delete
                   </button>
                 </div>
