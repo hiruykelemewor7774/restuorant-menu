@@ -40,19 +40,18 @@ export default function AdminLogin() {
         className="w-80 space-y-4 rounded-2xl border border-gray-200 p-6 shadow-sm px-6 mr-20">
         <h1 className="text-2xl font-bold">Admin Login</h1>
 
-
         <input
           type="text"
           value={username}
+          name="username" 
           onChange={(e) => setUsername(e.target.value)}
           placeholder="Username"
-          className="w-full rounded-lg border px-3 py-2"
-        />
-
+          className="w-full rounded-lg border px-3 py-2"/>
 
         <input
           type="password"
           value={password}
+          autoComplete="current-password"
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
           className="w-full rounded-lg border px-3 py-2"

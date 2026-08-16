@@ -50,6 +50,7 @@ export default function StoreLoginPage() {
         <input
           type="text"
           placeholder="የተጠቃሚ ስም"
+          name="username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           className="w-full mb-3 px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-lg text-white"
@@ -58,6 +59,7 @@ export default function StoreLoginPage() {
         <input
           type="password"
           placeholder="የይለፍ ቃል"
+          autoComplete="current-password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           className="w-full mb-4 px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-lg text-white"

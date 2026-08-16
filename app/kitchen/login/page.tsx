@@ -51,6 +51,7 @@ export default function KitchenLoginPage() {
         <input
           type="text"
           value={username}
+          name="username"
           onChange={(e) => setUsername(e.target.value)}
           placeholder="Username"
           required
@@ -59,6 +60,7 @@ export default function KitchenLoginPage() {
         <input
           type="password"
           value={password}
+          autoComplete="current-password"
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
           required
