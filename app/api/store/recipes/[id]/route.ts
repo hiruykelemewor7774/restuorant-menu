@@ -1,14 +1,18 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { verifyStoreToken, STORE_COOKIE_NAME } from "@/lib/store-auth";
+import { requireAdmin } from "@/lib/store-admin-guard";
 
 export async function DELETE(
   req: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
-  const token = req.cookies.get(STORE_COOKIE_NAME)?.value;
-  const payload = token ? await verifyStoreToken(token) : null;
-  if (!payload) return NextResponse.json({ success: false }, { status: 401 });
+  const admin = await requireAdmin(req);
+  if (!admin) {
+    return NextResponse.json(
+      { success: false, message: "Admin login required" },
+      { status: 403 },
+    );
+  }
 
   const { id } = await params;
 
@@ -19,7 +23,7 @@ export async function DELETE(
     console.error("Recipe delete error:", err);
     return NextResponse.json(
       { success: false, message: "Failed to delete" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

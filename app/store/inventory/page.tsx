@@ -220,19 +220,8 @@ export default function InventoryPage() {
                         <span className="text-green-600 text-xs">✓ OK</span>
                       )}
                     </td>
-                    <td className="py-3 px-4 flex gap-3">
-                      <button
-                        onClick={() => startEdit(item)}
-                        className="text-blue-600 hover:underline text-xs"
-                      >
-                        Edit
-                      </button>
-                      <button
-                        onClick={() => handleDelete(item.id)}
-                        className="text-red-500 hover:underline text-xs"
-                      >
-                        Delete
-                      </button>
+                    <td className="py-3 px-4 text-gray-300 text-xs italic">
+                      Admin only
                     </td>
                   </tr>
                 );

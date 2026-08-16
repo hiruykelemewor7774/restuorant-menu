@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import React from "react";
 import Link from "next/link";
+import { AdminAuth } from '../generated/prisma/browser';
 import { 
   LayoutDashboard, 
   UtensilsCrossed, 
@@ -144,8 +145,7 @@ export default function AdminDashboardPage() {
           {/* 5. Manage Staff Auth Action Button */}
           <Link 
             href="/admin/staff" 
-            className="flex items-center justify-between p-4 bg-gray-900 hover:bg-gray-800 border border-gray-800 rounded-xl transition group shadow-md"
-          >
+            className="flex items-center justify-between p-4 bg-gray-900 hover:bg-gray-800 border border-gray-800 rounded-xl transition group shadow-md">
             <div className="flex items-center gap-3">
               <div className="p-2.5 rounded-lg bg-amber-500/10 text-amber-400 group-hover:bg-amber-500/20 transition">
                 <Users size={22} />
@@ -153,6 +153,11 @@ export default function AdminDashboardPage() {
               <span className="font-medium text-gray-200 group-hover:text-white">Manage Staff Auth</span>
             </div>
             <span className="text-xs text-amber-400 font-semibold uppercase tracking-wider bg-amber-500/10 px-2.5 py-1 rounded-md">Control</span>
+          </Link>
+       
+          {/* for Admin Store Management */}
+          <Link href="/admin/store" className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-800 text-gray-300 hover:text-white transition">
+          <QrCode size={20} /> Store Management
           </Link>
 
         </div>
@@ -262,14 +267,12 @@ export default function AdminDashboardPage() {
             <div className="mt-6 gap-3">
                <Link
                   href="/admin/reports"
-                  className="inline-block bg-yellow-500 text-black font-semibold px-6 py-2.5 rounded-full hover:bg-yellow-400 transition"
-  >
+                  className="inline-block bg-yellow-500 text-black font-semibold px-6 py-2.5 rounded-full hover:bg-yellow-400 transition">
                   📊 ሙሉ ሪፖርት ይመልከቱ
               </Link>
               <Link
                 href="/"
-                className="inline-block bg-amber-500 text-black font-semibold px-6 py-2.5 rounded-full hover:bg-amber-600 transition"
-              >
+                className="inline-block bg-amber-500 text-black font-semibold px-6 py-2.5 rounded-full hover:bg-amber-600 transition">
                 Go to Menu
               </Link>
             </div>

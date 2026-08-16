@@ -45,3 +45,4 @@ next-env.d.ts
 
 # git fix script
 fix-git.ps1
+fix-all-git.ps1
