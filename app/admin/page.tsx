@@ -157,7 +157,12 @@ export default function AdminDashboardPage() {
        
           {/* for Admin Store Management */}
           <Link href="/admin/store" className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-800 text-gray-300 hover:text-white transition">
-          <QrCode size={20} /> Store Management
+            <QrCode size={20} /> Store Management
+          </Link>
+           
+           {/* For Admin Recipes in Store Management */}
+          <Link href="/admin/store/recipes" className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-800 text-gray-300 hover:text-white transition">
+             <UtensilsCrossed size={20} /> Recipes
           </Link>
 
         </div>
@@ -272,7 +277,7 @@ export default function AdminDashboardPage() {
               </Link>
               <Link
                 href="/"
-                className="inline-block bg-amber-500 text-black font-semibold px-6 py-2.5 rounded-full hover:bg-amber-600 transition">
+                className="inline-block bg-amber-500 text-black font-semibold px-6 py-2.5 ml-5 rounded-full hover:bg-amber-600 transition">
                 Go to Menu
               </Link>
             </div>
