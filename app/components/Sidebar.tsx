@@ -50,8 +50,7 @@ export default function Sidebar({ isAdmin = false }: SidebarProps) {
     languageOptions.find((l) => l.code === language)?.label || "English";
 
   return (
-    <aside className="w-64 text-white flex flex-col justify-between p-4 select-none relative z-30 overflow-y-auto [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-thumb]:bg-gray-800 [&::-webkit-scrollbar-thumb]:rounded-full"> 
-      {/* Top section containing navigation links and system settings */}
+  <aside className="sidebar-nav mt-28 w-64 text-white flex flex-col justify-between p-4 border-r border-white/10 select-none relative z-30 ...">      {/* Top section containing navigation links and system settings */}
       <div className="pt-5">       
         <nav className="space-y-2 pb-6">
           {/* Admin Management Navigation Links - Displayed ONLY when isAdmin is true */}

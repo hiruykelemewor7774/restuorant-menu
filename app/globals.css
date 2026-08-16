@@ -265,3 +265,19 @@ html.dark-content header .relative>button:hover {
   background-color: #223651 !important;
   /* bg-slate-700 */
 }
+
+.nav-header {
+  background: linear-gradient(135deg, #171e2e 0%, #00040f 60%, #0f172a 100%);
+}
+
+html.light-theme .nav-header {
+  background: #ffffff !important;
+}
+
+.sidebar-nav {
+  background: linear-gradient(180deg, #0f172a 0%, #111827 100%);
+}
+
+html.light-theme .sidebar-nav {
+  background: #ffffff !important;
+}

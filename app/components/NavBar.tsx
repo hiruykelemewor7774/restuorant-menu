@@ -11,6 +11,7 @@ import CartDrawer from "./CartDrawer";
 import { Menu } from "lucide-react";
 import { useUI } from "../context/UIContext";
 import { usePathname } from "next/navigation";
+import { useTheme } from "../context/ThemeContext";
 
 export default function Navbar() {
   const [showDropdown, setShowDropdown] = useState(false);
@@ -18,6 +19,7 @@ export default function Navbar() {
   const { totalItems } = useCart();
   const { toggleSidebar } = useUI();
   const { t } = useLanguage();
+  const { theme } = useTheme();
   const [cartOpen, setCartOpen] = useState(false);
 
   const pathname = usePathname();
@@ -35,37 +37,27 @@ async function handleLogout() {
   router.refresh();
 }
 
-  return (
+return (
   <>
-    <header className="fixed bg h-20 w-screen border-b-gray-300 border-b-1.5    text-white flex items-center justify-between px-6 py-4 backdrop-blur-md  top-0 left-0 right-0 z-50">
-    {/* Hamburger Menu - Mobile ላይ ብቻ ይታያል */}
+<header className="nav-header fixed h-20 w-screen text-white flex items-center justify-between px-6 py-4 top-0 left-0 right-0 z-50 border-b border-white/10">    
+{/* Hamburger Menu - Mobile ላይ ብቻ ይታያል */}
    <button
      onClick={toggleSidebar}
      className="md:hidden p-2 rounded-lg bg-gray-800/80 hover:bg-gray-800 border border-gray-700 text-white mr-2">
      <Menu size={20} />
   </button>
      
-    <div className='mt-3 block dark-content:hidden p-1 shrink-0 items-center space-x-2 cursor-pointer logo-light'>
-          <Image
-                alt="Company logo"
-                width={90}
-                height={50}
-                style={{ width: "auto", height: "auto" }}
-                className=" object-cover"
-                priority
-                src="/image/kereamilm.png"/>
-    </div>
-
-    <div className='mt-3 shrink-0 hidden items-center space-x-2 cursor-pointer logo-dark'>
-          <Image
-                alt="Company logo"
-                width={90}
-                height={50}
-                style={{ width: "auto", height: "auto" }}
-                className=" object-cover"
-                priority
-                src="/image/kereamidm.png"/>
-    </div>
+  <div className="mt-3 shrink-0 flex items-center space-x-2 cursor-pointer">
+  <Image
+    alt="Company logo"
+    width={90}
+    height={50}
+    style={{ width: "auto", height: "auto" }}
+    className="object-contain"
+    priority
+    src={theme === "dark" ? "/image/keramiDMs.png" : "/image/keramiLM.png"}
+  />
+</div>
 
         {/* Center links (All, Food, Drink, Room navigation links have been completely removed from the navbar as requested) */}
 
