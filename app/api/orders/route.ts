@@ -11,7 +11,7 @@ interface OrderItemInput {
 
 export async function POST(req: NextRequest) {
   try {
-    const { tableNumber, items, customerEmail, paymentMethod } =
+    const { tableNumber, items, customerEmail, paymentMethod, guestInfo } =
       await req.json();
 
     if (!tableNumber || !items || items.length === 0) {
@@ -37,6 +37,11 @@ export async function POST(req: NextRequest) {
           source: "customer",
           paymentStatus: "unpaid",
           paymentMethod: "manual",
+          guestName: guestInfo?.name || null,
+          guestPhone: guestInfo?.phone || null,
+          guestEmail: guestInfo?.email || null,
+          guestAddress: guestInfo?.address || null,
+          guestIdNumber: guestInfo?.idNumber || null,
           paymentRef: txRef,
           totalAmount,
           items: {

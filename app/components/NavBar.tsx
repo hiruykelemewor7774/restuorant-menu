@@ -12,6 +12,8 @@ import { Menu } from "lucide-react";
 import { useUI } from "../context/UIContext";
 import { usePathname } from "next/navigation";
 import { useTheme } from "../context/ThemeContext";
+import { Receptionist } from '../generated/prisma/browser';
+import AdminLogin from '../admin/login/page';
 
 export default function Navbar() {
   const [showDropdown, setShowDropdown] = useState(false);
@@ -92,6 +94,7 @@ return (
           {showDropdown && (
             <div className="absolute right-0 top-14 w-40 border border-gray-700 rounded-xl shadow-2xl overflow-hidden py-1 z-50 text-white">
               
+              {/* for Admin Login button */}
               <button 
                 onClick={() => { setShowDropdown(false); router.push("/admin/login"); }}
                 className="w-full flex items-center gap-3 px-4 py-2.5 text-sm dark:bg-gray-900 hover:bg-gray-200 transition text-gray-200 cursor-pointer">
@@ -99,6 +102,7 @@ return (
                 <span>{t("adminLogin")}</span>
               </button>
 
+              {/* for waiter Login button */}
               <button 
                 onClick={() => { setShowDropdown(false); router.push("/waiter"); }}
                 className="w-full flex items-center gap-3 px-4 py-2.5 text-sm hover:bg-gray-200 dark:hover:bg-gray-800 transition text-gray-200 cursor-pointer">
@@ -106,6 +110,7 @@ return (
                 <span>{t("waiterLogin")}</span>
               </button>
 
+               {/* for kitchen Login button */}
               <button 
                 onClick={() => { setShowDropdown(false); router.push("/kitchen"); }}
                 className="w-full flex items-center gap-3 px-4 py-2.5 text-sm hover:bg-gray-200 dark:hover:bg-gray-800 transition text-gray-200 cursor-pointer">
@@ -113,6 +118,15 @@ return (
                 <span>{t("kitchenLogin")}</span>
               </button>
 
+              {/* for Receptionist Login button */}
+              <button 
+                onClick={() => { setShowDropdown(false); router.push("/receptionist"); }}
+                className="w-full flex items-center gap-3 px-4 py-2.5 text-sm hover:bg-gray-200 dark:hover:bg-gray-800 transition text-gray-200 cursor-pointer">
+                <Utensils size={16} className="text-amber-400" />
+                <span>Receptionist Login</span>
+              </button>
+              
+              {/* for store Login button */}
               <button 
                 onClick={() => { setShowDropdown(false); router.push("/store/login"); }}
                 className="w-full flex items-center gap-3 px-4 py-2.5 text-sm hover:bg-gray-200 dark:hover:bg-gray-800 transition text-gray-200 cursor-pointer">
@@ -120,8 +134,10 @@ return (
                 <span>{t("storeLogin") || "Store Login"}</span>
               </button>
 
+              {/* for logout */}
               <div className="border-t border-gray-800 my-1"></div>
-
+              
+              {/* for logout Login button */}
               <button 
                 onClick={handleLogout}
                 className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-red-400 hover:bg-red-500 transition cursor-pointer">
@@ -131,11 +147,8 @@ return (
 
             </div>
           )}
-
         </div>
-
       </header>
-
       <CartDrawer isOpen={cartOpen} onClose={() => setCartOpen(false)} />
     </>
   );

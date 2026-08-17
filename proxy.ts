@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { verifyWaiterToken, WAITER_COOKIE_NAME } from "@/lib/waiter-auth";
 import { verifyAdminToken, ADMIN_COOKIE_NAME } from "@/lib/admin-auth";
 import { verifyKitchenToken, KITCHEN_COOKIE_NAME } from "@/lib/kitchen-auth";
+import {verifyReceptionistToken,RECEPTIONIST_COOKIE_NAME,} from "@/lib/receptionist-auth";
 
 const noCacheHeaders = {
   "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
@@ -73,9 +74,33 @@ export async function proxy(req: NextRequest) {
     return withNoCache(NextResponse.next());
   }
 
+  if (pathname.startsWith("/receptionist")) {
+    const isLoginPage = pathname === "/receptionist/login";
+    const token = req.cookies.get(RECEPTIONIST_COOKIE_NAME)?.value;
+    const payload = token ? await verifyReceptionistToken(token) : null;
+
+    if (isLoginPage) {
+      if (payload)
+        return NextResponse.redirect(new URL("/receptionist", req.url));
+      return NextResponse.next();
+    }
+
+    if (!payload) {
+      return withNoCache(
+        NextResponse.redirect(new URL("/receptionist/login", req.url)),
+      );
+    }
+
+    return withNoCache(NextResponse.next());
+  }
+
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/waiter/:path*", "/admin/:path*", "/kitchen/:path*"],
+  matcher: [
+    "/waiter/:path*", 
+    "/admin/:path*", 
+    "/kitchen/:path*",
+    "/receptionist/:path*"],
 };
