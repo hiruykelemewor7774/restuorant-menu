@@ -92,7 +92,7 @@ function handleGuestCancel() {
                   <Image src={room.image} alt={room.name} fill className="object-cover" />
                 </div>
 
-                <div className="flex flex-1 flex-col p-4">
+                <div className="bg-white flex flex-1 flex-col p-4">
                   <h3 className="text-lg font-semibold">{room.name}</h3>
                   <p className="text-amber-500 font-bold mt-1">{room.price}</p>
 

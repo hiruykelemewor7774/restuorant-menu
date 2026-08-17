@@ -44,7 +44,7 @@ export default function ExpiryPage() {
 
   return (
     <div>
-      <h2 className="text-xl font-bold text-gray-800 mb-4">⏳ Expiry Tracking</h2>
+      <h2 className="text-xl font-bold text-gray-800 mb-4 mt-15">⏳ Expiry Tracking</h2>
 
       {loading ? (
         <p className="text-gray-400">Loading...</p>

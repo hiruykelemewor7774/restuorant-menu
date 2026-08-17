@@ -27,7 +27,7 @@ export default function ReportsPage() {
 
   return (
     <div>
-      <div className="flex justify-between items-center mb-4">
+      <div className="flex justify-between items-center mb-4 mt-15">
         <h2 className="text-xl font-bold text-gray-800">📊 Reports</h2>
         <select
           value={range}

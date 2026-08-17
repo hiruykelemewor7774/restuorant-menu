@@ -33,7 +33,7 @@ export default function StoreTabs() {
         </h1>
         <button
           onClick={handleLogout}
-          className="bg-pink-600 hover:bg-pink-700 text-white px-5 py-2 rounded-lg text-sm font-semibold">
+          className="bg-red-500 hover:bg-red-600 text-white px-5 py-2 rounded-lg text-sm font-semibold">
           Logout
         </button>
       </div>

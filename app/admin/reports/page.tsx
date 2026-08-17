@@ -120,7 +120,7 @@ export default function ReportsPage() {
               <p className="text-gray-400 text-sm p-4">ለዚህ ጊዜ ክፍል ዳታ የለም</p>
             ) : (
               <table className="w-full text-sm">
-                <thead className="bg-gray-800 text-gray-300">
+                <thead className="bg-gray-200 text-gray-300">
                   <tr>
                     <th className="text-left p-3">ዌይተር</th>
                     <th className="text-right p-3">ትዕዛዞች</th>
@@ -149,7 +149,7 @@ export default function ReportsPage() {
               <p className="text-gray-400 text-sm p-4">ለዚህ ጊዜ ክፍል ዳታ የለም</p>
             ) : (
               <table className="w-full text-sm">
-                <thead className="bg-gray-800 text-gray-300">
+                <thead className="bg-gray-200 text-gray-300">
                   <tr>
                     <th className="text-left p-3">Kitchen Staff</th>
                     <th className="text-right p-3">ያዘጋጁት ትዕዛዞች</th>
@@ -174,7 +174,7 @@ export default function ReportsPage() {
               <p className="text-gray-400 text-sm p-4">ለዚህ ጊዜ ክፍል ዳታ የለም</p>
             ) : (
               <table className="w-full text-sm">
-                <thead className="bg-gray-800 text-gray-300">
+                <thead className="bg-gray-200 text-gray-300">
                   <tr>
                     <th className="text-left p-3">እቃ</th>
                     <th className="text-left p-3">Type</th>

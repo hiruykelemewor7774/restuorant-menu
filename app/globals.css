@@ -123,6 +123,9 @@ html.light-theme body {
   background-color: #f3f4f6 !important;
 }
 
+/* ============================================
+   BACKGROUND IMAGES FOR LIGHT & DARK MODES
+   ============================================ */
 html.light-theme .app-main-shell {
   background-image: none !important;
   background-color: #f3f4f6 !important;
@@ -300,4 +303,16 @@ html.light-theme main .bg-amber-500\/10 {
 
 html.light-theme main .bg-amber-500\/20 {
   background-color: rgba(217, 119, 6, 0.15) !important;
+}
+
+/* Background image በ theme የሚቀያየር */
+.app-main-shell {
+  background-image: url('/image/restaurant.webp');
+  /* ነባሪ (dark mode) */
+  background-size: cover;
+  background-position: center;
+}
+
+html.light-theme .app-main-shell {
+  background-image: linear-gradient(rgba(20, 20, 20, 0.55), rgba(20, 20, 20, 0.55)), url('/image/restaurantlm.webp') !important;
 }

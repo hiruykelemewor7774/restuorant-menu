@@ -86,17 +86,17 @@ export default function KitchenDashboardPage() {
   };
 
   return (
-    <div className="mt-10 min-h-screen text-white p-4">
-      <div className="flex justify-between items-center mb-6">
+    <div className="mt-15 min-h-screen text-gray-800">
+      <div className="flex justify-between items-center">
         <h1 className="text-2xl font-bold text-yellow-400">🍳 የኩሽና ትዕዛዞች</h1>
         <button
           onClick={handleLogout}
-          className="bg-red-600 px-4 py-2 rounded-md hover:bg-red-700">
+          className="bg-red-500 px-4 py-2 rounded-md hover:bg-red-600">
           ውጣ
         </button>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-1">
         {orders.map((order) => (
           <div
             key={order.id}
@@ -132,21 +132,21 @@ export default function KitchenDashboardPage() {
 
         {orders.length === 0 && (
           <p className="text-gray-400 col-span-full text-center py-10">
-            ምንም ትዕዛዝ የለም
+            there is no order
           </p>
         )}
       </div>
 
       {finishedOrders.length > 0 && (
         <div>
-          <h2 className="text-lg font-bold mb-3 text-green-400">📋 ያለፉ ትዕዛዞች</h2>
+          <h2 className="text-lg font-bold mb-3 text-green-400 mt-5">📋 ያለፉ ትዕዛዞች</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {finishedOrders.map((order) => {
               const badge = statusBadge[order.status] || { label: order.status, color: "bg-gray-800 text-gray-400" };
               return (
                 <div
                   key={order.id}
-                  className="bg-gray-900/50 border border-gray-800 rounded-xl p-4 opacity-70"
+                  className="bg-gray-200 border border-gray-800 rounded-xl p-4 opacity-70"
                 >
                   <div className="flex justify-between items-center mb-2">
                     <span className="font-bold text-gray-300">ጠረጴዛ: {order.tableNumber}</span>

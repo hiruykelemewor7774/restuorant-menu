@@ -50,16 +50,16 @@ return (
   </button>
      
   <div className="mt-3 shrink-0 flex items-center space-x-2 cursor-pointer">
-  <Image
-    alt="Company logo"
-    width={90}
-    height={50}
-    style={{ width: "auto", height: "auto" }}
-    className="object-contain"
-    priority
-    src={theme === "dark" ? "/image/keramiDMs.png" : "/image/keramiLM.png"}
-  />
-</div>
+    <Image
+      alt="Company logo"
+      width={90}
+      height={50}
+      style={{ width: "auto", height: "auto" }}
+      className="object-contain"
+      priority
+      src={theme === "dark" ? "/image/keramiDMs.png" : "/image/keramiLM.png"}
+    />
+  </div>
 
       {/* Center links (All, Food, Drink, Room navigation links have been completely removed from the navbar as requested) */}
 

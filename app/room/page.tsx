@@ -5,7 +5,7 @@ import RoomMenu from '../components/RoomMenu'
 const RoomPage = () => {
   return (
     <div>
-<RoomMenu/>
+      <RoomMenu/>
     </div>
   )
 }

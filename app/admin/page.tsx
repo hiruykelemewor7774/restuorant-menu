@@ -293,12 +293,12 @@ export default function AdminDashboardPage() {
             <div className="mt-6 gap-3">
                <Link
                   href="/admin/reports"
-                  className="inline-block bg-yellow-500 text-black font-semibold px-6 py-2.5 rounded-full hover:bg-yellow-400 transition">
-                  📊 ሙሉ ሪፖርት ይመልከቱ
+                  className="inline-block bg-yellow-400 text-black font-semibold px-6 py-2.5 rounded-full hover:bg-yellow-500 transition">
+                  📊 View Full Report
               </Link>
               <Link
                 href="/"
-                className="inline-block bg-amber-500 text-black font-semibold px-6 py-2.5 ml-5 rounded-full hover:bg-amber-600 transition">
+                className="inline-block bg-yellow-400 text-black font-semibold px-6 py-2.5 ml-5 rounded-full hover:bg-yellow-500 transition">
                 Go to Menu
               </Link>
             </div>

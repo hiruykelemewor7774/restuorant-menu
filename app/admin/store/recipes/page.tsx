@@ -78,7 +78,7 @@ export default function AdminRecipesPage() {
   }
 
   return (
-    <div className="text-gray-800 pt-8 md:p-8 w-full">
+    <div className="text-gray-800 mt-8 w-full">
       <h1 className="text-2xl font-bold text-yellow-500 mb-6">
         📖 Recipes (Admin Control)
       </h1>

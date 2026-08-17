@@ -52,7 +52,7 @@ export default function FoodMenu() {
         <p className="text-gray-400">Loading...</p>
       ) : (
         <>
-          <div className="flex flex-wrap gap-4 mb-8 rounded-2xl
+        <div className="flex flex-wrap gap-4 mb-8 rounded-2xl
         border
         border-white/10
         bg-white/5

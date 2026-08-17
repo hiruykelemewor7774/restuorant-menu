@@ -33,12 +33,12 @@ export default function MenuCard({
   }
 
   return (
-    <div className="block rounded-2xl border border-gray-200 overflow-hidden shadow-sm
-    hover:shadow-lg hover:-translate-y-1 transition-all relative">
-      <div className="relative h-48 w-full rounded-2xl
+    <div className="block rounded-2xl border bg-white border-gray-200 overflow-hidden shadow-sm
+     hover:shadow-lg hover:-translate-y-1 transition-all relative">
+      <div className="bg-white relative h-48 w-full rounded-2xl
          border
          border-white/10
-         bg-white/5
+        
          backdrop-blur-xl
          p-6
          transition-all
