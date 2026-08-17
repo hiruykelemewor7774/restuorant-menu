@@ -74,20 +74,18 @@ export default function ReceptionistDashboardPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-950 text-white p-6">
+    <div className="min-h-screen bg-gray-950 text-gray-800 p-6">
       <RingingAlertModal
         isOpen={alertOpen}
         title="ማሳወቂያ"
         message={alertMessage}
-        onAcknowledge={() => setAlertOpen(false)}
-      />
+        onAcknowledge={() => setAlertOpen(false)}/>
 
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold text-yellow-400">🛎️ የክፍል ትዕዛዞች (Receptionist)</h1>
         <button
           onClick={handleLogout}
-          className="bg-red-600 px-4 py-2 rounded-md hover:bg-red-700"
-        >
+          className="bg-red-600 px-4 py-2 rounded-md hover:bg-red-700">
           ውጣ
         </button>
       </div>
@@ -96,8 +94,7 @@ export default function ReceptionistDashboardPage() {
         {orders.map((order) => (
           <div
             key={order.id}
-            className="bg-gray-900 border border-gray-800 rounded-xl p-4"
-          >
+            className="bg-gray-900 border border-gray-800 rounded-xl p-4">
             <p className="font-bold text-yellow-400 mb-2">ክፍል: {order.tableNumber}</p>
 
             <div className="space-y-1 border-t border-b border-gray-800 py-2 mb-3">

@@ -19,6 +19,8 @@ type CartContextType = {
   totalPrice: number;
   tableNumber: string;
   setTableNumber: (table: string) => void;
+  guestInfo: { name: string; phone: string; email: string; address: string; idNumber: string } | null;
+  setGuestInfo: (info: { name: string; phone: string; email: string; address: string; idNumber: string } | null) => void;
 };
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -26,6 +28,10 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 export function CartProvider({ children }: { children: ReactNode }) {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [tableNumber, setTableNumber] = useState("");
+  const [guestInfo, setGuestInfo] = useState<{
+  name: string; phone: string; email: string; address: string; idNumber: string;
+} | null>(null);
+  
 
   function addToCart(item: Omit<CartItem, "quantity">) {
     setCart((prev) => {
@@ -76,6 +82,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
         totalPrice,
         tableNumber,
         setTableNumber,
+        guestInfo,
+        setGuestInfo,
       }}
     >
       {children}

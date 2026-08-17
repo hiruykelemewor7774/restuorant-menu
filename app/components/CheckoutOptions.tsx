@@ -13,7 +13,7 @@ type PaymentMethod = "telebirr" | "bank" | "manual";
 
 export default function CheckoutOptions({ subtotal, onClose }: CheckoutOptionsProps) {
   const router = useRouter();
-  const { cart, tableNumber, clearCart } = useCart();
+  const { cart, tableNumber, clearCart, guestInfo } = useCart();  
   const [selectedMethod, setSelectedMethod] = useState<PaymentMethod>("telebirr");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
@@ -30,11 +30,12 @@ export default function CheckoutOptions({ subtotal, onClose }: CheckoutOptionsPr
       const res = await fetch("/api/orders", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          tableNumber,
-          items: cart,
-          paymentMethod: selectedMethod === "manual" ? "manual" : "chapa",
-        }),
+       body: JSON.stringify({
+       tableNumber,
+       items: cart,
+       paymentMethod: selectedMethod === "manual" ? "manual" : "chapa",
+       guestInfo,
+        }),     
       });
 
       const data = await res.json();

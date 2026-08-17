@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { useCart } from '../context/CartContext'
 import { useLanguage } from '../context/LanguageContext'
+import RoomIdForm, { GuestInfo } from "./RoomIdForm";
 
 type DbMenuItem = {
   id: string
@@ -18,7 +19,9 @@ type DbMenuItem = {
 export default function RoomMenu() {
   const [rooms, setRooms] = useState<DbMenuItem[]>([])
   const [loading, setLoading] = useState(true)
-  const { addToCart } = useCart()
+  const { addToCart, guestInfo, setGuestInfo } = useCart();
+  const [showIdForm, setShowIdForm] = useState(false);
+  const [pendingRoom, setPendingRoom] = useState<DbMenuItem | null>(null);  
   const { t } = useLanguage()
 
   useEffect(() => {
@@ -36,13 +39,37 @@ export default function RoomMenu() {
   }, [])
 
   function handleAdd(room: DbMenuItem) {
-    addToCart({
-      name: room.name,
-      price: room.price,
-      image: room.image,
-      category: 'Room',
-    })
+  if (!guestInfo) {
+    setPendingRoom(room);
+    setShowIdForm(true);
+    return;
   }
+  addToCart({
+    name: room.name,
+    price: room.price,
+    image: room.image,
+    category: 'Room',
+  });
+}
+
+function handleGuestSubmit(info: GuestInfo) {
+  setGuestInfo(info);
+  setShowIdForm(false);
+  if (pendingRoom) {
+    addToCart({
+      name: pendingRoom.name,
+      price: pendingRoom.price,
+      image: pendingRoom.image,
+      category: 'Room',
+    });
+    setPendingRoom(null);
+  }
+}
+
+function handleGuestCancel() {
+  setShowIdForm(false);
+  setPendingRoom(null);
+}
 
   return (
     <main className="max-w-6xl mx-auto px-6 py-2">
@@ -90,6 +117,13 @@ export default function RoomMenu() {
           })}
         </div>
       )}
+      
+      {/* RoomIdForm Component integration */}
+      <RoomIdForm
+        isOpen={showIdForm}
+        onSubmit={handleGuestSubmit}
+        onCancel={handleGuestCancel}
+      />
     </main>
   )
 }

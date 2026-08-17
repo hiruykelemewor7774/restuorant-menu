@@ -170,7 +170,7 @@ export default function WaiterDashboard() {
   };
 
   return (
-    <div className="mt-10 min-h-screen text-white p-10">
+    <div className="mt-15 min-h-screen text-gray-800">
      <RingingAlertModal
         isOpen={alertOpen}
         title="ማሳወቂያ"
@@ -204,9 +204,9 @@ export default function WaiterDashboard() {
         </div>
       )}
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
         {orders.map((order) => (
-          <div key={order.id} className="bg-slate-700 border border-gray-800 p-6 rounded-xl shadow-xl flex flex-col justify-between">
+          <div key={order.id} className="bg-white border border-gray-800 p-6 rounded-xl shadow-xl flex flex-col justify-between">
             <div>
               <div className="flex justify-between items-center mb-4">
                 <span className="text-xl font-extrabold text-yellow-400">Table-{order.tableNumber}</span>
@@ -243,9 +243,9 @@ export default function WaiterDashboard() {
                 <button
                   onClick={() => deliverToTable(order.id, order.tableNumber)}
                   disabled={processing === order.id}
-                  className="w-full bg-green-600 hover:bg-green-500 text-white font-bold py-2 rounded-lg transition disabled:opacity-50"
+                  className="w-full bg-green-600 hover:bg-green-500 text-white font-bold text-sm py-2 rounded-lg transition disabled:opacity-50"
                 >
-                  {processing === order.id ? "..." : "Deliver to Table Based on No. ✅"}
+                  {processing === order.id ? "..." : "Deliver to User By Table No. ✅"}
                 </button>
               )}
             </div>
@@ -266,7 +266,7 @@ export default function WaiterDashboard() {
             {finishedOrders.map((order) => (
               <div
                 key={order.id}
-                className="bg-slate-800/50 border border-green-800 p-4 rounded-xl opacity-70"
+                className="bg-gray-200 border border-green-800 p-4 rounded-xl opacity-70"
               >
                 <div className="flex justify-between items-center mb-2">
                   <span className="font-bold text-gray-300">Table-{order.tableNumber}</span>

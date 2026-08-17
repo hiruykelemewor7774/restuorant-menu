@@ -61,7 +61,7 @@ return (
   />
 </div>
 
-        {/* Center links (All, Food, Drink, Room navigation links have been completely removed from the navbar as requested) */}
+      {/* Center links (All, Food, Drink, Room navigation links have been completely removed from the navbar as requested) */}
 
         {/* Right section containing Staff Portal, Cart button, and User dropdown menu */}
         <div className="relative flex items-center gap-4">
