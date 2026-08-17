@@ -43,6 +43,19 @@ model Kitchen {
   @@map("kitchen")
 }
 
+model Receptionist {
+  id        String   @id @default(cuid())
+  username  String   @unique
+  password  String
+  fullName  String?
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  orders    Order[]
+
+  @@map("receptionists")
+}
+
 model Table {
   id          String   @id @default(cuid())
   tableNumber String   @unique
@@ -63,6 +76,13 @@ model Order {
   waiter        Waiter?     @relation(fields: [waiterId], references: [id])
   kitchenId     String?
   kitchen       Kitchen?    @relation(fields: [kitchenId], references: [id])
+  receptionistId String?
+  receptionist    Receptionist? @relation(fields: [receptionistId], references: [id])
+  guestName       String?
+  guestPhone      String?
+  guestEmail      String?
+  guestAddress    String?
+  guestIdNumber   String? 
   status        String      @default("pending")
   source        String      @default("waiter")
   notes         String?     @db.Text
