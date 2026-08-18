@@ -41,7 +41,7 @@ async function handleLogout() {
 
 return (
   <>
-<header className="nav-header fixed h-15 w-screen text-white flex items-center justify-between px-6 py-4 top-0 left-0 right-0 z-50 border-b border-white/10">    
+<header className="nav-header fixed h-15 w-screen text-white flex items-center justify-between px-6 py-4 top-0 left-0 right-0 z-60 border-b border-white/10">    
 {/* Hamburger Menu - Mobile ላይ ብቻ ይታያል */}
    <button
      onClick={toggleSidebar}

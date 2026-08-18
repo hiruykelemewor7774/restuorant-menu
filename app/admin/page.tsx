@@ -84,7 +84,7 @@ export default function AdminDashboardPage() {
 
       {/* Newly Added Admin Management Action Buttons Section */}
       <div className="mt-6 mb-10 last:">
-        <h2 className="text-xl font-semibold text-gray-200 mb-4">Quick Management Actions</h2>
+        <h2 className="text-xl  font-semibold text-gray-200 mb-4">Quick Management Actions</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full">
     
           {/* 1. Dashboard Action Button */}
@@ -103,7 +103,7 @@ export default function AdminDashboardPage() {
           {/* 2. Menu Management Action Button */}
           <Link 
             href="/admin/menu" 
-            className="flex items-center justify-between p-4 bg-gray-900 hover:bg-gray-800 border border-gray-800 rounded-xl transition group shadow-md"
+            className="text-amber-300 flex items-center justify-between p-4 bg-gray-900 hover:bg-gray-800 border border-gray-800 rounded-xl transition group shadow-md"
           >
             <div className="flex items-center gap-3">
               <div className="p-2.5 rounded-lg bg-amber-500/10 text-amber-400 group-hover:bg-amber-500/20 transition">

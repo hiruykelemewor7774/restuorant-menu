@@ -19,13 +19,13 @@
   }
 }
 
-body {
+/* body {
   background-image: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), url('/image/restaurant.Webp');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
   background-repeat: no-repeat;
-}
+} */
 
 @keyframes blob {
   0% {
@@ -315,4 +315,39 @@ html.light-theme main .bg-amber-500\/20 {
 
 html.light-theme .app-main-shell {
   background-image: linear-gradient(rgba(20, 20, 20, 0.55), rgba(20, 20, 20, 0.55)), url('/image/restaurantlm.webp') !important;
+}
+
+
+
+
+/* Role Sidebar - shared across Waiter/Kitchen/Store/Receptionist */
+.sidebar-nav {
+  background-color: #0f172a;
+}
+
+html.light-theme .sidebar-nav {
+  background-color: #ffffff !important;
+  border-color: #e5e7eb !important;
+}
+
+html.light-theme .sidebar-nav a,
+html.light-theme .sidebar-nav button,
+html.light-theme .sidebar-nav span {
+  color: #374151 !important;
+}
+
+html.light-theme .sidebar-nav a:hover,
+html.light-theme .sidebar-nav button:hover {
+  background-color: #f3f4f6 !important;
+}
+
+html.light-theme .sidebar-nav .text-amber-400,
+html.light-theme .sidebar-nav .text-amber-500 {
+  color: #d97706 !important;
+}
+
+html.light-theme .sidebar-nav .border-gray-700,
+html.light-theme .sidebar-nav .border-gray-800,
+html.light-theme .sidebar-nav .border-gray-800\/60 {
+  border-color: #e5e7eb !important;
 }

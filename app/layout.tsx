@@ -1,4 +1,4 @@
-import Navbar from "./components/NavBar";
+import AppShell from "./components/AppShell";
 import Sidebar from "./components/Sidebar";
 import { CartProvider } from "./context/CartContext";
 import { ThemeProvider } from "./context/ThemeContext";
@@ -28,10 +28,8 @@ export default function RootLayout({
                 <QrTableReader />
                 <GlobalLogoutButton />
 
-                {/* Fixed Navbar (ከላይ ቋሚ ሆኖ የሚቀመጥ) */}
-                <div className="w-full z-50 shrink-0">
-                  <Navbar />
-                </div>
+                {/* Fixed Navbar - Customer ወይም Staff (URL ተመስርቶ ራሱ ይመርጣል) */}
+                   <AppShell />
                 <div className="flex h-screen w-screen overflow-hidden">
 
                   {/* ሳይድባር - Mobile ላይ overlay drawer, Desktop ላይ static */}
