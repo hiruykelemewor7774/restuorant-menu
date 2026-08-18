@@ -1,42 +1,25 @@
-"use client";
+import { redirect } from "next/navigation";
+import { cookies } from "next/headers";
+import { verifyStoreToken, STORE_COOKIE_NAME } from "@/lib/store-auth";
+import StoreTabs from "./StoreTabs";
 
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
-import { Inbox, Flame, CheckCircle, History } from "lucide-react";
-import RoleSidebar from "@/app/components/RoleSidebar";
-
-const kitchenLinks = [
-  { href: "/kitchen", label: "Live Orders", icon: Inbox },
-  { href: "/kitchen", label: "Preparing", icon: Flame },
-  { href: "/kitchen", label: "Ready for Pickup", icon: CheckCircle },
-  { href: "/kitchen", label: "History", icon: History },
-];
-
-export default function KitchenLayout({
+export default async function StoreDashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const router = useRouter();
+  const cookieStore = await cookies();
+  const token = cookieStore.get(STORE_COOKIE_NAME)?.value;
+  const payload = token ? await verifyStoreToken(token) : null;
 
-  useEffect(() => {
-    async function check() {
-      const res = await fetch("/api/kitchen/me", { cache: "no-store" });
-      if (!res.ok) router.replace("/kitchen/login");
-    }
-    check();
-  }, [router]);
-
-  async function handleLogout() {
-    await fetch("/api/kitchen/logout", { method: "POST" });
-    router.replace("/kitchen/login");
-    router.refresh();
+  if (!payload) {
+    redirect("/store/login");
   }
 
   return (
-    <div className="flex min-h-screen bg-gray-950">
-      <RoleSidebar title="Kitchen Panel" links={kitchenLinks} onLogout={handleLogout} />
-      <div className="flex-1 overflow-y-auto">{children}</div>
+    <div className="min-h-screen bg-slate-50">
+      <StoreTabs />
+      <div className="p-6">{children}</div>
     </div>
   );
 }

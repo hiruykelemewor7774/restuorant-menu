@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import Image from "next/image";
 import { 
   LayoutDashboard, 
   UtensilsCrossed, 
@@ -58,17 +57,7 @@ export default function Sidebar() {
     <aside className="sidebar-nav w-50 text-white flex flex-col justify-between p-4 border-r border-white/10 select-none relative z-30 h-screen overflow-y-auto">
 
       <div className="pt-5">
-        <div className="mb-6 px-1 flex items-center">
-          <Image
-            alt="Kereami logo"
-            width={130}
-            height={65}
-            style={{ width: "auto", height: "auto" }}
-            className="object-contain"
-            priority
-            src={theme === "dark" ? "/image/kereamidm.png" : "/image/kereamilm.png"}
-          />
-        </div>
+        
 
         <nav className="space-y-2 pb-15">
 

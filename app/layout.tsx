@@ -6,7 +6,6 @@ import { LanguageProvider } from "./context/LanguageContext";
 import { UIProvider } from "./context/UIContext";
 import QrTableReader from "./components/QrTableReader";
 import MobileSidebarWrapper from "./components/MobileSidebarWrapper";
-import GlobalLogoutButton from "./components/GlobalLogoutButton";
 import "./globals.css";
 
 export const viewport = {
@@ -26,10 +25,10 @@ export default function RootLayout({
             <CartProvider>
               <UIProvider>
                 <QrTableReader />
-                <GlobalLogoutButton />
-
+                
                 {/* Fixed Navbar - Customer ወይም Staff (URL ተመስርቶ ራሱ ይመርጣል) */}
                    <AppShell />
+
                 <div className="flex h-screen w-screen overflow-hidden">
 
                   {/* ሳይድባር - Mobile ላይ overlay drawer, Desktop ላይ static */}
