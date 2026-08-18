@@ -36,8 +36,7 @@ export default function KitchenLoginPage() {
     <div className="flex items-center justify-center mt-20 px-4">
       <form
         onSubmit={handleSubmit}
-        className="border border-gray-500 rounded-xl shadow-md p-8 w-full max-w-sm"
-      >
+        className="border border-gray-500 bg-gray-300 rounded-xl shadow-md p-8 w-full max-w-sm">
         <h1 className="text-2xl font-bold mb-6 text-center text-yellow-400 pr-15">
           🍳 Kitchen Login
         </h1>

@@ -26,7 +26,7 @@ export default function StaffTopBar() {
   }
 
   return (
-    <header className="nav-header fixed h-20 w-full text-white flex items-center justify-between px-6 py-4 top-0 left-0 right-0 z-50 border-b border-white/10 md:ml-64">
+    <header className="nav-header fixed h-13 w-full text-white flex items-center justify-between px-6 py-4 top-0 left-0 right-0 z-50 border-b border-white/10">
       <h1 className="text-lg font-bold text-amber-400">🍽️ Kereami — {roleLabels[role]}</h1>
 
       <button
