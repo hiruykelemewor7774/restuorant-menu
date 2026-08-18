@@ -42,7 +42,7 @@ export default function WaiterLoginPage() {
     <div className="mt-18 flex items-center justify-center px-4 text-white mr-10">
       <form
         onSubmit={handleSubmit}
-        className="rounded-xl shadow-md p-8 mt-0 w-full max-w-sm text-gray-800 border border-gray-200"
+        className="rounded-xl shadow-md p-8 mt-0 bg-white w-full max-w-sm text-gray-800 border border-gray-200"
       >
         <h1 className="text-2xl font-bold mb-6 text-center">
           የዌይተር መግቢያ
