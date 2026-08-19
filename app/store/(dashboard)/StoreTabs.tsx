@@ -26,7 +26,7 @@ export default function StoreTabs() {
   }
 
   return (
-    <div className="bg-white border-b border-gray-200 px-6 py-4 mt-15">
+    <div className="bg-gray-200 border-b border-gray-200 px-6 py-4 mt-5">
       <div className="flex justify-between items-center mb-4">
         <h1 className="text-2xl font-bold text-amber-600">
           🏪 Store Management

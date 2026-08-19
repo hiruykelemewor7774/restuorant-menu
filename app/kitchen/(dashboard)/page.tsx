@@ -86,7 +86,7 @@ export default function KitchenDashboardPage() {
   };
 
   return (
-    <div className="mt-15 min-h-screen text-gray-800">
+    <div className="mt-15 min-h-screen text-">
       <div className="flex justify-between items-center">
         <h1 className="text-2xl font-bold text-yellow-400">🍳 የኩሽና ትዕዛዞች</h1>
         <button

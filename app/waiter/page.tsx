@@ -170,7 +170,7 @@ export default function WaiterDashboard() {
   };
 
   return (
-    <div className="mt-15 min-h-screen text-gray-800">
+    <div className="mt-5 pt-5 min-h-screen text-amber-500 bg-gray-200">
      <RingingAlertModal
         isOpen={alertOpen}
         title="ማሳወቂያ"
@@ -204,7 +204,7 @@ export default function WaiterDashboard() {
         </div>
       )}
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+      <div className=" ml-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
         {orders.map((order) => (
           <div key={order.id} className="bg-white border border-gray-800 p-6 rounded-xl shadow-xl flex flex-col justify-between">
             <div>
