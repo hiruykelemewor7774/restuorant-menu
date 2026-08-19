@@ -3,6 +3,7 @@ import { verifyWaiterToken, WAITER_COOKIE_NAME } from "@/lib/waiter-auth";
 import { verifyAdminToken, ADMIN_COOKIE_NAME } from "@/lib/admin-auth";
 import { verifyKitchenToken, KITCHEN_COOKIE_NAME } from "@/lib/kitchen-auth";
 import {verifyReceptionistToken,RECEPTIONIST_COOKIE_NAME,} from "@/lib/receptionist-auth";
+import { verifyStoreToken, STORE_COOKIE_NAME } from "@/lib/store-auth";
 
 const noCacheHeaders = {
   "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
@@ -74,6 +75,7 @@ export async function proxy(req: NextRequest) {
     return withNoCache(NextResponse.next());
   }
 
+  // ---------------- RECEPTIONIST ROUTES ----------------
   if (pathname.startsWith("/receptionist")) {
     const isLoginPage = pathname === "/receptionist/login";
     const token = req.cookies.get(RECEPTIONIST_COOKIE_NAME)?.value;
@@ -90,6 +92,26 @@ export async function proxy(req: NextRequest) {
         NextResponse.redirect(new URL("/receptionist/login", req.url)),
       );
     }
+    
+  // ---------------- STORE ROUTES ----------------
+  if (pathname.startsWith("/store")) {
+    const isLoginPage = pathname === "/store/login";
+    const token = req.cookies.get(STORE_COOKIE_NAME)?.value;
+    const payload = token ? await verifyStoreToken(token) : null;
+
+    if (isLoginPage) {
+      if (payload) return NextResponse.redirect(new URL("/store", req.url));
+      return NextResponse.next();
+    }
+
+    if (!payload) {
+      return withNoCache(
+        NextResponse.redirect(new URL("/store/login", req.url)),
+      );
+    }
+
+    return withNoCache(NextResponse.next());
+    }
 
     return withNoCache(NextResponse.next());
   }
@@ -102,5 +124,6 @@ export const config = {
     "/waiter/:path*", 
     "/admin/:path*", 
     "/kitchen/:path*",
-    "/receptionist/:path*"],
+    "/receptionist/:path*",
+    "/store/:path*"]
 };

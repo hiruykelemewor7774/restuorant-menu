@@ -12,7 +12,7 @@ export default function AdminLayout({
     {/* <AdminNavbar /> */}
    </div>
       {/* Main content fills the remaining right side */}
-      <main className="flex-1 p-8 ">
+      <main className="flex-1">
         {children}
       </main>
     </div>

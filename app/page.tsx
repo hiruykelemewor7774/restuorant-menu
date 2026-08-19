@@ -15,8 +15,8 @@ export default function Home() {
           <h1 className="text-4xl font-bold text-white">
             <span className="text-amber-500 text-7xl md:text-9xl font-bold">{t("welcome")}</span>
           </h1>
-          <h2 className="text-3xl mt-4 text-white">{t("subtitle")}</h2>
-          <p className="text-amber-400 mt-4">{t("chooseCategory")}</p>
+          <h2 className="text-3xl text-white">{t("subtitle")}</h2>
+          <p className="text-amber-400 mt-40">{t("chooseCategory")}</p>
         </div>
       </section>
       <FoodMenu />

@@ -176,7 +176,7 @@ export default function WaiterDashboard() {
         title="ማሳወቂያ"
         message={alertMessage}
         onAcknowledge={() => setAlertOpen(false)}/>
-      <h1 className="text-2xl font-bold mb-6 text-yellow-500">🍽️ Waiter Station & Order Dispatcher</h1>
+      <h1 className="text-2xl font-bold mb-6 pl-5 text-yellow-500">🍽️ Waiter Station & Order Dispatcher</h1>
 
       {manualOrders.length > 0 && (
         <div className="mb-8">

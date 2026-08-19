@@ -1,4 +1,4 @@
-// lib/menu-data.ts
+
 export type MenuItem = {
   name: string;
   price: string;

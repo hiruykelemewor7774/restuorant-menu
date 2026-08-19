@@ -74,11 +74,11 @@ export default function KitchenDashboardPage() {
     setProcessing(null);
   }
 
-  async function handleLogout() {
-    await fetch("/api/kitchen/logout", { method: "POST" });
-    router.replace("/kitchen/login");
-    router.refresh();
-  }
+  // async function handleLogout() {
+  //   await fetch("/api/kitchen/logout", { method: "POST" });
+  //   router.replace("/kitchen/login");
+  //   router.refresh();
+  // }
 
   const statusBadge: Record<string, { label: string; color: string }> = {
     ready: { label: "ለ Waiter ተልኳል", color: "bg-blue-900/50 text-blue-400" },
@@ -86,14 +86,15 @@ export default function KitchenDashboardPage() {
   };
 
   return (
-    <div className="mt-15 min-h-screen text-">
+    <div className="mt-5 pl-5 pt-5 pr-5 pb-5 bg-gray-200 min-h-screen text-amber-500">
       <div className="flex justify-between items-center">
         <h1 className="text-2xl font-bold text-yellow-400">🍳 የኩሽና ትዕዛዞች</h1>
-        <button
+        
+        {/* <button
           onClick={handleLogout}
           className="bg-red-500 px-4 py-2 rounded-md hover:bg-red-600">
           ውጣ
-        </button>
+        </button> */}
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-1">
@@ -146,7 +147,7 @@ export default function KitchenDashboardPage() {
               return (
                 <div
                   key={order.id}
-                  className="bg-gray-200 border border-gray-800 rounded-xl p-4 opacity-70"
+                  className="bg-white border border-gray-800 rounded-xl p-4 opacity-70"
                 >
                   <div className="flex justify-between items-center mb-2">
                     <span className="font-bold text-gray-300">ጠረጴዛ: {order.tableNumber}</span>

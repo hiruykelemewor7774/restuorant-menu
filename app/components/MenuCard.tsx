@@ -48,8 +48,8 @@ export default function MenuCard({
       <div
         onClick={openDetails}
         className="block rounded-2xl border bg-white border-gray-200 overflow-hidden shadow-sm
-         hover:shadow-lg hover:-translate-y-1 transition-all relative cursor-pointer"
-      >
+         hover:shadow-lg hover:-translate-y-1 transition-all relative cursor-pointer">
+        
         <div className="bg-white relative h-48 w-full rounded-2xl
            border
            border-white/10
@@ -68,8 +68,7 @@ export default function MenuCard({
 
           <button
             onClick={handleAdd}
-            className="mt-3 w-full bg-amber-500 text-black font-semibold py-2 rounded-full hover:bg-amber-600 transition"
-          >
+            className="mt-3 w-full bg-amber-500 text-black font-semibold py-2 rounded-full hover:bg-amber-600 transition">
             🛒 {t("addToCart")}
           </button>
         </div>
@@ -119,8 +118,7 @@ export default function MenuCard({
                 </button>
                 <button
                   onClick={closeDetails}
-                  className="px-6 border border-gray-300 text-gray-700 font-semibold py-3 rounded-full hover:bg-gray-100 transition"
-                >
+                  className="px-6 border border-gray-300 text-gray-700 font-semibold py-3 rounded-full hover:bg-gray-100 transition">
                   Cancel
                 </button>
               </div>
