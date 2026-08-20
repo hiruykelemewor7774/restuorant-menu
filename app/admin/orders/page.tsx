@@ -86,7 +86,7 @@ export default function LiveOrdersPage() {
   };
 
   return (
-    <div className="text-gray-800 mt-8">
+    <div className="text-gray-800 bg-gray-200 mt-5 pt-3 pl-5 pr-5 pb-5">
       <h1 className="text-3xl font-bold mb-6 text-yellow-500">Live Orders</h1>
 
       <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">

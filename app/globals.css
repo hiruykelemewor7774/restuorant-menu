@@ -2,7 +2,7 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #040922;
 }
 
 @theme inline {
@@ -23,7 +23,7 @@ body {
   background-image: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), url('/image/restaurant.Webp');
   background-size: cover;
   background-position: center;
-  background-attachment: fixed;
+  
   background-repeat: no-repeat;
 }
 
@@ -260,12 +260,12 @@ html.dark-content .logo-dark {
 
 /* Navbar Dropdown Hover fix for Dark Mode */
 html.dark-content header .relative div[class*="absolute"] button:hover {
-  background-color: #223651 !important;
+  background-color: #0d3366 !important;
   /* bg-slate-700 */
 }
 
 html.dark-content header .relative>button:hover {
-  background-color: #223651 !important;
+  background-color: #184784 !important;
   /* bg-slate-700 */
 }
 

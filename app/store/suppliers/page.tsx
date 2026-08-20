@@ -46,8 +46,8 @@ export default function SuppliersPage() {
   }
 
   return (
-    <div>
-      <div className="flex justify-between items-center mb-4 mt-15">
+    <div className="bg-gray-200 h-screen pl-5 pr-5 pb-5 pt-5">
+      <div className="flex justify-between items-center mb-4 mt-3">
         <h2 className="text-xl font-bold text-gray-800">🚚 Suppliers</h2>
         <button
           onClick={() => setShowForm(!showForm)}

@@ -32,8 +32,8 @@ export default function TableManagementPage() {
   };
 
   return (
-    <div className="flex text-white ">
-      <main className="flex-1 p-10 mx-auto w-full">
+    <div className="flex text-white pt-3 h-screen bg-gray-200">
+      <main className="flex-1 p-5 mx-auto w-full">
         <h1 className="text-2xl font-bold mb-6 ml-0 text-yellow-500">Table & QR Code Management</h1>
         <form onSubmit={handleAddTable} className="flex flex-col gap-2 mb-8 max-w-xl w-full">
           <div className="flex gap-4">

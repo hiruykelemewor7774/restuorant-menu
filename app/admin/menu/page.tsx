@@ -166,7 +166,7 @@ function startEdit(item: MenuItem) {
   const availableCategories = categoriesByType[form.type] || [];
 
   return (
-    <div className="text-gray-800 mt-8">
+    <div className="text-gray-800 bg-gray-200 mt-3 pt-5 pl-5 pr-5 pb-5">
       <h1 className="text-3xl font-bold mb-6 text-yellow-500">Menu Management</h1>
 
       {/* Form */}

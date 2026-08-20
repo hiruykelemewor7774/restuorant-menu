@@ -76,8 +76,8 @@ export default function KitchenRequestsPage() {
   }
 
   return (
-    <div>
-      <div className="flex justify-between items-center mb-4 mt-15">
+    <div className="bg-gray-200 h-screen mt-5 pt-5 pl-5 pr-5 pb-5">
+      <div className="flex justify-between items-center mb-4">
         <h2 className="text-xl font-bold text-gray-800">🍳 Kitchen Requests</h2>
         <button
           onClick={() => setShowForm(!showForm)}

@@ -17,25 +17,25 @@ const tabs = [
 
 export default function StoreTabs() {
   const pathname = usePathname();
-  const router = useRouter();
+  // const router = useRouter();
 
-  async function handleLogout() {
-    await fetch("/api/store/logout", { method: "POST" });
-    router.replace("/store/login");
-    router.refresh();
-  }
+  // async function handleLogout() {
+  //   await fetch("/api/store/logout", { method: "POST" });
+  //   router.replace("/store/login");
+  //   router.refresh();
+  // }
 
   return (
-    <div className="bg-gray-200 border-b border-gray-200 px-6 py-4 mt-5">
+    <div className="border-b border-gray-200 px-6 py-4 mt-5">
       <div className="flex justify-between items-center mb-4">
-        <h1 className="text-2xl font-bold text-amber-600">
+        <h1 className="text-2xl font-bold text-amber-500">
           🏪 Store Management
         </h1>
-        <button
+        {/* <button
           onClick={handleLogout}
           className="bg-red-500 hover:bg-red-600 text-white px-5 py-2 rounded-lg text-sm font-semibold">
           Logout
-        </button>
+        </button> */}
       </div>
 
       <div className="flex gap-2 flex-wrap">

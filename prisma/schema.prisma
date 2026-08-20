@@ -239,3 +239,18 @@ model RecipeItem {
 
   @@map("recipe_items")
 }
+model Reservation {
+  id             String   @id @default(cuid())
+  guestName      String
+  guestPhone     String
+  tableNumber    String
+  reservedDate   DateTime
+  reservedTime   String
+  guestCount     Int      @default(1)
+  status         String   @default("confirmed") // confirmed | cancelled | completed
+  notes          String?  @db.Text
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@map("reservations")
+}
