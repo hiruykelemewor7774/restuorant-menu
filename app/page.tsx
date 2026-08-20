@@ -9,7 +9,7 @@ export default function Home() {
   const { t } = useLanguage();
 
   return (
-    <div className="m-0">
+    <div className="m-0 home-hero-bg">
       <section className="relative text-center text-amber-300 flex flex-col items-center justify-center shadow-lg pt-20">
         <div className="relative z-10">
           <h1 className="text-4xl font-bold text-white">

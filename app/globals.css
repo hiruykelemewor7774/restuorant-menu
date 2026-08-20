@@ -19,13 +19,13 @@
   }
 }
 
-/* body {
+body {
   background-image: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), url('/image/restaurant.Webp');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
   background-repeat: no-repeat;
-} */
+}
 
 @keyframes blob {
   0% {
