@@ -22,8 +22,8 @@ export default function WaiterPerformancePage() {
   }, []);
 
   return (
-    <div className="text-gray-800 h-screen bg-gray-200 p-5 mt-5">
-      <h1 className="text-2xl font-bold mb-6 text-yellow-500">📊 My Performance</h1>
+    <div className="text-gray-800 h-screen bg-gray-200 p-5 mt-3">
+      <h1 className="text-xl font-bold mb-3 text-yellow-500">📊 My Performance</h1>
 
       {perf && (
         <div className="grid grid-cols-2 gap-4 max-w-xl">

@@ -79,7 +79,7 @@ export default function AdminDashboardPage() {
 
   return (
     <div className="text-gray-800 md:pt-8 pl-5 pr-5 pb-5 w-full bg-gray-200">
-      <h1 className="text-3xl font-bold mb-2 text-yellow-500">Admin Page</h1>
+      <h1 className="text-xl font-bold mb-2 text-yellow-500">Admin Page</h1>
       <p className="text-gray-400 mb-8">Welcome, admin. Overview of your restaurant.</p>
 
       {/* Newly Added Admin Management Action Buttons Section */}

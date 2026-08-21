@@ -37,7 +37,7 @@ export default function AdminPaymentsPage() {
 
   return (
     <div className="text-gray-800 bg-gray-200 pl-5 pr-5 pb-5 pt-8">
-      <h1 className="text-3xl font-bold mb-2 text-yellow-500">💳 Payments & Finance</h1>
+      <h1 className="text-xl font-bold mb-2 text-yellow-500">💳 Payments & Finance</h1>
       <p className="text-gray-400 mb-6">ጠቅላላ የተከፈለ: <span className="text-amber-400 font-bold">{totalPaid.toFixed(2)} ETB</span></p>
 
       {loading ? (
