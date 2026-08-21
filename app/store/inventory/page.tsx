@@ -103,8 +103,8 @@ export default function InventoryPage() {
   }
 
   return (
-    <div>
-      <div className="flex justify-between items-center mb-4 mt-15">
+    <div className="bg-gray-200 text-gray-800 p-5 h-screen">
+      <div className="flex justify-between items-center mb-4 mt-5">
         <h2 className="text-xl font-bold text-gray-800">📦 Inventory</h2>
         <button
           onClick={() => {
@@ -182,7 +182,7 @@ export default function InventoryPage() {
         <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="text-left text-gray-500 border-b border-gray-100">
+              <tr className="text-left bg-gray-300 text-gray-500 border-b border-gray-100">
                 <th className="py-3 px-4">Name</th>
                 <th className="py-3 px-4">Category</th>
                 <th className="py-3 px-4">Quantity</th>

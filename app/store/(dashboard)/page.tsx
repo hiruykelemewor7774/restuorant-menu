@@ -55,7 +55,7 @@ export default function StoreDashboard() {
   ];
 
   return (
-    <div>
+    <div className="text-gray-800">
       <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
         {cards.map((c) => (
           <div

@@ -3,7 +3,7 @@
 export default function AdminSettingsPage() {
   return (
     <div className="h-screen text-amber-500 pt-8 pl-5 bg-gray-200">
-      <h1 className="text-3xl font-bold mb-6 text-yellow-500">⚙️ System Settings</h1>
+      <h1 className="text-xl font-bold mb-3 text-yellow-500">⚙️ System Settings</h1>
 
       <div className="bg-gray-900 border border-gray-800 rounded-2xl p-6 max-w-2xl space-y-6">
         <div>

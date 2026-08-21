@@ -30,7 +30,7 @@ export default function CashReportPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-950 text-white p-6 pt-24">
+    <div className="min-h-screen bg-gray-200 text-gray-800 p-5 pt-10">
       <h1 className="text-2xl font-bold mb-6 text-yellow-400">🧮 Daily Cash Drawer Report</h1>
       <p className="text-gray-400 mb-6">{new Date().toLocaleDateString()}</p>
 
@@ -48,7 +48,7 @@ export default function CashReportPage() {
       <h2 className="text-lg font-bold mb-3 text-amber-400">በ Payment Method</h2>
       <div className="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden max-w-xl">
         <table className="w-full text-sm">
-          <thead className="bg-gray-800 text-gray-300">
+          <thead className="bg-gray-300 text-gray-500">
             <tr>
               <th className="text-left p-3">ዘዴ</th>
               <th className="text-right p-3">ብዛት</th>

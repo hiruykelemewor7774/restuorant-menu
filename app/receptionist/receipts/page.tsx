@@ -25,17 +25,17 @@ export default function ReceiptsPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-950 text-white p-6 pt-24">
-      <h1 className="text-2xl font-bold mb-6 text-yellow-400">🧾 Receipts & Invoices</h1>
+    <div className="min-h-screen bg-gray-200 text-gray-800 p-5 pt-10">
+      <h1 className="text-xl font-bold mb-3 text-yellow-400">🧾 Receipts & Invoices</h1>
 
       <div className="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden mb-6">
         <table className="w-full text-sm">
-          <thead className="bg-gray-800 text-gray-300">
+          <thead className="bg-gray-300 text-gray-300">
             <tr>
-              <th className="text-left p-3">ጠረጴዛ</th>
-              <th className="text-left p-3">ዘዴ</th>
+              <th className="text-left p-3">table</th>
+              <th className="text-left p-3">method</th>
               <th className="text-right p-3">መጠን</th>
-              <th className="text-right p-3">ቀን</th>
+              <th className="text-right p-3">date</th>
               <th className="text-right p-3">Print</th>
             </tr>
           </thead>
@@ -47,7 +47,7 @@ export default function ReceiptsPage() {
                 <td className="p-3 text-right text-amber-400 font-bold">{r.totalAmount.toFixed(2)}</td>
                 <td className="p-3 text-right text-gray-500 text-xs">{new Date(r.updatedAt).toLocaleDateString()}</td>
                 <td className="p-3 text-right">
-                  <button onClick={() => setSelected(r)} className="text-blue-400 hover:underline text-xs">ተመልከት</button>
+                  <button onClick={() => setSelected(r)} className="text-blue-400 hover:underline text-xs">view</button>
                 </td>
               </tr>
             ))}
@@ -73,7 +73,7 @@ export default function ReceiptsPage() {
               <span>Total</span>
               <span>{selected.totalAmount.toFixed(2)} ETB</span>
             </div>
-            <button onClick={() => window.print()} className="w-full bg-black text-white py-2 rounded-full text-sm">🖨️ Print</button>
+            <button onClick={() => window.print()} className="w-full bg-gray-200 hover:bg-gray-300 text-gray-800 py-2 rounded-full text-sm">🖨️ Print</button>
           </div>
         </div>
       )}

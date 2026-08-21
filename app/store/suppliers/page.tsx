@@ -46,7 +46,7 @@ export default function SuppliersPage() {
   }
 
   return (
-    <div className="bg-gray-200 h-screen pl-5 pr-5 pb-5 pt-5">
+    <div className="bg-gray-200 text-gray-800 h-screen pl-5 pr-5 pb-5 pt-5">
       <div className="flex justify-between items-center mb-4 mt-3">
         <h2 className="text-xl font-bold text-gray-800">🚚 Suppliers</h2>
         <button
@@ -92,7 +92,7 @@ export default function SuppliersPage() {
       <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-x-auto">
         <table className="w-full text-sm">
           <thead>
-            <tr className="text-left text-gray-500 border-b border-gray-100">
+            <tr className="text-left bg-gray-300 text-gray-500 border-b border-gray-100">
               <th className="py-3 px-4">Name</th>
               <th className="py-3 px-4">Phone</th>
               <th className="py-3 px-4">Address</th>

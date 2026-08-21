@@ -73,8 +73,8 @@ export default function RecipesPage() {
   }
 
   return (
-    <div>
-      <div className="flex justify-between items-center mb-4 mt-15">
+    <div className="bg-gray-100 h-screen p-5 text-gray-800">
+      <div className="flex justify-between items-center mb-4 mt-5">
         <h2 className="text-xl font-bold text-gray-800">📖 Recipes</h2>
         <button
           onClick={() => setShowForm(!showForm)}

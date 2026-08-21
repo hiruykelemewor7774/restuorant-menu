@@ -49,19 +49,19 @@ export default function ReservationsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-950 text-white p-6 pt-24">
-      <h1 className="text-2xl font-bold mb-6 text-yellow-400">📅 Table Reservations</h1>
+    <div className="min-h-screen bg-gray-200 text-gray-800 p-5 pt-10">
+      <h1 className="text-xl font-bold mb-6 text-yellow-500">📅 Table Reservations</h1>
 
       <form onSubmit={handleSubmit} className="bg-gray-900 border border-gray-800 rounded-2xl p-6 max-w-2xl space-y-3 mb-8">
         <div className="grid grid-cols-2 gap-3">
-          <input required placeholder="የደንበኛ ስም" value={form.guestName} onChange={(e) => setForm({ ...form, guestName: e.target.value })} className="px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-sm" />
-          <input required placeholder="ስልክ" value={form.guestPhone} onChange={(e) => setForm({ ...form, guestPhone: e.target.value })} className="px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-sm" />
-          <input required placeholder="ጠረጴዛ ቁጥር" value={form.tableNumber} onChange={(e) => setForm({ ...form, tableNumber: e.target.value })} className="px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-sm" />
-          <input required type="number" min="1" placeholder="የእንግዶች ብዛት" value={form.guestCount} onChange={(e) => setForm({ ...form, guestCount: e.target.value })} className="px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-sm" />
-          <input required type="date" value={form.reservedDate} onChange={(e) => setForm({ ...form, reservedDate: e.target.value })} className="px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-sm" />
-          <input required type="time" value={form.reservedTime} onChange={(e) => setForm({ ...form, reservedTime: e.target.value })} className="px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-sm" />
+          <input required placeholder="የደንበኛ ስም" value={form.guestName} onChange={(e) => setForm({ ...form, guestName: e.target.value })} className="px-3 py-2 bg-gray-200 border border-gray-500 rounded-lg text-sm" />
+          <input required placeholder="ስልክ" value={form.guestPhone} onChange={(e) => setForm({ ...form, guestPhone: e.target.value })} className="px-3 py-2 bg-gray-200 border border-gray-500 rounded-lg text-sm" />
+          <input required placeholder="ጠረጴዛ ቁጥር" value={form.tableNumber} onChange={(e) => setForm({ ...form, tableNumber: e.target.value })} className="px-3 py-2 bg-gray-200 border border-gray-500 rounded-lg text-sm" />
+          <input required type="number" min="1" placeholder="የእንግዶች ብዛት" value={form.guestCount} onChange={(e) => setForm({ ...form, guestCount: e.target.value })} className="px-3 py-2 bg-gray-200 border border-gray-500 rounded-lg text-sm" />
+          <input required type="date" value={form.reservedDate} onChange={(e) => setForm({ ...form, reservedDate: e.target.value })} className="px-3 py-2 bg-gray-200 border border-gray-500 rounded-lg text-sm" />
+          <input required type="time" value={form.reservedTime} onChange={(e) => setForm({ ...form, reservedTime: e.target.value })} className="px-3 py-2 bg-gray-200 border border-gray-500 rounded-lg text-sm" />
         </div>
-        <textarea placeholder="ማስታወሻ" value={form.notes} onChange={(e) => setForm({ ...form, notes: e.target.value })} className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-sm" rows={2} />
+        <textarea placeholder="ማስታወሻ" value={form.notes} onChange={(e) => setForm({ ...form, notes: e.target.value })} className="w-full px-3 py-2 bg-gray-200 border border-gray-500 rounded-lg text-sm" rows={2} />
         {message && <p className="text-sm text-amber-400">{message}</p>}
         <button className="bg-yellow-500 text-black font-bold px-6 py-2.5 rounded-xl hover:bg-yellow-400">ማስያዝ ፍጠር</button>
       </form>

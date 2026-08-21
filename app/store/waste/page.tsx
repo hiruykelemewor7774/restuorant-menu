@@ -58,8 +58,8 @@ export default function WastePage() {
   }
 
   return (
-    <div>
-      <div className="flex justify-between items-center mb-4 mt-15">
+    <div className="bg-gray-100 h-screen p-5 text-gray-800">
+      <div className="flex justify-between items-center mb-4 mt-5">
         <h2 className="text-xl font-bold text-gray-800">🗑️ Waste Log</h2>
         <button
           onClick={() => setShowForm(!showForm)}
@@ -111,7 +111,7 @@ export default function WastePage() {
       <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-x-auto">
         <table className="w-full text-sm">
           <thead>
-            <tr className="text-left text-gray-500 border-b border-gray-100">
+            <tr className="text-left bg-gray-300 text-gray-500 border-b border-gray-100">
               <th className="py-3 px-4">Item</th>
               <th className="py-3 px-4">Quantity</th>
               <th className="py-3 px-4">Reason</th>

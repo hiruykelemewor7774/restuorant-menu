@@ -105,7 +105,7 @@ export default function ManageStaffPage() {
   }
 
   return (
-    <div className="text-gray-800 pt-7">
+    <div className="text-gray-800 bg-gray-200 p-5">
       <h1 className="text-3xl font-bold mb-6 text-yellow-500">Manage Staff Auth</h1>
 
       {/* Tabs */}

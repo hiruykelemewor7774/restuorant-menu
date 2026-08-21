@@ -74,7 +74,7 @@ export default function ReceptionistDashboardPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-950 text-white p-6 pt-24">
+    <div className="min-h-screen bg-gray-200 text-gray-800 p-6 pt-5 transition-all">
       <RingingAlertModal
         isOpen={alertOpen}
         title="ማሳወቂያ"
