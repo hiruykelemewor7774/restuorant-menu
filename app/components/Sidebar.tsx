@@ -84,6 +84,7 @@ export default function Sidebar() {
               <Link href="/kitchen#preparing" className={linkClass}><FileText size={18} /> Preparing</Link>
               <Link href="/kitchen#ready" className={linkClass}><ClipboardList size={18} /> Ready for Pickup</Link>
               <Link href="/kitchen/history" className={linkClass}><FileBarChart size={18} /> Completed / History</Link>
+              <Link href="/kitchen/materials" className={linkClass}><PackagePlus size={18} /> Request Material</Link>
             </div>
           )}
 
@@ -94,6 +95,7 @@ export default function Sidebar() {
               <Link href="/store" className={linkClass}><StoreIcon size={18} /> Inventory Dashboard</Link>
               <Link href="/store/stock-in" className={linkClass}><PackagePlus size={18} /> Stock In (Receiving)</Link>
               <Link href="/store/stock-out" className={linkClass}><PackageMinus size={18} /> Stock Out (Issuance)</Link>
+              <Link href="/store/kitchen-requests" className={linkClass}><ClipboardList size={18} /> Kitchen Requests</Link>
               <Link href="/store/low-stock" className={linkClass}><AlertTriangle size={18} /> Low Stock Alerts</Link>
               <Link href="/store/suppliers" className={linkClass}><Truck size={18} /> Suppliers Directory</Link>
               <Link href="/store/reports" className={linkClass}><FileBarChart size={18} /> Stock Reports</Link>
