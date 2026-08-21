@@ -23,6 +23,22 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    const tableExists = await prisma.table.findFirst({
+      where: {
+        OR: [
+          { tableNumber: tableNumber },
+          { tableNumber: `Table-${tableNumber}` },
+        ],
+      },
+    });
+
+    if (!tableExists) {
+      return NextResponse.json(
+        { success: false, message: "ይህ ጠረጴዛ የለም (Table not found)" },
+        { status: 404 },
+      );
+    }
+
     const order = await prisma.order.create({
       data: {
         tableNumber,

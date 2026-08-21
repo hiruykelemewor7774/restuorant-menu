@@ -153,17 +153,6 @@ html.light-theme main {
   color: #cab922 !important;
 }
 
-/* for background color .bg-gray-200 */
-html.dark-content .bg-gray-200 {
-  background-color: #02132b !important;
-}
-
-/* for background color .bg-gray-300 */
-html.dark-content .bg-gray-300 {
-  background-color: #05162e !important;
-}
-
-
 html.light-theme main h1,
 html.light-theme main h2,
 html.light-theme main h3,
@@ -202,8 +191,9 @@ html.dark-content .bg-gray-300 {
   background-color: #05162e !important;
 }
 
-html.dark-content tr{
-  background: #0a2040;
+/* for table head */
+.dark thead {
+  background-color: #170969;
 }
 
 html.dark-content .text-gray-700,
@@ -223,11 +213,6 @@ html.dark-content .border,
 html.dark-content .border-gray-200,
 html.dark-content .border-gray-300 {
   border-color: #374151 !important;
-}
-
-/* for table head */
-thead{
-  background-color: #0a0526;
 }
 
 html.dark-content input,

@@ -63,11 +63,11 @@ export default function ReportsPage() {
   }, [period]);
 
   return (
-    <div className="text-gray-800 h-screen bg-gray-200 pl-5 pr-5 pb-5 pt-9">
-      <h1 className="text-xl font-bold mb-6 text-yellow-500">📊 Report</h1>
+    <div className="text-gray-800 min-h-screen bg-gray-200 p-5">
+      <h1 className="text-xl font-bold pt-2 pb-2 text-yellow-500">📊 Report</h1>
 
       {/* Period Selector */}
-      <div className="flex gap-2 mb-6">
+      <div className="flex gap-2">
         {(["day", "week", "month", "year"] as Period[]).map((p) => (
           <button
             key={p}
@@ -88,7 +88,7 @@ export default function ReportsPage() {
       ) : (
         <>
           {/* Summary Cards */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 mb-10">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 pt-5">
             <div className="bg-gray-900 border border-gray-800 rounded-xl p-5">
               <p className="text-sm text-gray-400 mb-1">ጠቅላላ ትዕዛዞች</p>
               <p className="text-3xl font-bold text-amber-400">{summary?.totalOrders ?? 0}</p>
@@ -114,13 +114,13 @@ export default function ReportsPage() {
           </div>
 
           {/* Waiter Performance */}
-          <h2 className="text-xl font-bold mb-4 text-yellow-500">👥 Waiter Performance</h2>
-          <div className="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden mb-10">
+          <h2 className="text-xl font-bold p-1 text-yellow-500 pt-5">👥 Waiter Performance</h2>
+          <div className="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden">
             {waiterPerformance.length === 0 ? (
               <p className="text-gray-400 text-sm p-4">ለዚህ ጊዜ ክፍል ዳታ የለም</p>
             ) : (
               <table className="w-full text-sm">
-                <thead className="bg-gray-200 text-gray-300">
+                <thead className="bg-gray-300 text-gray-300">
                   <tr>
                     <th className="text-left p-3">ዌይተር</th>
                     <th className="text-right p-3">ትዕዛዞች</th>
@@ -143,13 +143,13 @@ export default function ReportsPage() {
           </div>
 
           {/* kitchen Performance */}
-          <h2 className="text-xl font-bold mb-4 mt-10 text-yellow-500">🍳 Kitchen Performance</h2>
-          <div className="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden mb-10">
+          <h2 className="text-xl font-bold pb-1 pt-3 text-yellow-500">🍳 Kitchen Performance</h2>
+          <div className="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden">
             {kitchenPerformance.length === 0 ? (
               <p className="text-gray-400 text-sm p-4">ለዚህ ጊዜ ክፍል ዳታ የለም</p>
             ) : (
               <table className="w-full text-sm">
-                <thead className="bg-gray-200 text-gray-300">
+                <thead className="bg-gray-300 text-gray-300">
                   <tr>
                     <th className="text-left p-3">Kitchen Staff</th>
                     <th className="text-right p-3">ያዘጋጁት ትዕዛዞች</th>
@@ -168,13 +168,13 @@ export default function ReportsPage() {
           </div>  
 
           {/* Top Selling Items */}
-          <h2 className="text-xl font-bold mb-4 text-yellow-500">🔥 Top-Selling Items</h2>
+          <h2 className="text-xl font-bold text-yellow-500 pb-2 pt-3">🔥 Top-Selling Items</h2>
           <div className="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden">
             {topItems.length === 0 ? (
               <p className="text-gray-400 text-sm p-4">ለዚህ ጊዜ ክፍል ዳታ የለም</p>
             ) : (
               <table className="w-full text-sm">
-                <thead className="bg-gray-200 text-gray-300">
+                <thead className="bg-gray-300 text-gray-300">
                   <tr>
                     <th className="text-left p-3">እቃ</th>
                     <th className="text-left p-3">Type</th>

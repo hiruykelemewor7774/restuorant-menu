@@ -14,12 +14,32 @@ export async function POST(req: NextRequest) {
     const { tableNumber, items, customerEmail, paymentMethod, guestInfo } =
       await req.json();
 
-    if (!tableNumber || !items || items.length === 0) {
-      return NextResponse.json(
-        { success: false, message: "የጠረጴዛ ቁጥር እና ቢያንስ አንድ እቃ ያስፈልጋል" },
-        { status: 400 },
-      );
-    }
+   if (!tableNumber || !items || items.length === 0) {
+     return NextResponse.json(
+       { success: false, message: "የጠረጴዛ ቁጥር እና ቢያንስ አንድ እቃ ያስፈልጋል" },
+       { status: 400 },
+     );
+   }
+
+   // ---- Table Validation - admin ያልፈጠረው ጠረጴዛ ቁጥር ትዕዛዝ መቀበል የለበትም ----
+   const tableExists = await prisma.table.findFirst({
+     where: {
+       OR: [
+         { tableNumber: tableNumber },
+         { tableNumber: `Table-${tableNumber}` },
+       ],
+     },
+   });
+
+   if (!tableExists) {
+     return NextResponse.json(
+       {
+         success: false,
+         message: "ይህ ጠረጴዛ የለም (Table not found). እባክህ ትክክለኛ ቁጥር አስገባ።",
+       },
+       { status: 404 },
+     );
+   }
 
     const totalAmount = items.reduce((sum: number, item: OrderItemInput) => {
       const price = parseFloat(String(item.price).replace(/[^0-9.]/g, "")) || 0;

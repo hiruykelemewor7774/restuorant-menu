@@ -78,8 +78,8 @@ export default function AdminDashboardPage() {
     : [];
 
   return (
-    <div className="text-gray-800 md:pt-8 pl-5 pr-5 pb-5 w-full bg-gray-200">
-      <h1 className="text-xl font-bold mb-2 text-yellow-500">Admin Page</h1>
+    <div className="text-gray-800 p-3 w-full bg-gray-200">
+      <h1 className="text-xl font-bold mb-2 text-yellow-500 pt-3">Admin Page</h1>
       <p className="text-gray-400 mb-8">Welcome, admin. Overview of your restaurant.</p>
 
       {/* Newly Added Admin Management Action Buttons Section */}
@@ -260,7 +260,7 @@ export default function AdminDashboardPage() {
           </div>
 
           <div className="mt-8">
-            <h2 className="text-xl font-bold mb-4 mt-10 text-yellow-500">
+            <h2 className="text-xl font-bold mb-2  text-yellow-500">
               💰 በ Waiter የተከፋፈለ ሽያጭ (የተከፈለ ብቻ)
             </h2>
             <div className="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden">
@@ -268,7 +268,7 @@ export default function AdminDashboardPage() {
                 <p className="text-gray-400 text-sm p-4">ገና ምንም የተከፈለ ትዕዛዝ የለም</p>
               ) : (
                 <table className="w-full text-sm">
-                  <thead className="bg-gray-200 text-gray-300">
+                  <thead className="bg-gray-300 text-gray-300">
                     <tr>
                       <th className="text-left p-3">Waiter</th>
                       <th className="text-right p-3">ትዕዛዞች</th>
