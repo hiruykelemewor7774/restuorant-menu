@@ -22,12 +22,12 @@ export default function KitchenHistoryPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-200 text-gray-800 p-6 pt-10">
-      <h1 className="text-2xl font-bold mb-6 text-yellow-400">📋 Completed / History</h1>
+    <div className="min-h-screen bg-slate-100 text-gray-800 p-3 pt-8">
+      <h1 className="text-2xl font-bold pb-2 text-yellow-400">📋 Completed / History</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {orders.map((o) => (
-          <div key={o.id} className="bg-gray-900 border border-gray-800 rounded-xl p-4">
+          <div key={o.id} className="bg-gray-900 border border-gray-800 shadow-sm rounded-xl p-4">
             <p className="font-bold text-gray-300 mb-2">ጠረጴዛ: {o.tableNumber}</p>
             <ul className="text-xs text-gray-500 list-disc list-inside">
               {o.items.map((i) => (

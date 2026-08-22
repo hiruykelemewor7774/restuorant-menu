@@ -69,7 +69,7 @@ return (
           {/* Cart Button */}
           <button
             onClick={() => setCartOpen(true)}
-            className="relative p-2.5 rounded-full hover:bg-gray-200 dark:bg-gray-800/80 dark:hover:bg-gray-800 border border-gray-300 text-white transition cursor-pointer">
+            className="relative p-2.5 rounded-full hover:bg-slate-100 dark:bg-gray-800/80 dark:hover:bg-gray-800 border border-gray-300 text-white transition cursor-pointer">
             <FaShoppingCart size={18} />
             {totalItems > 0 && (
               <span className="absolute -top-1 -right-1 bg-red-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
@@ -80,7 +80,7 @@ return (
 
           <button 
             onClick={() => setShowDropdown(!showDropdown)}
-            className="flex items-center gap-2 hover:bg-gray-200 dark:bg-gray-800/80 dark:hover:bg-gray-800 px-4 py-2 rounded-full border border-gray-300 text-sm transition text-white cursor-pointer">
+            className="flex items-center gap-2 hover:bg-slate-100 dark:bg-gray-800/80 dark:hover:bg-gray-800 px-4 py-2 rounded-full border border-gray-300 text-sm transition text-white cursor-pointer">
             <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
             <span>{t("staffPortal")}</span>
             <ChevronDown size={16} className="text-gray-400" />
@@ -92,12 +92,12 @@ return (
 
           {/* Dropdown Menu (Opened when Staff Portal is clicked) */}
           {showDropdown && (
-            <div className="absolute right-0 top-14 w-40 border bg-white hover:bg-gray-300 border-gray-700 rounded-xl shadow-2xl overflow-hidden py-1 z-50 text-white">
+            <div className="absolute right-0 top-14 w-40 border bg-white hover:bg-slate-200 border-gray-700 rounded-xl shadow-2xl overflow-hidden py-1 z-50 text-white">
               
               {/* for Admin Login button */}
               <button 
                 onClick={() => { setShowDropdown(false); router.push("/admin/login"); }}
-                className="w-full flex items-center gap-3 px-4 py-2.5 text-sm dark:bg-gray-900 hover:bg-gray-200 transition text-gray-200 cursor-pointer">
+                className="w-full flex items-center gap-3 px-4 py-2.5 text-sm dark:bg-gray-900 hover:bg-slate-100 transition text-gray-200 cursor-pointer">
                 <Lock size={16} className="text-amber-400" />
                 <span>{t("adminLogin")}</span>
               </button>
@@ -105,7 +105,7 @@ return (
               {/* for waiter Login button */}
               <button 
                 onClick={() => { setShowDropdown(false); router.push("/waiter"); }}
-                className="w-full flex items-center gap-3 px-4 py-2.5 text-sm hover:bg-gray-200 dark:hover:bg-gray-800 transition text-gray-200 cursor-pointer">
+                className="w-full flex items-center gap-3 px-4 py-2.5 text-sm hover:bg-slate-100 dark:hover:bg-gray-800 transition text-gray-200 cursor-pointer">
                 <Utensils size={16} className="text-amber-400" />
                 <span>{t("waiterLogin")}</span>
               </button>
@@ -113,7 +113,7 @@ return (
                {/* for kitchen Login button */}
               <button 
                 onClick={() => { setShowDropdown(false); router.push("/kitchen"); }}
-                className="w-full flex items-center gap-3 px-4 py-2.5 text-sm hover:bg-gray-200 dark:hover:bg-gray-800 transition text-gray-200 cursor-pointer">
+                className="w-full flex items-center gap-3 px-4 py-2.5 text-sm hover:bg-slate-100 dark:hover:bg-gray-800 transition text-gray-200 cursor-pointer">
                 <ChefHat size={16} className="text-amber-400" />
                 <span>{t("kitchenLogin")}</span>
               </button>
@@ -121,7 +121,7 @@ return (
               {/* for Receptionist Login button */}
               <button 
                 onClick={() => { setShowDropdown(false); router.push("/receptionist"); }}
-                className="w-full flex items-center gap-3 px-4 py-2.5 text-sm hover:bg-gray-200 dark:hover:bg-gray-800 transition text-gray-200 cursor-pointer">
+                className="w-full flex items-center gap-3 px-4 py-2.5 text-sm hover:bg-slate-100 dark:hover:bg-gray-800 transition text-gray-200 cursor-pointer">
                 <Utensils size={16} className="text-amber-400" />
                 <span>Receptionist Login</span>
               </button>
@@ -129,7 +129,7 @@ return (
               {/* for store Login button */}
               <button 
                 onClick={() => { setShowDropdown(false); router.push("/store/login"); }}
-                className="w-full flex items-center gap-3 px-4 py-2.5 text-sm hover:bg-gray-200 dark:hover:bg-gray-800 transition text-gray-200 cursor-pointer">
+                className="w-full flex items-center gap-3 px-4 py-2.5 text-sm hover:bg-slate-100 dark:hover:bg-gray-800 transition text-gray-200 cursor-pointer">
                 <Utensils size={16} className="text-amber-400" />
                 <span>{t("storeLogin") || "Store Login"}</span>
               </button>

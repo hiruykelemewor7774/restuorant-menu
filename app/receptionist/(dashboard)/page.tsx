@@ -74,7 +74,7 @@ export default function ReceptionistDashboardPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-200 text-gray-800 p-6 pt-5 transition-all">
+    <div className="min-h-screen bg-slate-100 text-gray-800 p-6 pt-5 transition-all">
       <RingingAlertModal
         isOpen={alertOpen}
         title="ማሳወቂያ"
@@ -96,7 +96,7 @@ export default function ReceptionistDashboardPage() {
         {orders.map((order) => (
           <div
             key={order.id}
-            className="bg-gray-900 border border-gray-800 rounded-xl p-4"
+            className="bg-gray-900 border shadow-sm border-gray-800 rounded-xl p-4"
           >
             <p className="font-bold text-yellow-400 mb-2">ክፍል: {order.tableNumber}</p>
 

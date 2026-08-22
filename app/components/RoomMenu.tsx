@@ -86,7 +86,7 @@ function handleGuestCancel() {
             return (
               <div
                 key={room.id}
-                className="flex flex-col rounded-2xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 hover:scale-105"
+                className="flex flex-col rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 hover:scale-105"
               >
                 <div className="relative h-48 w-full">
                   <Image src={room.image} alt={room.name} fill className="object-cover" />

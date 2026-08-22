@@ -138,43 +138,43 @@ export default function AdminStoreInventoryPage() {
             placeholder="Name"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="px-3 py-2 bg-gray-200 border border-gray-500 rounded-lg text-sm"/>
+            className="px-3 py-2 bg-slate-100 border border-slate-500 rounded-lg text-sm"/>
           <input
             placeholder="Category"
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-            className="px-3 py-2 bg-gray-200 border border-gray-500 rounded-lg text-sm"/>
+            className="px-3 py-2 bg-slate-100 border border-slate-500 rounded-lg text-sm"/>
           <input
             placeholder="Unit (kg, L, pcs...)"
             value={unit}
             onChange={(e) => setUnit(e.target.value)}
-            className="px-3 py-2 bg-gray-200 border border-gray-500 rounded-lg text-sm"/>
+            className="px-3 py-2 bg-slate-100 border border-slate-500 rounded-lg text-sm"/>
           <input
             type="number"
             placeholder="Quantity"
             value={quantity}
             onChange={(e) => setQuantity(e.target.value)}
-            className="px-3 py-2 bg-gray-200 border border-gray-500 rounded-lg text-sm"
+            className="px-3 py-2 bg-slate-100 border border-slate-500 rounded-lg text-sm"
           />
           <input
             type="number"
             placeholder="Min Threshold"
             value={minThreshold}
             onChange={(e) => setMinThreshold(e.target.value)}
-            className="px-3 py-2 bg-gray-200 border border-gray-500 rounded-lg text-sm"
+            className="px-3 py-2 bg-slate-100 border border-slate-500 rounded-lg text-sm"
           />
           <input
             type="number"
             placeholder="Cost per Unit"
             value={costPerUnit}
             onChange={(e) => setCostPerUnit(e.target.value)}
-            className="px-3 py-2 bg-gray-200 border border-gray-500 rounded-lg text-sm"
+            className="px-3 py-2 bg-slate-100 border border-slate-500 rounded-lg text-sm"
           />
           <input
             type="date"
             value={expiryDate}
             onChange={(e) => setExpiryDate(e.target.value)}
-            className="px-3 py-2 bg-gray-200 border border-gray-500 rounded-lg text-sm"
+            className="px-3 py-2 bg-slate-100 border border-slate-500 rounded-lg text-sm"
           />
           <button
             type="submit"
@@ -194,7 +194,7 @@ export default function AdminStoreInventoryPage() {
         <div className="bg-gray-900 border border-gray-800 rounded-xl overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="text-left text-gray-800 bg-gray-200 border-b border-gray-800">
+              <tr className="text-left text-gray-800 bg-slate-100 border-b border-gray-800">
                 <th className="py-3 px-4">Name</th>
                 <th className="py-3 px-4">Category</th>
                 <th className="py-3 px-4">Quantity</th>

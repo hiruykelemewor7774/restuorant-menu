@@ -105,8 +105,8 @@ export default function ManageStaffPage() {
   }
 
   return (
-    <div className="text-gray-800 bg-gray-200 p-5">
-      <h1 className="text-3xl font-bold mb-6 text-yellow-500">Manage Staff Auth</h1>
+    <div className="text-gray-800 bg-slate-100 p-5">
+      <h1 className="text-xl font-bold mb-6 text-yellow-500">Manage Staff Auth</h1>
 
       {/* Tabs */}
       <div className="flex gap-2 mb-6">
@@ -114,7 +114,7 @@ export default function ManageStaffPage() {
           onClick={() => switchTab("waiter")}
           className={`px-5 py-2 rounded-full font-semibold transition ${
             staffType === "waiter"
-              ? "bg-yellow-500 border border-gray-500 hover:bg-amber-500 text-black"
+              ? "bg-yellow-500 border border-slate-500 hover:bg-amber-500 text-black"
               : "bg-gray-900 border border-gray-700 hover:bg-gray-800"
           }`}>
           🍽️ Waiters
@@ -123,7 +123,7 @@ export default function ManageStaffPage() {
           onClick={() => switchTab("kitchen")}
           className={`px-5 py-2 rounded-full font-semibold transition ${
             staffType === "kitchen"
-              ? "bg-yellow-500 border border-gray-500 hover:bg-amber-500 text-black"
+              ? "bg-yellow-500 border border-slate-500 hover:bg-amber-500 text-black"
               : "bg-gray-900 border border-gray-700 hover:bg-gray-800"
           }`}>
           🍳 Kitchen Staff
@@ -133,7 +133,7 @@ export default function ManageStaffPage() {
       {/* Create Form */}
       <form
         onSubmit={handleCreate}
-        className="bg-gray-900 border border-gray-800 rounded-2xl p-6 mb-8 max-w-xl">
+        className="bg-gray-900 border border-gray-800 shadow-sm rounded-2xl p-6 mb-8 max-w-xl">
         <h2 className="text-lg font-bold mb-4 text-yellow-400">
           አዲስ {staffType === "waiter" ? "Waiter" : "Kitchen Staff"} ጨምር
         </h2>
@@ -146,7 +146,7 @@ export default function ManageStaffPage() {
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               required
-              className="w-full px-3 py-2 bg-gray-200 border border-gray-500 rounded-lg"/>
+              className="w-full px-3 py-2 bg-slate-100 border border-slate-500 rounded-lg"/>
           </div>
           <div>
             <label className="block text-sm text-gray-800 mb-1">Password</label>
@@ -155,7 +155,7 @@ export default function ManageStaffPage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="w-full px-3 py-2 bg-gray-200 border border-gray-500 rounded-lg"/>
+              className="w-full px-3 py-2 bg-slate-100 border border-slate-500 rounded-lg"/>
           </div>
         </div>
 
@@ -165,7 +165,7 @@ export default function ManageStaffPage() {
             type="text"
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
-            className="w-full px-3 py-2 bg-gray-200 border border-gray-500 rounded-lg"
+            className="w-full px-3 py-2 bg-slate-100 border border-slate-500 rounded-lg"
           />
         </div>
 
@@ -186,7 +186,7 @@ export default function ManageStaffPage() {
           {staffList.map((member) => (
             <div
               key={member.id}
-              className="bg-gray-900 border border-gray-800 rounded-xl p-4">
+              className="bg-gray-900 border border-gray-800 shadow-sm rounded-xl p-4">
               <div className="flex justify-between items-start mb-2">
                 <div>
                   <p className="font-semibold">{member.fullName || member.username}</p>
@@ -209,7 +209,7 @@ export default function ManageStaffPage() {
                     value={resetPassword}
                     onChange={(e) => setResetPassword(e.target.value)}
                     placeholder="አዲስ password"
-                    className="flex-1 text-sm px-2 py-1.5 bg-gray-200 border border-gray-500 rounded-lg"/>
+                    className="flex-1 text-sm px-2 py-1.5 bg-slate-100 border border-slate-500 rounded-lg"/>
                   <button
                     onClick={() => handleResetPassword(member.id)}
                     className="text-sm bg-yellow-500 text-black px-3 py-1.5 rounded-lg font-semibold">
@@ -220,12 +220,12 @@ export default function ManageStaffPage() {
                 <div className="flex gap-2 mt-3">
                   <button
                     onClick={() => toggleActive(member)}
-                    className="flex-1 text-sm bg-gray-200 hover:bg-gray-300 py-1.5 rounded-lg transition">
+                    className="flex-1 text-sm bg-slate-100 hover:bg-slate-200 py-1.5 rounded-lg transition">
                     {member.isActive ? "አሰናክል" : "አንቃ"}
                   </button>
                   <button
                     onClick={() => setResetTarget(member.id)}
-                    className="flex-1 text-sm bg-gray-200 hover:bg-gray-300 py-1.5 rounded-lg transition">
+                    className="flex-1 text-sm bg-slate-100 hover:bg-slate-200 py-1.5 rounded-lg transition">
                     Password ቀይር
                   </button>
                   <button

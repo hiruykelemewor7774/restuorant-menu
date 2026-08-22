@@ -611,14 +611,14 @@ async function handleForwardToKitchen(orderId: string) {
                     <div className="flex items-center gap-2">
                       <button
                         onClick={() => changeQuantity(c.name, c.category, -1)}
-                        className="w-6 h-6 rounded-full bg-gray-200 hover:bg-gray-300"
+                        className="w-6 h-6 rounded-full bg-slate-100 hover:bg-slate-200"
                       >
                         −
                       </button>
                       <span className="text-sm w-4 text-center">{c.quantity}</span>
                       <button
                         onClick={() => changeQuantity(c.name, c.category, 1)}
-                        className="w-6 h-6 rounded-full bg-gray-200 hover:bg-gray-300"
+                        className="w-6 h-6 rounded-full bg-slate-100 hover:bg-slate-200"
                       >
                         +
                       </button>

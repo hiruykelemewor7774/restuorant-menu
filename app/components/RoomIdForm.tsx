@@ -85,7 +85,7 @@ export default function RoomIdForm({
                 placeholder="Full Name"
                 value={form.name}
                 onChange={(e) => setForm({ ...form, name: e.target.value })}
-                className="w-full px-3 py-2 bg-gray-200 border border-gray-500 rounded-lg text-white text-sm"
+                className="w-full px-3 py-2 bg-slate-100 border border-slate-500 rounded-lg text-white text-sm"
               />
               <input
                 type="tel"
@@ -93,21 +93,21 @@ export default function RoomIdForm({
                 placeholder="Phone Number"
                 value={form.phone}
                 onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                className="w-full px-3 py-2 bg-gray-200 border border-gray-500 rounded-lg text-white text-sm"
+                className="w-full px-3 py-2 bg-slate-100 border border-slate-500 rounded-lg text-white text-sm"
               />
               <input
                 type="email"
                 placeholder="Email (optional)"
                 value={form.email}
                 onChange={(e) => setForm({ ...form, email: e.target.value })}
-                className="w-full px-3 py-2 bg-gray-200 border border-gray-500 rounded-lg text-white text-sm"
+                className="w-full px-3 py-2 bg-slate-100 border border-slate-500 rounded-lg text-white text-sm"
               />
               <input
                 type="text"
                 placeholder="Address"
                 value={form.address}
                 onChange={(e) => setForm({ ...form, address: e.target.value })}
-                className="w-full px-3 py-2 bg-gray-200 border border-gray-500 rounded-lg text-white text-sm"
+                className="w-full px-3 py-2 bg-slate-100 border border-slate-500 rounded-lg text-white text-sm"
               />
               <input
                 type="text"
@@ -115,7 +115,7 @@ export default function RoomIdForm({
                 placeholder="ID Number"
                 value={form.idNumber}
                 onChange={(e) => setForm({ ...form, idNumber: e.target.value })}
-                className="w-full px-3 py-2 bg-gray-200 border border-gray-500 rounded-lg text-white text-sm"
+                className="w-full px-3 py-2 bg-slate-100 border border-slate-500 rounded-lg text-white text-sm"
               />
             </div>
 
@@ -123,7 +123,7 @@ export default function RoomIdForm({
               <button
                 type="button"
                 onClick={handleNo}
-                className="flex-1 border border-gray-500 text-white py-2.5 rounded-full hover:bg-gray-300 transition text-sm"
+                className="flex-1 border border-slate-500 text-white py-2.5 rounded-full hover:bg-slate-200 transition text-sm"
               >
                 Cancel
               </button>

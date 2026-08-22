@@ -74,34 +74,24 @@ export default function KitchenDashboardPage() {
     setProcessing(null);
   }
 
-  // async function handleLogout() {
-  //   await fetch("/api/kitchen/logout", { method: "POST" });
-  //   router.replace("/kitchen/login");
-  //   router.refresh();
-  // }
-
   const statusBadge: Record<string, { label: string; color: string }> = {
-    ready: { label: "ለ Waiter ተልኳል", color: "bg-blue-900/50 text-blue-400" },
-    delivered: { label: "ተጠናቅቋል", color: "bg-green-900/50 text-green-400" },
+    ready: { label: "send to Waiter", color: "bg-blue-900/50 text-blue-400" },
+    delivered: { label: "finished", color: "bg-green-400 text-white" },
   };
 
   return (
-    <div className="mt-5 pl-5 pt-5 pr-5 pb-5 bg-gray-200 min-h-screen text-amber-500">
+    <div className="mt-4 p-3 bg-slate-100 min-h-screen text-gray-800">
       <div className="flex justify-between items-center">
         <h1 className="text-2xl font-bold text-yellow-400">🍳 የኩሽና ትዕዛዞች</h1>
         
-        {/* <button
-          onClick={handleLogout}
-          className="bg-red-500 px-4 py-2 rounded-md hover:bg-red-600">
-          ውጣ
-        </button> */}
+        
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-1">
         {orders.map((order) => (
           <div
             key={order.id}
-            className="bg-gray-900 border border-gray-800 rounded-xl p-4">
+            className="bg-gray-900 border border-gray-800 shadow-sm rounded-xl p-4">
             <p className="font-bold text-yellow-400 mb-2">
               ጠረጴዛ: {order.tableNumber}
             </p>
@@ -140,14 +130,14 @@ export default function KitchenDashboardPage() {
 
       {finishedOrders.length > 0 && (
         <div>
-          <h2 className="text-lg font-bold mb-3 text-green-400 mt-5">📋 ያለፉ ትዕዛዞች</h2>
+          <h2 className="text-lg font-bold pb-1 text-green-400 mt-4">📋 ያለፉ ትዕዛዞች</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {finishedOrders.map((order) => {
-              const badge = statusBadge[order.status] || { label: order.status, color: "bg-gray-800 text-gray-400" };
+              const badge = statusBadge[order.status] || { label: order.status, color: "bg-gray-800 text-gray-500" };
               return (
                 <div
                   key={order.id}
-                  className="bg-white border border-gray-800 rounded-xl p-4 opacity-70"
+                  className="bg-white border border-slate-200 rounded-xl shadow-sm p-4 opacity-70"
                 >
                   <div className="flex justify-between items-center mb-2">
                     <span className="font-bold text-gray-300">ጠረጴዛ: {order.tableNumber}</span>

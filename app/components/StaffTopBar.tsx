@@ -53,7 +53,7 @@ export default function StaffTopBar() {
       )}
 
       <div className="flex items-center gap-3 shrink-0">
-        <button className="relative p-2 rounded-full bg-gray-200 hover:bg-gray-300 border border-gray-500 transition">
+        <button className="relative p-2 rounded-full bg-slate-100 hover:bg-slate-200 border border-slate-500 transition">
           <Bell size={18} />
         </button>
 

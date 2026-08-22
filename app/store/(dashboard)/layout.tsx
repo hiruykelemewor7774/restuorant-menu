@@ -17,7 +17,7 @@ export default async function StoreDashboardLayout({
   }
 
   return (
-    <div className="min-h-screen bg-gray-200">
+    <div className="min-h-screen bg-slate-100">
       <StoreTabs />
       <div className="p-6">{children}</div>
     </div>

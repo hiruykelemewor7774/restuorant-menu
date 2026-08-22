@@ -86,19 +86,19 @@ export default function LiveOrdersPage() {
   };
 
   return (
-    <div className="text-gray-800 bg-gray-200 mt-5 pt-3 pl-5 pr-5 pb-5">
-      <h1 className="text-3xl font-bold mb-6 text-yellow-500">Live Orders</h1>
+    <div className="text-gray-800 bg-slate-100 mt-4 p-3">
+      <h1 className="text-xl font-bold mb-2 text-yellow-500">Live Orders</h1>
 
       <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {orders.map((order) => (
           <div
             key={order.id}
-            className="bg-white border border-gray-500 rounded-xl p-4">
+            className="bg-white border border-slate-200 shadow-sm rounded-xl p-4">
             <div className="flex justify-between items-center mb-2">
               <span className="font-bold text-yellow-400">
                 ጠረጴዛ: {order.tableNumber}
               </span>
-              <span className="text-xs bg-gray-200 px-2 py-1 rounded-md">
+              <span className="text-xs bg-slate-100 px-2 py-1 rounded-md">
                 {statusLabel[order.status] || order.status}
               </span>
             </div>
@@ -131,7 +131,7 @@ export default function LiveOrdersPage() {
                   onChange={(e) =>
                     setSelectedWaiter({ ...selectedWaiter, [order.id]: e.target.value })
                   }
-                  className="flex-1 bg-gray-800 border border-gray-700 rounded-lg px-2 py-1.5 text-sm">
+                  className="flex-1 bg-slate-100 hover:bg-slate-300 border border-gray-700 rounded-lg px-2 py-1.5 text-sm">
                   <option value="">ዌይተር ምረጥ</option>
                   {waiters.map((w) => (
                     <option key={w.id} value={w.id}>

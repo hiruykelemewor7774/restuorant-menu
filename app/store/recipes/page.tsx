@@ -93,14 +93,14 @@ export default function RecipesPage() {
             placeholder="Recipe Name"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm"
+            className="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm"
           />
           {lines.map((line, idx) => (
             <div key={idx} className="flex gap-2">
               <select
                 value={line.itemId}
                 onChange={(e) => updateLine(idx, "itemId", e.target.value)}
-                className="flex-1 px-3 py-2 border border-gray-200 rounded-lg text-sm"
+                className="flex-1 px-3 py-2 border border-slate-200 rounded-lg text-sm"
               >
                 <option value="">Select Ingredient</option>
                 {items.map((i) => (
@@ -114,7 +114,7 @@ export default function RecipesPage() {
                 placeholder="Qty"
                 value={line.quantity}
                 onChange={(e) => updateLine(idx, "quantity", e.target.value)}
-                className="w-28 px-3 py-2 border border-gray-200 rounded-lg text-sm"
+                className="w-28 px-3 py-2 border border-slate-200 rounded-lg text-sm"
               />
             </div>
           ))}

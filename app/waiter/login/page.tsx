@@ -39,12 +39,12 @@ export default function WaiterLoginPage() {
   }
 
   return (
-    <div className="mt-18 flex items-center justify-center px-4 text-white mr-10">
+    <div className="h-screen flex items-center justify-center px-4 bg-slate-100 text-gray-800 mr-10">
       <form
         onSubmit={handleSubmit}
-        className="rounded-xl shadow-md p-8 mt-0 bg-white w-full max-w-sm text-gray-800 border border-gray-200"
+        className="rounded-xl shadow-md p-8 bg-white w-full max-w-sm text-gray-800 border border-slate-200"
       >
-        <h1 className="text-2xl font-bold mb-6 text-center">
+        <h1 className="text-xl font-bold pb-3 text-center">
           የዌይተር መግቢያ
         </h1>
 
@@ -54,7 +54,7 @@ export default function WaiterLoginPage() {
           </div>
         )}
 
-        <label className="block mb-3">
+        <label className="block pb-3">
           <span className="text-sm font-medium text-white">Username</span>
           <input
             type="text"

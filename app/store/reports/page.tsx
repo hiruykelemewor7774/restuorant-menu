@@ -26,13 +26,13 @@ export default function ReportsPage() {
   }, [range]);
 
   return (
-    <div className="bg-gray-200 h-screen pl-5 pt-8 pr-5 pb-5">
+    <div className="bg-slate-100 h-screen pl-5 pt-8 pr-5 pb-5">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-xl font-bold text-gray-800">📊 Reports</h2>
         <select
           value={range}
           onChange={(e) => setRange(e.target.value)}
-          className="px-3 py-2 border border-gray-200 rounded-lg text-sm"
+          className="px-3 py-2 border border-slate-200 rounded-lg text-sm"
         >
           <option value="7">Last 7 days</option>
           <option value="30">Last 30 days</option>

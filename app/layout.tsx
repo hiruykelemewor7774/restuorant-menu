@@ -37,7 +37,7 @@ export default function RootLayout({
                   </MobileSidebarWrapper>
 
                   {/* የቀኝ በኩል አጠቃላይ ክፍል (ማሸብለል የሌለበት) */}
-                  <div className="app-main-shell flex-1 flex flex-col h-full relative bg-gray-200 backdrop-blur-[2px] bg-cover bg-center w-full">
+                  <div className="app-main-shell flex-1 flex flex-col h-full relative bg-slate-100 backdrop-blur-[2px] bg-cover bg-center w-full">
                     {/* የጀርባ ምስል ከለላ (Overlay) */}
                     <div className="app-overlay absolute inset-0 bg-gray-950/70 backdrop-blur-[2px] pointer-events-none"></div>
 

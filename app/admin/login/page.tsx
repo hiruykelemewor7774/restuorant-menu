@@ -34,11 +34,11 @@ export default function AdminLogin() {
 
 
   return (
-    <main className="mt-10 flex items-center justify-center">
+    <main className=" bg-slate-100 h-screen flex items-center justify-center">
       <form
         onSubmit={handleSubmit}
-        className="w-80 space-y-4 rounded-2xl border bg-white border-gray-200 p-6 shadow-sm px-6 mr-20">
-        <h1 className="text-2xl font-bold">Admin Login</h1>
+        className="w-80 text-gray-800 space-y-4 rounded-2xl border bg-white border-slate-200 p-6 shadow-sm px-6 mr-20">
+        <h1 className="text-xl font-bold">Admin Login</h1>
 
         <input
           type="text"

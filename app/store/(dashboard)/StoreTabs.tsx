@@ -26,7 +26,7 @@ export default function StoreTabs() {
   // }
 
   return (
-    <div className="border-b text-gray-800 border-gray-400 bg-gray-300 px-6 py-4 mt-5">
+    <div className="border-b text-gray-800 border-gray-400 bg-slate-200 px-6 py-4 mt-5">
       <div className="flex justify-between items-center mb-4">
         <h1 className="text-2xl font-bold text-amber-500">
           🏪 Store Management
@@ -48,7 +48,7 @@ export default function StoreTabs() {
               className={`px-4 py-2 rounded-lg text-sm font-medium transition ${
                 active
                   ? "bg-amber-500 text-white"
-                  : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                  : "bg-gray-100 text-gray-700 hover:bg-slate-100"
               }`}
             >
               {tab.label}

@@ -86,7 +86,7 @@ export default function PurchasesPage() {
           <select
             value={itemId}
             onChange={(e) => setItemId(e.target.value)}
-            className="px-3 py-2 border border-gray-200 rounded-lg text-sm"
+            className="px-3 py-2 border border-slate-200 rounded-lg text-sm"
           >
             <option value="">Select Item</option>
             {items.map((i) => (
@@ -98,7 +98,7 @@ export default function PurchasesPage() {
           <select
             value={supplierId}
             onChange={(e) => setSupplierId(e.target.value)}
-            className="px-3 py-2 border border-gray-200 rounded-lg text-sm"
+            className="px-3 py-2 border border-slate-200 rounded-lg text-sm"
           >
             <option value="">Supplier (optional)</option>
             {suppliers.map((s) => (
@@ -112,14 +112,14 @@ export default function PurchasesPage() {
             placeholder="Quantity"
             value={quantity}
             onChange={(e) => setQuantity(e.target.value)}
-            className="px-3 py-2 border border-gray-200 rounded-lg text-sm"
+            className="px-3 py-2 border border-slate-200 rounded-lg text-sm"
           />
           <input
             type="number"
             placeholder="Total Cost (ETB)"
             value={totalCost}
             onChange={(e) => setTotalCost(e.target.value)}
-            className="px-3 py-2 border border-gray-200 rounded-lg text-sm"
+            className="px-3 py-2 border border-slate-200 rounded-lg text-sm"
           />
           <button
             type="submit"
@@ -133,7 +133,7 @@ export default function PurchasesPage() {
       <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-x-auto">
         <table className="w-full text-sm">
           <thead>
-            <tr className="text-left bg-gray-300 text-gray-500 border-b border-gray-100">
+            <tr className="text-left bg-slate-200 text-gray-500 border-b border-gray-100">
               <th className="py-3 px-4">Item</th>
               <th className="py-3 px-4">Supplier</th>
               <th className="py-3 px-4">Quantity</th>

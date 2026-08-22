@@ -63,7 +63,7 @@ export default function ReportsPage() {
   }, [period]);
 
   return (
-    <div className="text-gray-800 min-h-screen bg-gray-200 p-5">
+    <div className="text-gray-800 min-h-screen bg-slate-100 p-5">
       <h1 className="text-xl font-bold pt-2 pb-2 text-yellow-500">📊 Report</h1>
 
       {/* Period Selector */}
@@ -89,25 +89,25 @@ export default function ReportsPage() {
         <>
           {/* Summary Cards */}
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 pt-5">
-            <div className="bg-gray-900 border border-gray-800 rounded-xl p-5">
+            <div className="bg-gray-900 border shadow-sm border-gray-800 rounded-xl p-5">
               <p className="text-sm text-gray-400 mb-1">ጠቅላላ ትዕዛዞች</p>
               <p className="text-3xl font-bold text-amber-400">{summary?.totalOrders ?? 0}</p>
             </div>
-            <div className="bg-gray-900 border border-gray-800 rounded-xl p-5">
+            <div className="bg-gray-900 border border-gray-800 shadow-sm rounded-xl p-5">
               <p className="text-sm text-gray-400 mb-1">ጠቅላላ ገቢ</p>
               <p className="text-3xl font-bold text-green-400">
                 {(summary?.totalRevenue ?? 0).toFixed(2)} ETB
               </p>
             </div>
-            <div className="bg-gray-900 border border-gray-800 rounded-xl p-5">
+            <div className="bg-gray-900 border border-gray-800 shadow-sm rounded-xl p-5">
               <p className="text-sm text-gray-400 mb-1">የተላኩ</p>
               <p className="text-3xl font-bold text-emerald-400">{summary?.deliveredCount ?? 0}</p>
             </div>
-            <div className="bg-gray-900 border border-gray-800 rounded-xl p-5">
+            <div className="bg-gray-900 border border-gray-800 shadow-sm rounded-xl p-5">
               <p className="text-sm text-gray-400 mb-1">አዲስ (Pending)</p>
               <p className="text-3xl font-bold text-yellow-400">{summary?.pendingCount ?? 0}</p>
             </div>
-            <div className="bg-gray-900 border border-gray-800 rounded-xl p-5">
+            <div className="bg-gray-900 border border-gray-800 shadow-sm rounded-xl p-5">
               <p className="text-sm text-gray-400 mb-1">የተሰረዙ</p>
               <p className="text-3xl font-bold text-red-400">{summary?.cancelledCount ?? 0}</p>
             </div>
@@ -115,12 +115,12 @@ export default function ReportsPage() {
 
           {/* Waiter Performance */}
           <h2 className="text-xl font-bold p-1 text-yellow-500 pt-5">👥 Waiter Performance</h2>
-          <div className="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden">
+          <div className="bg-gray-900 border border-gray-800 shadow-sm rounded-xl overflow-hidden">
             {waiterPerformance.length === 0 ? (
               <p className="text-gray-400 text-sm p-4">ለዚህ ጊዜ ክፍል ዳታ የለም</p>
             ) : (
               <table className="w-full text-sm">
-                <thead className="bg-gray-300 text-gray-300">
+                <thead className="bg-slate-200 text-gray-300">
                   <tr>
                     <th className="text-left p-3">ዌይተር</th>
                     <th className="text-right p-3">ትዕዛዞች</th>
@@ -144,12 +144,12 @@ export default function ReportsPage() {
 
           {/* kitchen Performance */}
           <h2 className="text-xl font-bold pb-1 pt-3 text-yellow-500">🍳 Kitchen Performance</h2>
-          <div className="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden">
+          <div className="bg-gray-900 border border-gray-800 shadow-sm rounded-xl overflow-hidden">
             {kitchenPerformance.length === 0 ? (
               <p className="text-gray-400 text-sm p-4">ለዚህ ጊዜ ክፍል ዳታ የለም</p>
             ) : (
               <table className="w-full text-sm">
-                <thead className="bg-gray-300 text-gray-300">
+                <thead className="bg-slate-200 text-gray-300">
                   <tr>
                     <th className="text-left p-3">Kitchen Staff</th>
                     <th className="text-right p-3">ያዘጋጁት ትዕዛዞች</th>
@@ -169,12 +169,12 @@ export default function ReportsPage() {
 
           {/* Top Selling Items */}
           <h2 className="text-xl font-bold text-yellow-500 pb-2 pt-3">🔥 Top-Selling Items</h2>
-          <div className="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden">
+          <div className="bg-gray-900 border border-gray-800 shadow-sm rounded-xl overflow-hidden">
             {topItems.length === 0 ? (
               <p className="text-gray-400 text-sm p-4">ለዚህ ጊዜ ክፍል ዳታ የለም</p>
             ) : (
               <table className="w-full text-sm">
-                <thead className="bg-gray-300 text-gray-300">
+                <thead className="bg-slate-200 text-gray-300">
                   <tr>
                     <th className="text-left p-3">እቃ</th>
                     <th className="text-left p-3">Type</th>

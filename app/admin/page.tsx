@@ -78,13 +78,13 @@ export default function AdminDashboardPage() {
     : [];
 
   return (
-    <div className="text-gray-800 p-3 w-full bg-gray-200">
-      <h1 className="text-xl font-bold mb-2 text-yellow-500 pt-3">Admin Page</h1>
-      <p className="text-gray-400 mb-8">Welcome, admin. Overview of your restaurant.</p>
+    <div className="text-gray-800 p-3 w-full bg-slate-100">
+      <h1 className="text-xl font-bold text-yellow-500 pt-3">Admin Page</h1>
+      <p className="text-gray-400 pb-2">Welcome, admin. Overview of your restaurant.</p>
 
       {/* Newly Added Admin Management Action Buttons Section */}
-      <div className="mt-6 mb-10 last:">
-        <h2 className="text-xl  font-semibold text-gray-200 mb-4">Quick Management Actions</h2>
+      <div className="mt-3 mb-10 last:">
+        <h2 className="text-md  font-semibold text-gray-200 pb-2">Quick Management Actions</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full">
     
           {/* 1. Dashboard Action Button */}
@@ -223,7 +223,7 @@ export default function AdminDashboardPage() {
               return (
                 <div
                   key={type}
-                  className={`bg-gray-900 border rounded-xl p-5 ${typeColors[type]}`}>
+                  className={`bg-gray-900 border rounded-xl shadow-sm p-5 ${typeColors[type]}`}>
                   <div className="flex justify-between items-center mb-4">
                     <h3 className="text-lg font-bold flex items-center gap-2">
                       <span>{typeIcons[type]}</span>
@@ -241,7 +241,7 @@ export default function AdminDashboardPage() {
                       {Object.entries(categories).map(([category, count]) => (
                         <div
                           key={category}
-                          className="flex justify-between items-center bg-gray-200 rounded-lg px-3 py-2">
+                          className="flex justify-between items-center bg-slate-100 rounded-lg px-3 py-2">
                           <span className="text-sm text-gray-300">{category}</span>
                           <span className="text-sm font-bold text-gray-200">{count}</span>
                         </div>
@@ -263,12 +263,12 @@ export default function AdminDashboardPage() {
             <h2 className="text-xl font-bold mb-2  text-yellow-500">
               💰 በ Waiter የተከፋፈለ ሽያጭ (የተከፈለ ብቻ)
             </h2>
-            <div className="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden">
+            <div className="bg-gray-900 border border-gray-800 shadow-sm rounded-xl overflow-hidden">
               {waiterSales.length === 0 ? (
                 <p className="text-gray-400 text-sm p-4">ገና ምንም የተከፈለ ትዕዛዝ የለም</p>
               ) : (
                 <table className="w-full text-sm">
-                  <thead className="bg-gray-300 text-gray-300">
+                  <thead className="bg-slate-200 text-gray-300">
                     <tr>
                       <th className="text-left p-3">Waiter</th>
                       <th className="text-right p-3">ትዕዛዞች</th>

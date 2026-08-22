@@ -33,16 +33,17 @@ export default function KitchenLoginPage() {
   }
 
   return (
-    <div className="flex items-center justify-center mt-20 px-4">
+    <div className="flex items-center h-screen justify-center bg-slate-100 px-4">
       <form
         onSubmit={handleSubmit}
-        className="border border-gray-500 bg-white rounded-xl shadow-md p-8 w-full max-w-sm">
-        <h1 className="text-2xl font-bold mb-6 text-center text-yellow-400 pr-15">
+        className="border border-slate-200 text-gray-800 bg-white rounded-xl shadow-md p-8 w-full max-w-sm">
+        <h1 className="text-xl font-bold pb-3
+        text-center text-yellow-400 pr-15">
           🍳 Kitchen Login
         </h1>
 
         {error && (
-          <div className="bg-red-900/50 text-red-300 text-sm rounded-md p-3 mb-4">
+          <div className="bg-red-900 text-red-300 text-sm rounded-md p-3 mb-4">
             {error}
           </div>
         )}
@@ -54,7 +55,7 @@ export default function KitchenLoginPage() {
           onChange={(e) => setUsername(e.target.value)}
           placeholder="Username"
           required
-          className="w-full mb-3 px-3 py-2 border border-gray-500 rounded-md text-gray-900"
+          className="w-full mb-3 px-3 py-2 border border-slate-500 rounded-md text-gray-900"
         />
         <input
           type="password"
@@ -63,7 +64,7 @@ export default function KitchenLoginPage() {
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
           required
-          className="w-full mb-5 px-3 py-2 border border-gray-500 rounded-md text-gray-900"/>
+          className="w-full mb-5 px-3 py-2 border border-slate-500 rounded-md text-gray-900"/>
 
         <button
           type="submit"

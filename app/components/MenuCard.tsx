@@ -47,7 +47,7 @@ export default function MenuCard({
     <>
       <div
         onClick={openDetails}
-        className="block rounded-2xl border bg-white border-gray-200 overflow-hidden shadow-sm
+        className="block rounded-2xl border bg-white border-slate-200 overflow-hidden shadow-sm
          hover:shadow-lg hover:-translate-y-1 transition-all relative cursor-pointer">
         
         <div className="bg-white relative h-48 w-full rounded-2xl

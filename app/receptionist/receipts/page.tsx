@@ -25,12 +25,12 @@ export default function ReceiptsPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-200 text-gray-800 p-5 pt-10">
+    <div className="min-h-screen bg-slate-100 text-gray-800 p-5 pt-10">
       <h1 className="text-xl font-bold mb-3 text-yellow-400">🧾 Receipts & Invoices</h1>
 
-      <div className="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden mb-6">
+      <div className="bg-gray-900 shadow-sm border border-gray-800 rounded-xl overflow-hidden mb-6">
         <table className="w-full text-sm">
-          <thead className="bg-gray-300 text-gray-300">
+          <thead className="bg-slate-200 text-gray-300">
             <tr>
               <th className="text-left p-3">table</th>
               <th className="text-left p-3">method</th>
@@ -73,7 +73,7 @@ export default function ReceiptsPage() {
               <span>Total</span>
               <span>{selected.totalAmount.toFixed(2)} ETB</span>
             </div>
-            <button onClick={() => window.print()} className="w-full bg-gray-200 hover:bg-gray-300 text-gray-800 py-2 rounded-full text-sm">🖨️ Print</button>
+            <button onClick={() => window.print()} className="w-full bg-slate-100 hover:bg-slate-200 text-gray-800 py-2 rounded-full text-sm">🖨️ Print</button>
           </div>
         </div>
       )}

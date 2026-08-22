@@ -19,7 +19,7 @@ export default function LowStockPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-200 text-gray-800 p-6 pt-15">
+    <div className="min-h-screen bg-slate-100 text-gray-800 p-6 pt-15">
       <h1 className="text-2xl font-bold mb-6 text-red-400">⚠️ Low Stock Alerts</h1>
 
       {items.length === 0 ? (

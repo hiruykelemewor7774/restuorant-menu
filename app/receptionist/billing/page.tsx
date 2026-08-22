@@ -41,7 +41,7 @@ export default function BillingPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-200 text-gray-800 p-5 pt-10">
+    <div className="min-h-screen bg-slate-100 text-gray-800 p-5 pt-10">
       <h1 className="text-2xl font-bold mb-6 text-yellow-400">💳 Billing & Checkout</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -51,7 +51,7 @@ export default function BillingPage() {
             0
           );
           return (
-            <div key={order.id} className="bg-gray-900 border border-gray-800 rounded-xl p-4">
+            <div key={order.id} className="bg-gray-900 border shadow-sm border-gray-800 rounded-xl p-4">
               <p className="font-bold text-amber-400 mb-2">ጠረጴዛ/ክፍል: {order.tableNumber}</p>
               <ul className="text-sm text-gray-300 mb-3 list-disc list-inside">
                 {order.items.map((i) => (

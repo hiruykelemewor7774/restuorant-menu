@@ -30,25 +30,25 @@ export default function CashReportPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-200 text-gray-800 p-5 pt-10">
-      <h1 className="text-2xl font-bold mb-6 text-yellow-400">🧮 Daily Cash Drawer Report</h1>
-      <p className="text-gray-400 mb-6">{new Date().toLocaleDateString()}</p>
+    <div className="min-h-screen bg-slate-100 text-gray-800 p-5 pt-10">
+      <h1 className="text-xl font-bold pb-2 text-yellow-400">🧮 Daily Cash Drawer Report</h1>
+      <p className="text-gray-400 pb-2">{new Date().toLocaleDateString()}</p>
 
-      <div className="grid grid-cols-2 gap-4 mb-8 max-w-xl">
-        <div className="bg-gray-900 border border-gray-800 rounded-xl p-5">
+      <div className="grid grid-cols-2 gap-4 pb-3 max-w-xl">
+        <div className="bg-gray-900 border border-gray-800 shadow-sm rounded-xl p-5">
           <p className="text-sm text-gray-400">ጠቅላላ ግብይቶች</p>
           <p className="text-3xl font-bold text-amber-400">{totalTransactions}</p>
         </div>
-        <div className="bg-gray-900 border border-gray-800 rounded-xl p-5">
+        <div className="bg-gray-900 border border-gray-800 shadow-sm rounded-xl p-5">
           <p className="text-sm text-gray-400">ጠቅላላ ገቢ</p>
-          <p className="text-3xl font-bold text-green-400">{grandTotal.toFixed(2)} ETB</p>
+          <p className="text-xl font-bold text-green-400">{grandTotal.toFixed(2)} ETB</p>
         </div>
       </div>
 
-      <h2 className="text-lg font-bold mb-3 text-amber-400">በ Payment Method</h2>
-      <div className="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden max-w-xl">
+      <h2 className="text-lg font-bold pb-2 text-amber-400">By Payment Method</h2>
+      <div className="bg-gray-900 border border-gray-800 shadow-sm rounded-xl overflow-hidden max-w-xl">
         <table className="w-full text-sm">
-          <thead className="bg-gray-300 text-gray-500">
+          <thead className="bg-slate-200 text-gray-500">
             <tr>
               <th className="text-left p-3">ዘዴ</th>
               <th className="text-right p-3">ብዛት</th>

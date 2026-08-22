@@ -43,7 +43,7 @@ export default function ExpiryPage() {
   );
 
   return (
-    <div className="bg-gray-200 text-gray-800 h-screen p-5">
+    <div className="bg-slate-100 text-gray-800 h-screen p-5">
       <h2 className="text-xl font-bold text-gray-800 mb-4 mt-5">⏳ Expiry Tracking</h2>
 
       {loading ? (
@@ -52,7 +52,7 @@ export default function ExpiryPage() {
         <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="text-left bg-gray-300 text-gray-500 border-b border-gray-100">
+              <tr className="text-left bg-slate-200 text-gray-500 border-b border-gray-100">
                 <th className="py-3 px-4">Item</th>
                 <th className="py-3 px-4">Quantity</th>
                 <th className="py-3 px-4">Expiry Date</th>

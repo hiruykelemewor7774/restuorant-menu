@@ -92,17 +92,17 @@ export default function KitchenMaterialsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-950 text-white p-6 pt-24">
-      <h1 className="text-2xl font-bold mb-6 text-yellow-400">📦 Request Material from Store</h1>
+    <div className="min-h-screen bg-slate-100 text-gray-800 p-3 pt-8">
+      <h1 className="text-xl font-bold pb-2 text-yellow-400">📦 Request Material from Store</h1>
 
       {/* Add item to request */}
-      <div className="bg-gray-900 border border-gray-800 rounded-2xl p-5 mb-6 max-w-2xl">
-        <h2 className="text-lg font-bold mb-3 text-amber-400">አዲስ ጥያቄ ፍጠር</h2>
+      <div className="bg-gray-900 border border-gray-800 rounded-2xl p-5 shadow-sm mb-4 max-w-2xl">
+        <h2 className="text-lg font-bold pb-2 text-amber-400">አዲስ ጥያቄ ፍጠር</h2>
         <div className="flex gap-3 mb-3">
           <select
             value={selectedItem}
             onChange={(e) => setSelectedItem(e.target.value)}
-            className="flex-1 px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-sm"
+            className="flex-1 px-3 py-2 bg-slate-100 border border-gray-300 rounded-lg text-sm"
           >
             <option value="">-- እቃ ምረጥ --</option>
             {materials.map((m) => (
@@ -116,11 +116,11 @@ export default function KitchenMaterialsPage() {
             placeholder="ብዛት"
             value={quantity}
             onChange={(e) => setQuantity(e.target.value)}
-            className="w-28 px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-sm"
+            className="w-28 px-3 py-2 bg-slate-100 border border-gray-300 rounded-lg text-sm"
           />
           <button
             onClick={addToRequestCart}
-            className="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg text-sm font-semibold"
+            className="bg-slate-100 hover:bg-slate-300 px-4 py-2 rounded-lg text-sm font-semibold"
           >
             + ጨምር
           </button>
@@ -150,12 +150,12 @@ export default function KitchenMaterialsPage() {
       </div>
 
       {/* Request history */}
-      <h2 className="text-lg font-bold mb-3 text-amber-400">የጥያቄ ታሪክ</h2>
+      <h2 className="text-lg font-bold mb-3 text-amber-400">Request history</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {requests.map((r) => {
           const badge = statusLabel[r.status] || { label: r.status, color: "bg-gray-800 text-gray-400" };
           return (
-            <div key={r.id} className="bg-gray-900 border border-gray-800 rounded-xl p-4">
+            <div key={r.id} className="bg-gray-900 border border-gray-800 shadow-sm rounded-xl p-4">
               <div className="flex justify-between items-center mb-2">
                 <span className="text-xs text-gray-500">
                   {new Date(r.createdAt).toLocaleString()}

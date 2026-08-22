@@ -166,13 +166,13 @@ function startEdit(item: MenuItem) {
   const availableCategories = categoriesByType[form.type] || [];
 
   return (
-    <div className="text-gray-800 bg-gray-200 mt-3 pt-5 pl-5 pr-5 pb-5">
+    <div className="text-gray-800 bg-slate-100 mt-3 pt-5 pl-5 pr-5 pb-5">
       <h1 className="text-3xl font-bold mb-6 text-yellow-500">Menu Management</h1>
 
       {/* Form */}
       <form
         onSubmit={handleSubmit}
-        className="bg-gray-900 border border-gray-800 rounded-2xl p-6 mb-8 max-w-2xl">
+        className="bg-gray-900 border border-gray-800 shadow-sm rounded-2xl p-6 mb-8 max-w-2xl">
         <h2 className="text-lg font-bold mb-4 text-yellow-400">
           {editingId ? "እቃ አስተካክል" : "አዲስ እቃ ጨምር"}
         </h2>
@@ -183,7 +183,7 @@ function startEdit(item: MenuItem) {
             <select
               value={form.type}
               onChange={(e) => handleTypeChange(e.target.value)}
-              className="w-full px-3 py-2 bg-gray-100 border border-gray-500 rounded-lg">
+              className="w-full px-3 py-2 bg-gray-100 border border-slate-500 rounded-lg">
               <option value="Food">Food</option>
               <option value="Drink">Drink</option>
               <option value="Room">Room</option>
@@ -195,7 +195,7 @@ function startEdit(item: MenuItem) {
             <select
               value={form.category}
               onChange={(e) => setForm({ ...form, category: e.target.value })}
-              className="w-full px-3 py-2 bg-gray-100 border border-gray-500 rounded-lg">
+              className="w-full px-3 py-2 bg-gray-100 border border-slate-500 rounded-lg">
               {availableCategories.map((cat) => (
                 <option key={cat} value={cat}>
                   {cat}
@@ -213,7 +213,7 @@ function startEdit(item: MenuItem) {
               value={form.name}
               onChange={(e) => setForm({ ...form, name: e.target.value })}
               required
-              className="w-full px-3 py-2 bg-gray-100 border border-gray-500 rounded-lg"/>
+              className="w-full px-3 py-2 bg-gray-100 border border-slate-500 rounded-lg"/>
           </div>
           <div>
             <label className="block text-sm text-gray-800 mb-1">Price</label>
@@ -322,7 +322,7 @@ function startEdit(item: MenuItem) {
           {filteredItems.map((item) => (
             <div
               key={item.id}
-              className="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden flex flex-col">
+              className="bg-gray-900 border border-gray-800 shadow-md rounded-xl overflow-hidden flex flex-col">
               <div className="relative w-full h-32 bg-gray-800">
                 <Image src={item.image} alt={item.name} fill className="object-cover" />
               </div>
@@ -340,7 +340,7 @@ function startEdit(item: MenuItem) {
                 <div className="flex gap-2 mt-auto pt-3">
                   <button
                     onClick={() => startEdit(item)}
-                    className="flex-1 text-sm bg-gray-200 hover:bg-gray-300 py-1.5 rounded-lg transition">
+                    className="flex-1 text-sm bg-slate-100 hover:bg-slate-200 py-1.5 rounded-lg transition">
                     Edit
                   </button>
                   <button

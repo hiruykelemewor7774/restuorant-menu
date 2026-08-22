@@ -170,13 +170,13 @@ export default function WaiterDashboard() {
   };
 
   return (
-    <div className="mt-5 pt-5 min-h-screen text-amber-500 bg-gray-200">
+    <div className="mt-4 p-3 min-h-screen text-gray-800 bg-slate-100">
      <RingingAlertModal
         isOpen={alertOpen}
         title="ማሳወቂያ"
         message={alertMessage}
         onAcknowledge={() => setAlertOpen(false)}/>
-      <h1 className="text-2xl font-bold mb-6 pl-5 text-yellow-500">🍽️ Waiter Station & Order Dispatcher</h1>
+      <h1 className="text-xl font-bold mb-2 text-yellow-500">🍽️ Waiter Station & Order Dispatcher</h1>
 
       {manualOrders.length > 0 && (
         <div className="mb-8">
@@ -204,9 +204,9 @@ export default function WaiterDashboard() {
         </div>
       )}
 
-      <div className=" ml-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
         {orders.map((order) => (
-          <div key={order.id} className="bg-white border border-gray-800 p-6 rounded-xl shadow-xl flex flex-col justify-between">
+          <div key={order.id} className="bg-white p-6 rounded-xl shadow-sm flex flex-col justify-between">
             <div>
               <div className="flex justify-between items-center mb-4">
                 <span className="text-xl font-extrabold text-yellow-400">Table-{order.tableNumber}</span>
@@ -266,7 +266,7 @@ export default function WaiterDashboard() {
             {finishedOrders.map((order) => (
               <div
                 key={order.id}
-                className="bg-gray-200 border border-green-800 p-4 rounded-xl opacity-70"
+                className="bg-slate-300 shadow-sm p-4 rounded-xl opacity-70"
               >
                 <div className="flex justify-between items-center mb-2">
                   <span className="font-bold text-gray-300">Table-{order.tableNumber}</span>

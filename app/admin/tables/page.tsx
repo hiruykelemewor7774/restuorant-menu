@@ -54,11 +54,11 @@ export default function TableManagementPage() {
   }
 
   return (
-    <div className="flex text-white">
-      <main className="flex-1 p-10 mx-auto w-full max-w-5xl">
-        <h1 className="text-3xl font-bold mb-6 text-yellow-500">Table & QR Code Management</h1>
+    <div className="flex bg-slate-100 h-screen text-gray-800">
+      <main className="flex-1 p-3 pt-8 mx-auto w-full">
+        <h1 className="text-xl font-bold pb-2 text-yellow-500">Table & QR Code Management</h1>
 
-        <form onSubmit={handleAddTable} className="flex flex-col gap-2 mb-8 max-w-xl w-full">
+        <form onSubmit={handleAddTable} className="flex flex-col gap-2 mb-4 max-w-xl w-full">
           <div className="flex gap-4">
             <input
               type="text"
@@ -68,7 +68,7 @@ export default function TableManagementPage() {
                 setTableNumber(e.target.value);
                 setErrorMsg("");
               }}
-              className="flex-1 px-4 py-2.5 bg-gray-900 border border-gray-700 rounded-xl focus:outline-none focus:border-yellow-500 text-white"
+              className="flex-1 px-4 py-2.5 bg-gray-900 border border-gray-500 rounded-xl focus:outline-gray-700 focus:border-yellow-500 text-gray-800"
             />
             <button type="submit" className="bg-yellow-500 text-black font-bold px-6 py-2.5 rounded-xl hover:bg-yellow-400 transition cursor-pointer">
               Generate QR Code
@@ -80,11 +80,11 @@ export default function TableManagementPage() {
         {loading ? (
           <p className="text-gray-400">እየጫነ ነው...</p>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 w-140">
             {tables.map((t) => (
-              <div key={t.id} className="bg-gray-900 border border-gray-800 p-6 rounded-2xl flex flex-col items-center justify-between shadow-xl">
+              <div key={t.id} className="bg-gray-900 border border-gray-800 p-5 rounded-2xl flex flex-col items-center justify-between shadow-xl">
                 <h3 className="text-xl font-bold text-yellow-400 mb-2">{t.tableNumber}</h3>
-                <div className="bg-white p-4 rounded-xl shadow-inner flex items-center justify-center my-2">
+                <div className="bg-white p-4 rounded-xl shadow-sm flex items-center justify-center my-2">
                   <QRCodeCanvas
                     value={`${typeof window !== "undefined" ? window.location.origin : ""}/?table=${t.tableNumber.replace("Table-", "")}`}
                     size={100}
@@ -135,7 +135,7 @@ export default function TableManagementPage() {
 //   };
 
 //   return (
-//     <div className="flex text-white pt-3 h-screen bg-gray-200">
+//     <div className="flex text-white pt-3 h-screen bg-slate-100">
 //       <main className="flex-1 p-5 mx-auto w-full">
 //         <h1 className="text-2xl font-bold mb-6 ml-0 text-yellow-500">Table & QR Code Management</h1>
 //         <form onSubmit={handleAddTable} className="flex flex-col gap-2 mb-8 max-w-xl w-full">

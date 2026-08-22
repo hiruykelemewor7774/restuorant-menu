@@ -181,13 +181,18 @@ html.dark-content .bg-gray-100  {
   background-color: #1f2937 !important;
 }
 
-/* for background color .bg-gray-200 */
-html.dark-content .bg-gray-200 {
+/* for background color .bg-slate-100 */
+html.dark-content .bg-slate-100 {
   background-color: #02132b !important;
 }
 
-/* for background color .bg-gray-300 */
-html.dark-content .bg-gray-300 {
+/* for background color .bg-slate-100 */
+html.dark-content .bg-slate-100 {
+  background-color: #02132b !important;
+}
+
+/* for background color .bg-slate-200 */
+html.dark-content .bg-slate-200 {
   background-color: #05162e !important;
 }
 
@@ -210,7 +215,7 @@ html.dark-content .text-gray-600 {
 
 /* for each box */
 html.dark-content .border,
-html.dark-content .border-gray-200,
+html.dark-content .border-slate-200,
 html.dark-content .border-gray-300 {
   border-color: #374151 !important;
 }
@@ -241,11 +246,11 @@ html.dark-content .text-red-500 {
 }
 
 /* for receptionist bg color */
-html.dark-content .bg-gray-200 .bg-white {
+html.dark-content .bg-slate-100 .bg-white {
   background-color: #07152e !important;
 }
 
-div.dark-content .bg-gray-200 .bg-white{
+div.dark-content .bg-slate-100 .bg-white{
   background: #07152e;
 }
 
@@ -340,9 +345,6 @@ html.light-theme main .bg-amber-500\/20 {
 html.light-theme .app-main-shell {
   background-image: linear-gradient(rgba(20, 20, 20, 0.55), rgba(20, 20, 20, 0.55)), url('/image/restaurantlm.webp') !important;
 }
-
-
-
 
 /* Role Sidebar - shared across Waiter/Kitchen/Store/Receptionist */
 .sidebar-nav {

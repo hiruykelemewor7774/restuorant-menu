@@ -39,17 +39,17 @@ export default function StockOutPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-200 text-gray-800 p-6 pt-8">
+    <div className="min-h-screen bg-slate-100 text-gray-800 p-6 pt-8">
       <h1 className="text-2xl font-bold mb-6 text-yellow-400">📤 Stock Out (Issuance)</h1>
 
       <form onSubmit={handleSubmit} className="bg-gray-900 border border-gray-800 rounded-2xl p-6 max-w-lg space-y-3">
-        <select required value={form.itemId} onChange={(e) => setForm({ ...form, itemId: e.target.value })} className="w-full px-3 py-2 bg-gray-200 border border-gray-500 rounded-lg text-sm">
+        <select required value={form.itemId} onChange={(e) => setForm({ ...form, itemId: e.target.value })} className="w-full px-3 py-2 bg-slate-100 border border-slate-500 rounded-lg text-sm">
           <option value="">-- እቃ ምረጥ --</option>
           {items.map((i) => <option key={i.id} value={i.id}>{i.name} ({i.quantity} {i.unit} ቀርቷል)</option>)}
         </select>
 
-        <input required type="number" placeholder="ብዛት (Quantity)" value={form.quantity} onChange={(e) => setForm({ ...form, quantity: e.target.value })} className="w-full px-3 py-2 bg-gray-200 border border-gray-500 rounded-lg text-sm" />
-        <input placeholder="ምክንያት (ለምሳሌ: Issued to Kitchen)" value={form.reason} onChange={(e) => setForm({ ...form, reason: e.target.value })} className="w-full px-3 py-2 bg-gray-200 border border-gray-500 rounded-lg text-sm" />
+        <input required type="number" placeholder="ብዛት (Quantity)" value={form.quantity} onChange={(e) => setForm({ ...form, quantity: e.target.value })} className="w-full px-3 py-2 bg-slate-100 border border-slate-500 rounded-lg text-sm" />
+        <input placeholder="ምክንያት (ለምሳሌ: Issued to Kitchen)" value={form.reason} onChange={(e) => setForm({ ...form, reason: e.target.value })} className="w-full px-3 py-2 bg-slate-100 border border-slate-500 rounded-lg text-sm" />
 
         {message && <p className="text-sm text-amber-400">{message}</p>}
 

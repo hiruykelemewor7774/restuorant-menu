@@ -76,7 +76,7 @@ export default function KitchenRequestsPage() {
   }
 
   return (
-    <div className="bg-gray-200 h-screen mt-5 pt-5 pl-5 pr-5 pb-5">
+    <div className="bg-slate-100 h-screen mt-5 pt-5 pl-5 pr-5 pb-5">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-xl font-bold text-gray-800">🍳 Kitchen Requests</h2>
         <button
@@ -96,14 +96,14 @@ export default function KitchenRequestsPage() {
             placeholder="Requested By (optional)"
             value={requestedBy}
             onChange={(e) => setRequestedBy(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm"
+            className="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm"
           />
           {lines.map((line, idx) => (
             <div key={idx} className="flex gap-2">
               <select
                 value={line.itemId}
                 onChange={(e) => updateLine(idx, "itemId", e.target.value)}
-                className="flex-1 px-3 py-2 border border-gray-200 rounded-lg text-sm"
+                className="flex-1 px-3 py-2 border border-slate-200 rounded-lg text-sm"
               >
                 <option value="">Select Item</option>
                 {items.map((i) => (
@@ -117,7 +117,7 @@ export default function KitchenRequestsPage() {
                 placeholder="Qty"
                 value={line.quantity}
                 onChange={(e) => updateLine(idx, "quantity", e.target.value)}
-                className="w-28 px-3 py-2 border border-gray-200 rounded-lg text-sm"
+                className="w-28 px-3 py-2 border border-slate-200 rounded-lg text-sm"
               />
             </div>
           ))}

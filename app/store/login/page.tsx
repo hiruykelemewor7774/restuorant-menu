@@ -38,11 +38,11 @@ export default function StoreLoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4">
+    <div className="min-h-screen bg-white text-gray-800 flex items-center justify-center px-4">
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-sm bg-white border border-slate-300 rounded-2xl p-8">
-        <h1 className="text-2xl font-bold text-white mb-6">
+        className="w-full max-w-sm bg-white border border-slate-200 rounded-2xl p-8">
+        <h1 className="text-xl font-bold text-white pb-3">
           🏪 Store Login
         </h1>
 
@@ -52,7 +52,7 @@ export default function StoreLoginPage() {
           name="username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          className="w-full mb-3 px-4 py-2.5 bg-gray-200 border border-gray-300 rounded-lg text-gray-800"
+          className="w-full mb-3 px-4 py-2.5 bg-slate-100 border border-gray-300 rounded-lg text-gray-800"
         />
 
         <input
@@ -61,7 +61,7 @@ export default function StoreLoginPage() {
           autoComplete="current-password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="w-full mb-4 px-4 py-2.5 bg-gray-200 border border-gray-300 rounded-lg text-gray-800"
+          className="w-full mb-4 px-4 py-2.5 bg-slate-100 border border-gray-300 rounded-lg text-gray-800"
         />
 
         {error && <p className="text-red-400 text-sm mb-4">{error}</p>}

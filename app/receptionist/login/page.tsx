@@ -33,10 +33,10 @@ export default function ReceptionistLoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-950 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-white px-4">
       <form
         onSubmit={handleSubmit}
-        className="border border-gray-800 rounded-xl shadow-md p-8 w-full max-w-sm"
+        className="border border-slate-200 rounded-xl text-gray-800 shadow-md p-8 w-full max-w-sm"
       >
         <h1 className="text-2xl font-bold mb-6 text-center text-yellow-400">
           🛎️ Receptionist login
@@ -54,7 +54,7 @@ export default function ReceptionistLoginPage() {
           onChange={(e) => setUsername(e.target.value)}
           placeholder="Username"
           required
-          className="w-full mb-3 px-3 py-2 border border-gray-700 rounded-md text-white"
+          className="w-full mb-3 px-3 py-2 border border-gray-700 rounded-md text-gray-800"
         />
         <input
           type="password"
@@ -62,7 +62,7 @@ export default function ReceptionistLoginPage() {
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
           required
-          className="w-full mb-5 px-3 py-2 border border-gray-700 rounded-md text-white"
+          className="w-full mb-5 px-3 py-2 border border-gray-700 rounded-md text-gray-800"
         />
 
         <button

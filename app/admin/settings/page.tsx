@@ -42,35 +42,35 @@ export default function AdminSettingsPage() {
   if (loading) return <p className="text-gray-400">እየጫነ ነው...</p>;
 
   return (
-    <div className="text-white">
-      <h1 className="text-3xl font-bold mb-6 text-yellow-500">⚙️ System Settings</h1>
+    <div className="text-gray-800 bg-slate-100 p-3 h-screen">
+      <h1 className="text-xl font-bold mb-3 pt-4 text-yellow-500">⚙️ System Settings</h1>
 
-      <form onSubmit={handleSave} className="bg-gray-900 border border-gray-800 rounded-2xl p-6 max-w-2xl space-y-6">
+      <form onSubmit={handleSave} className="bg-gray-900 border border-gray-800 shadow-sm rounded-2xl p-6 max-w-2xl space-y-6">
         <div>
-          <label className="block text-sm text-gray-400 mb-1">Restaurant Name</label>
+          <label className="block text-sm text-gray-600 mb-1">Restaurant Name</label>
           <input
             type="text"
             value={restaurantName}
             onChange={(e) => setRestaurantName(e.target.value)}
-            className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg"
+            className="w-full px-3 py-2 bg-slate-100 border border-gray-500 rounded-lg"
           />
         </div>
         <div>
-          <label className="block text-sm text-gray-400 mb-1">Service Charge (Birr)</label>
+          <label className="block text-sm text-gray-600 mb-1">Service Charge (Birr)</label>
           <input
             type="number"
             value={serviceCharge}
             onChange={(e) => setServiceCharge(e.target.value)}
-            className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg"
+            className="w-full px-3 py-2 bg-slate-100 border border-gray-500 rounded-lg"
           />
         </div>
         <div>
-          <label className="block text-sm text-gray-400 mb-1">Tax Rate (%)</label>
+          <label className="block text-sm text-gray-600 mb-1">Tax Rate (%)</label>
           <input
             type="number"
             value={taxRate}
             onChange={(e) => setTaxRate(e.target.value)}
-            className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg"
+            className="w-full px-3 py-2 bg-slate-100 border border-gray-500 rounded-lg"
           />
         </div>
 
