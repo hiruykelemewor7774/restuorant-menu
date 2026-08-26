@@ -47,6 +47,23 @@ async function main() {
   });
   console.log("✔ Kitchen created -> username: kitchen1 | password: kitchen123");
 
+  // RECEPTIONIST
+  const receptionistPassword = await bcrypt.hash("reception123", 10);
+
+  await prisma.receptionist.upsert({
+    where: { username: "reception1" },
+    update: {},
+    create: {
+      username: "reception1",
+      password: receptionistPassword,
+      fullName: "Receptionist One",
+    },
+  });
+
+  console.log(
+    "✔ Receptionist created -> username: reception1 | password: reception123",
+  );
+
   // STORE
     const storePassword = await bcrypt.hash("store123", 10);
     await prisma.storeAuth.upsert({

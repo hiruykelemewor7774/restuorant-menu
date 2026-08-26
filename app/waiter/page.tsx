@@ -65,13 +65,13 @@ export default function WaiterDashboard() {
 
         if (isNew) {
           console.log("🔔 TRIGGERING: new order alert");
-          setAlertMessage(`🆕 አዲስ ትዕዛዝ! ጠረጴዛ ${order.tableNumber}`);
+          setAlertMessage(`🆕 አዲስ order! table ${order.tableNumber}`);
           setAlertOpen(true);
           break;
         }
         if (becameReady) {
           console.log("🔔 TRIGGERING: ready alert");
-          setAlertMessage(`✅ ጠረጴዛ ${order.tableNumber} ትዕዛዝ ዝግጁ ሆኗል! ወደ ደንበኛ ውሰድ።`);
+          setAlertMessage(`✅ tableF ${order.tableNumber} ትዕዛዝ ዝግጁ ሆኗል! ወደ ደንበኛ ውሰድ።`);
           setAlertOpen(true);
           break;
         }

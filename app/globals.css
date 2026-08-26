@@ -150,7 +150,7 @@ html.light-theme header .text-amber-500 {
 
 /* for home page text */
 html.light-theme main {
-  color: #cab922 !important;
+  color: #052709f9 !important;
 }
 
 html.light-theme main h1,
@@ -335,15 +335,21 @@ html.light-theme main .bg-amber-500\/20 {
 }
 
 /* Background image በ theme የሚቀያየር */
-.app-main-shell {
+/* .app-main-shell {
   background-image: url('/image/restaurant.webp');
   /* ነባሪ (dark mode) */
-  background-size: cover;
-  background-position: center;
-}
+  /* background-size: cover;
+  background-position: center; */
+/* }
 
 html.light-theme .app-main-shell {
   background-image: linear-gradient(rgba(20, 20, 20, 0.55), rgba(20, 20, 20, 0.55)), url('/image/restaurantlm.webp') !important;
+/* } */ 
+ 
+
+/* for bg image that scroll horizontally it seif */
+.app-main-shell {
+  background-color: #0f172a; /* fallback ቀለም */
 }
 
 /* Role Sidebar - shared across Waiter/Kitchen/Store/Receptionist */

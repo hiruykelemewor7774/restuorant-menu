@@ -7,6 +7,7 @@ import { UIProvider } from "./context/UIContext";
 import QrTableReader from "./components/QrTableReader";
 import MobileSidebarWrapper from "./components/MobileSidebarWrapper";
 import "./globals.css";
+import BackgroundCarousel from "./components/BackgroundCarousel";
 
 export const viewport = {
   width: "device-width",
@@ -38,6 +39,8 @@ export default function RootLayout({
 
                   {/* የቀኝ በኩል አጠቃላይ ክፍል (ማሸብለል የሌለበት) */}
                   <div className="app-main-shell flex-1 flex flex-col h-full relative bg-slate-100 backdrop-blur-[2px] bg-cover bg-center w-full">
+                      <BackgroundCarousel />
+                   
                     {/* የጀርባ ምስል ከለላ (Overlay) */}
                     <div className="app-overlay absolute inset-0 bg-gray-950/70 backdrop-blur-[2px] pointer-events-none"></div>
 

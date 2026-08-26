@@ -54,7 +54,7 @@ export default function TableManagementPage() {
   }
 
   return (
-    <div className="flex bg-slate-100 h-screen text-gray-800">
+    <div className="flex bg-slate-100 w-full h-screen text-gray-800">
       <main className="flex-1 p-3 pt-8 mx-auto w-full">
         <h1 className="text-xl font-bold pb-2 text-yellow-500">Table & QR Code Management</h1>
 
@@ -80,9 +80,9 @@ export default function TableManagementPage() {
         {loading ? (
           <p className="text-gray-400">እየጫነ ነው...</p>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 w-140">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
             {tables.map((t) => (
-              <div key={t.id} className="bg-gray-900 border border-gray-800 p-5 rounded-2xl flex flex-col items-center justify-between shadow-xl">
+              <div key={t.id} className="bg-gray-900 border border-gray-800 p-5 rounded-2xl flex flex-col items-center justify-between shadow-xl transition-transform duration-200 ease-in-out hover:translate-y-1">
                 <h3 className="text-xl font-bold text-yellow-400 mb-2">{t.tableNumber}</h3>
                 <div className="bg-white p-4 rounded-xl shadow-sm flex items-center justify-center my-2">
                   <QRCodeCanvas
