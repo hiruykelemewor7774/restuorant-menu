@@ -256,10 +256,13 @@ model Reservation {
 }
 
 model Settings {
-  id             Int    @id @default(autoincrement())
-  restaurantName String @default("Kereami")
-  serviceCharge  Float  @default(30)
-  taxRate        Float  @default(0)
+  id             Int      @id @default(autoincrement())
+  restaurantName String   @default("Kereami")
+  logoLight      String?  @default("/image/keramiLM.png")
+  logoDark       String?  @default("/image/keramiDMs.png")
+  defaultLanguage String  @default("en")
+  serviceCharge  Float    @default(30)
+  taxRate        Float    @default(0)
   updatedAt      DateTime @updatedAt
 
   @@map("settings")

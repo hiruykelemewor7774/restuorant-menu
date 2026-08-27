@@ -7,12 +7,12 @@ import { useTheme } from "../context/ThemeContext";
 const lightImages = [
   "/image/restaurantlm.Webp",
   "/image/restarat.webp",
-  "/image/restaurant.webp",
+  "/image/restaurant6.avif",
 ];
 
 const darkImages = [
   "/image/restaurant.webp",
-  "/image/restaurant.webp",
+  "/image/restaurantdm1.webp",
   "/image/restaurant3-dark.webp",
 ];
 
