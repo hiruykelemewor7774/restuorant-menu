@@ -30,6 +30,9 @@ export default function WaiterDashboard() {
   const [manualOrders, setManualOrders] = useState<ManualOrder[]>([]);
   const knownManualIds = useRef<Set<string>>(new Set());
   const firstManualLoad = useRef(true);
+  const knownCallIds = useRef<Set<string>>(new Set());
+  const firstCallLoad = useRef(true);
+  const [pendingCalls, setPendingCalls] = useState<{ id: string; tableNumber: string }[]>([]);
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
 
@@ -107,6 +110,27 @@ export default function WaiterDashboard() {
     if (data.success) setFinishedOrders(data.orders.slice(0, 10));
   }
 
+  async function loadCalls() {
+  const res = await fetch("/api/waiter/calls", { cache: "no-store" });
+  const data = await res.json();
+  if (!data.success) return;
+
+  const newOnes = data.calls.filter((c: { id: string }) => !knownCallIds.current.has(c.id));
+  if (!firstCallLoad.current && newOnes.length > 0) {
+    setAlertMessage(`📞 ጠረጴዛ ${newOnes[0].tableNumber} ደውሏል! (Call Waiter)`);
+    setAlertOpen(true);
+  }
+
+  data.calls.forEach((c: { id: string }) => knownCallIds.current.add(c.id));
+  setPendingCalls(data.calls);
+  firstCallLoad.current = false;
+}
+
+async function acknowledgeCall(id: string) {
+  await fetch(`/api/waiter/calls/${id}`, { method: "PUT" });
+  setPendingCalls((prev) => prev.filter((c) => c.id !== id));
+}
+
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     loadOrders();
@@ -123,6 +147,12 @@ export default function WaiterDashboard() {
     const interval = setInterval(loadManualOrders, 5000);
     return () => clearInterval(interval);
   }, []);
+
+  useEffect(() => {
+  loadCalls();
+  const interval = setInterval(loadCalls, 5000);
+  return () => clearInterval(interval);
+}, []);
 
   async function forwardToKitchen(orderId: string) {
     setProcessing(orderId);
@@ -177,6 +207,25 @@ export default function WaiterDashboard() {
         message={alertMessage}
         onAcknowledge={() => setAlertOpen(false)}/>
       <h1 className="text-xl font-bold mb-2 text-yellow-500">🍽️ Waiter Station & Order Dispatcher</h1>
+
+      {pendingCalls.length > 0 && (
+        <div className="mb-8">
+          <h2 className="text-lg font-bold mb-3 text-blue-400">📞 ደንበኞች የደወሉ</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {pendingCalls.map((call) => (
+              <div key={call.id} className="bg-blue-900/30 border border-blue-500 p-4 rounded-xl flex justify-between items-center">
+                <p className="font-bold text-blue-300">Table-{call.tableNumber}</p>
+                <button
+                  onClick={() => acknowledgeCall(call.id)}
+                  className="bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold px-4 py-2 rounded-full"
+                >
+                  ✅ ደረስኩ
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       {manualOrders.length > 0 && (
         <div className="mb-8">
