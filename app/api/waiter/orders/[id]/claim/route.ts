@@ -4,7 +4,7 @@ import { verifyWaiterToken, WAITER_COOKIE_NAME } from "@/lib/waiter-auth";
 
 export async function PUT(
   req: NextRequest,
-  { params }: { params: Promise<{ id: string }> },
+  { params }: { params: Promise<{ id: string }> }
 ) {
   const token = req.cookies.get(WAITER_COOKIE_NAME)?.value;
   const payload = token ? await verifyWaiterToken(token) : null;
@@ -12,21 +12,23 @@ export async function PUT(
 
   const { id } = await params;
 
-  const order = await prisma.order.findUnique({ where: { id } });
+  const order = await prisma.order.findUnique({
+    where: { id },
+    include: { items: true },
+  });
 
   if (!order) {
-    return NextResponse.json(
-      { success: false, message: "ትዕዛዝ አልተገኘም" },
-      { status: 404 },
-    );
+    return NextResponse.json({ success: false, message: "ትዕዛዝ አልተገኘም" }, { status: 404 });
   }
 
-  // ---- ጉዳይ 1: ትዕዛዙ ካንተ ራስህ ጋር ቀድሞውኑ የተመደበ ከሆነ (waiter ራሱ የፈጠረው/ቀደም የያዘው) ----
-  // ክፍያ አትጠይቅ - በቀጥታ ወደ ኩሽና ላክ
+  // ---- Room order መሆኑን አረጋግጥ (ማንኛውም item ካቴጎሪ "Room" ካለው) ----
+  const isRoomOrder = order.items.some((item) => item.category === "Room");
+
+  // ---- ጉዳይ 1: ትዕዛዙ ካንተ ራስህ ጋር ቀድሞውኑ የተመደበ ከሆነ ----
   if (order.waiterId === payload.waiterId) {
     const updated = await prisma.order.update({
       where: { id },
-      data: { status: "sent_to_kitchen" },
+      data: { status: isRoomOrder ? "ready" : "sent_to_kitchen" },
     });
     return NextResponse.json({ success: true, order: updated });
   }
@@ -35,7 +37,7 @@ export async function PUT(
   if (order.waiterId) {
     return NextResponse.json(
       { success: false, message: "ይህ ትዕዛዝ ቀድሞውኑ በሌላ waiter ተይዟል" },
-      { status: 409 },
+      { status: 409 }
     );
   }
 
@@ -43,16 +45,16 @@ export async function PUT(
   if (order.source === "customer" && order.paymentStatus !== "paid") {
     return NextResponse.json(
       { success: false, message: "ይህ ትዕዛዝ ገና አልተከፈለም" },
-      { status: 400 },
+      { status: 400 }
     );
   }
 
-  // ---- ውሰድ + ወደ ኩሽና ላክ ----
+  // ---- ውሰድ + Room ከሆነ "ready" (ወደ Receptionist)፣ ካልሆነ "sent_to_kitchen" (ወደ Kitchen) ----
   const updated = await prisma.order.update({
     where: { id },
     data: {
       waiterId: payload.waiterId,
-      status: "sent_to_kitchen",
+      status: isRoomOrder ? "ready" : "sent_to_kitchen",
     },
   });
 
