@@ -2,6 +2,7 @@
 
 import { usePathname, useRouter } from "next/navigation";
 import { LogOut, Bell, Search } from "lucide-react";
+import { useRestaurantSettings } from "../context/SettingsContext";
 
 const roleConfig: Record<string, { label: string; extra?: string }> = {
   admin: { label: "Admin Dashboard" },
@@ -14,6 +15,7 @@ const roleConfig: Record<string, { label: string; extra?: string }> = {
 export default function StaffTopBar() {
   const pathname = usePathname();
   const router = useRouter();
+  const { restaurantName } = useRestaurantSettings();
 
   const role = Object.keys(roleConfig).find((r) => pathname.startsWith(`/${r}`));
   if (!role) return null;
@@ -31,7 +33,7 @@ export default function StaffTopBar() {
       
       <div className="flex items-center gap-4 min-w-0">
         <h1 className="text-lg font-bold text-amber-400 truncate">
-          🍽️ Kereami — {config.label}
+          🍽️ {restaurantName} — {config.label}
         </h1>
         {config.extra && (
           <span className="hidden sm:inline text-xs bg-gray-800 px-3 py-1 rounded-full text-gray-300">
