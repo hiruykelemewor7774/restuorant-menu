@@ -14,6 +14,7 @@ import { usePathname } from "next/navigation";
 import { useTheme } from "../context/ThemeContext";
 import { Receptionist } from '../generated/prisma/browser';
 import AdminLogin from '../admin/login/page';
+import { useRestaurantSettings } from "../context/SettingsContext";
 
 export default function Navbar() {
   const [showDropdown, setShowDropdown] = useState(false);
@@ -23,6 +24,7 @@ export default function Navbar() {
   const { t } = useLanguage();
   const { theme } = useTheme();
   const [cartOpen, setCartOpen] = useState(false);
+  const { restaurantName, logoLight, logoDark } = useRestaurantSettings();
 
   const pathname = usePathname();
 
@@ -51,13 +53,14 @@ return (
      
   <div className="mt-3 shrink-0 flex items-center space-x-2 cursor-pointer">
     <Image
-      alt="Company logo"
+      alt={`${restaurantName} logo`}
       width={90}
       height={50}
       style={{ width: "auto", height: "auto" }}
       className="object-contain"
       priority
-      src={theme === "dark" ? "/image/keramiDMs.png" : "/image/keramiLM.png"}
+      // src={theme === "dark" ? "/image/keramiDMs.png" : "/image/keramiLM.png"}
+      src={theme === "dark" ? logoDark : logoLight}
     />
   </div>
 
