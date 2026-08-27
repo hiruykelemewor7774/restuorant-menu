@@ -267,3 +267,12 @@ model Settings {
 
   @@map("settings")
 }
+
+model WaiterCall {
+  id          String   @id @default(cuid())
+  tableNumber String
+  status      String   @default("pending") // pending | acknowledged
+  createdAt   DateTime @default(now())
+
+  @@map("waiter_calls")
+}
