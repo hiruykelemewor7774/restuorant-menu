@@ -11,8 +11,8 @@ type RestaurantSettings = {
 
 const defaultSettings: RestaurantSettings = {
   restaurantName: "Kereami",
-  logoLight: "/image/kereamilm.png",
-  logoDark: "/image/kereamidm.png",
+  logoLight: "/image/keramiLM.png",
+  logoDark: "/image/keramiDMs.png",
   defaultLanguage: "en",
 };
 
