@@ -24,7 +24,7 @@ export async function PUT(req: NextRequest) {
   if (!admin) return NextResponse.json({ success: false }, { status: 401 });
 
   try {
-    const { restaurantName, serviceCharge, taxRate } = await req.json();
+    const { restaurantName, logoLight, logoDark, defaultLanguage, serviceCharge, taxRate } = await req.json();
 
     let settings = await prisma.settings.findFirst();
     if (!settings) {
@@ -34,18 +34,18 @@ export async function PUT(req: NextRequest) {
     const updated = await prisma.settings.update({
       where: { id: settings.id },
       data: {
-        restaurantName,
-        serviceCharge: parseFloat(serviceCharge),
-        taxRate: parseFloat(taxRate),
+        ...(restaurantName !== undefined ? { restaurantName } : {}),
+        ...(logoLight !== undefined ? { logoLight } : {}),
+        ...(logoDark !== undefined ? { logoDark } : {}),
+        ...(defaultLanguage !== undefined ? { defaultLanguage } : {}),
+        ...(serviceCharge !== undefined ? { serviceCharge: parseFloat(serviceCharge) } : {}),
+        ...(taxRate !== undefined ? { taxRate: parseFloat(taxRate) } : {}),
       },
     });
 
     return NextResponse.json({ success: true, settings: updated });
   } catch (error) {
     console.error("Update settings error:", error);
-    return NextResponse.json(
-      { success: false, message: "ማዘመን አልተቻለም" },
-      { status: 500 },
-    );
+    return NextResponse.json({ success: false, message: "ማዘመን አልተቻለም" }, { status: 500 });
   }
 }
