@@ -3,11 +3,17 @@
 import { useState } from "react";
 import { Phone } from "lucide-react";
 import { useCart } from "../context/CartContext";
+import { usePathname } from "next/navigation";
 
 export default function CallWaiterButton() {
+  const pathname = usePathname();
+  const staffPrefixes = ["/admin", "/waiter", "/kitchen", "/store", "/receptionist"];
+  const isStaffRoute = staffPrefixes.some((p) => pathname.startsWith(p));
   const { tableNumber } = useCart();
   const [calling, setCalling] = useState(false);
   const [called, setCalled] = useState(false);
+     
+  if (isStaffRoute) return null;
 
   async function handleCall() {
     if (!tableNumber) {

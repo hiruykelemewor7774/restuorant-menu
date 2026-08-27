@@ -9,6 +9,7 @@ import MobileSidebarWrapper from "./components/MobileSidebarWrapper";
 import "./globals.css";
 import BackgroundCarousel from "./components/BackgroundCarousel";
 import { SettingsProvider } from "./context/SettingsContext";
+import CallWaiterButton from "./components/CallWaiterButton";
 
 export const viewport = {
   width: "device-width",
@@ -50,6 +51,7 @@ export default function RootLayout({
                     <main className="flex-1 pt-8 overflow-y-auto relative z-10">
                       {children}
                     </main>
+                    <CallWaiterButton />
                   </div>
                 </div>
                 </UIProvider>
