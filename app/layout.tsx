@@ -8,6 +8,7 @@ import QrTableReader from "./components/QrTableReader";
 import MobileSidebarWrapper from "./components/MobileSidebarWrapper";
 import "./globals.css";
 import BackgroundCarousel from "./components/BackgroundCarousel";
+import { SettingsProvider } from "./context/SettingsContext";
 
 export const viewport = {
   width: "device-width",
@@ -22,10 +23,11 @@ export default function RootLayout({
     <html lang="en">
       <body className="bg-gray-950 text-white antialiased backdrop-blur-xl">
         <ThemeProvider>
-          <LanguageProvider>
-            <CartProvider>
-              <UIProvider>
-                <QrTableReader />
+          <SettingsProvider>
+            <LanguageProvider>
+              <CartProvider>
+                <UIProvider>
+                  <QrTableReader />
                 
                 {/* Fixed Navbar - Customer ወይም Staff (URL ተመስርቶ ራሱ ይመርጣል) */}
                    <AppShell />
@@ -50,9 +52,10 @@ export default function RootLayout({
                     </main>
                   </div>
                 </div>
-              </UIProvider>
-            </CartProvider>
-          </LanguageProvider>
+                </UIProvider>
+              </CartProvider>
+            </LanguageProvider>
+          </SettingsProvider>
         </ThemeProvider>
       </body>
     </html>
